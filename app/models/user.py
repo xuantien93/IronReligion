@@ -11,8 +11,24 @@ class User(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
+    first_name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
+    gender = db.Column(db.String(10),nullable=False)
+    phone = db.Column(db.String(12),nullable=False)
+    birthday = db.Column(db.Date(),nullable=False)
+    status = db.Column(db.String(),nullable=False)
+    enrolled_with_coach = db.Column(db.Boolean(),default=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
+    created_at = db.Column(db.Date(), nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
+    trainer_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('trainers.id')), nullable=True)
+
+    trainer = db.relationship('Trainer', back_populates='users')
+    classes = db.relationship('Class', back_populates='user')
+    workouts = db.relationship('Workout', back_populates='user')
+    comments = db.relationship('Comment', back_populates='user')
+    reviews = db.relationship('Review', back_populates='user')
 
     @property
     def password(self):
@@ -29,5 +45,13 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'first_name':self.first_name,
+            'last_name':self.last_name,
+            'gender':self.gender,
+            'phone':self.phone,
+            'birthday':self.birthday,
+            'status':self.status,
+            'enrolled_with_coach':self.enrolled_with_coach,
+            'created_at':self.created_at
         }
