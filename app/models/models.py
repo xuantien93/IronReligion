@@ -16,6 +16,7 @@ class Trainer(db.Model):
     last_name = db.Column(db.String(50),nullable=False)
     email = db.Column(db.String(50), nullable=False)
     phone = db.Column(db.String(50),nullable=False)
+    image = db.Column(db.String(100))
     specialization = db.Column(db.String(2000),nullable=False)
     bio = db.Column(db.String(5000),nullable=False)
     created_at = db.Column(db.Date(), nullable=False)
@@ -26,7 +27,7 @@ class Trainer(db.Model):
     users = db.relationship('User', back_populates='trainer')
 
     def __repr__(self):
-        return f'<Trainer {self.first_name} {self.last_name} was created>'
+        return f'<Trainer #{self.id} {self.first_name} {self.last_name} was created>'
 
     def to_dict(self):
         return {
@@ -181,6 +182,7 @@ class Product(db.Model):
     reviews = db.relationship('Review', back_populates='product')
     cart = db.relationship('Cart', back_populates='products')
 
+
     def __repr__(self):
         return f'<Product {self.id} {self.name} was created>'
 
@@ -190,9 +192,90 @@ class Product(db.Model):
             'name':self.name,
             'price':self.price,
             'description':self.description,
-            'created_at':self.created_at
+            'created_at':self.created_at,
+            'reviews' : {}
         }
 
 
 class Review(db.Model):
-    pass
+    __tablename__ = 'reviews'
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    stars = db.Column(db.Integer, nullable=False)
+    content = db.Column(db.String(5000),nullable=False)
+    created_at = db.Column(db.Date(), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('products.id')), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('users.id')), nullable=False)
+
+    product = db.relationship('Product', back_populates='reviews')
+    user = db.relationship('User', back_populates='reviews')
+    cart = db.relationship('Cart', back_populates='products')
+
+    def __repr__(self):
+        return f'<User {self.user_id}, {self.user.username}, posted a new Review #{self.id}>'
+
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'stars':self.stars,
+            'content':self.content,
+            'created_at':self.created_at,
+            'user': {
+                'id': self.user.id,
+                'name':self.name,
+                'price':self.price,
+                'description':self.description,
+                'created_at':self.created_at
+            },
+            'product': {
+                'id':self.product.id,
+                'name':self.product.name
+            }
+        }
+
+class Cart(db.Model):
+    __tablename__ = 'carts'
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    quantity = db.Column(db.Integer())
+    created_at = db.Column(db.Date(), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('products.id')), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('users.id')), nullable=False)
+
+    products = db.relationship('Product', back_populates='cart', cascade='all, delete-orphan')
+    user = db.relationship('User',back_populates='cart')
+
+    def __repr__(self):
+        return f'<User {self.user_id}, {self.user.username}, added {self.products.name} to Cart #{self.id}>'
+
+
+    def to_dict(self):
+        return {
+            'id':self.id,
+            'quantity':self.quantity,
+            'created_at':self.created_at,
+            'user': {
+                'id': self.user.id,
+                'name':self.name,
+                'price':self.price,
+                'description':self.description,
+                'created_at':self.created_at
+            },
+            'product': {
+                'id':self.product.id,
+                'name':self.product.name
+            }
+        }

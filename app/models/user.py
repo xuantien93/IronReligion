@@ -29,6 +29,8 @@ class User(db.Model, UserMixin):
     workouts = db.relationship('Workout', back_populates='user')
     comments = db.relationship('Comment', back_populates='user')
     reviews = db.relationship('Review', back_populates='user')
+    cart = db.relationship('Cart', back_populates='user')
+
 
     @property
     def password(self):
