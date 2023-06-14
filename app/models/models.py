@@ -107,6 +107,7 @@ class Workout(db.Model):
 
     user = db.relationship('User', back_populates = 'workouts')
     comments = db.relationship('Comment', back_populates='workout',cascade="all, delete-orphan")
+    routine = db.relationship('Routine', back_populates='workouts')
 
     def __repr__(self):
         return f'<User {self.id}, {self.user.username}, just created Workout #{self.id}>'
@@ -131,6 +132,44 @@ class Workout(db.Model):
         }
 
 
+class Routine(db.Model):
+    __tablename__ = 'routines'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+
+
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('users.id')), nullable=False)
+    # workout_id = db.Column(db.Integer, db.ForeignKey(
+    #     add_prefix_for_prod('workouts.id')), nullable=True)
+    notes = db.Column(db.String(5000))
+    created_at = db.Column(db.Date(), nullable=False)
+
+    workouts = db.relationship('Workout', back_populates = 'routine',cascade="all, delete-orphan")
+    user = db.relationship('User', back_populates='routines')
+    comments = db.relationship('Comment', back_populates='routine',cascade="all, delete-orphan" )
+
+    def __repr__(self):
+        return f'<User {self.id}, {self.user.username}, just made Routine #{self.id}>'
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'notes':self.notes,
+            'created_at':self.created_at,
+            'user': {
+                'id':self.user.id,
+                'username':self.user.username,
+                'fisrt_name':self.user.first_name,
+                'last_name':self.user.last_name,
+                'phone':self.user.phone
+            },
+            'workouts': [workout.to_dict() for workout in self.workouts]
+        }
+
 class Comment(db.Model):
     __tablename__ = 'comments'
 
@@ -143,11 +182,11 @@ class Comment(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
-    workout_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('workouts.id')), nullable=False)
+    routine_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('routines.id')), nullable=False)
 
     user = db.relationship('User', back_populates='comments')
-    workout = db.relationship('Workout', back_populates='comments')
+    routine = db.relationship('Workout', back_populates='comments')
 
     def __repr__(self):
         return f'<User {self.id}, {self.user.username}, just posted Comment #{self.id}>'

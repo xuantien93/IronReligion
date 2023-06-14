@@ -9,28 +9,28 @@ fake = Faker()
 
 def seed_comments():
     comment1 = Comment(
-        content="Great work out, Love it", user_id = 3, workout_id = 1, created_at=fake.date_between(start_date='-5y', end_date='today')
+        content="Great work out, Love it", user_id = 3, routine_id = 1, created_at=fake.date_between(start_date='-5y', end_date='today')
     )
     comment2 = Comment(
-        content="Great work out, Love it", user_id = 2, workout_id = 3, created_at=fake.date_between(start_date='-5y', end_date='today')
+        content="Awesome work out, Love it", user_id = 2, routine_id = 1, created_at=fake.date_between(start_date='-5y', end_date='today')
     )
     comment3 = Comment(
-        content="Great work out, Love it", user_id = 1, workout_id = 2, created_at=fake.date_between(start_date='-5y', end_date='today')
+        content="Amazing work out, Love it", user_id = 3, routine_id = 1, created_at=fake.date_between(start_date='-5y', end_date='today')
     )
     comment4 = Comment(
-        content="Great work out, Love it", user_id = 3, workout_id = 4, created_at=fake.date_between(start_date='-5y', end_date='today')
+        content="Love it", user_id = 1, routine_id = 2, created_at=fake.date_between(start_date='-5y', end_date='today')
     )
     comment5 = Comment(
-        content="Great work out, Love it", user_id = 2, workout_id = 3, created_at=fake.date_between(start_date='-5y', end_date='today')
+        content="Killing it", user_id = 3, routine_id = 2, created_at=fake.date_between(start_date='-5y', end_date='today')
     )
     comment6 = Comment(
-        content="Great work out, Love it", user_id = 1, workout_id = 5, created_at=fake.date_between(start_date='-5y', end_date='today')
+        content="Let's go", user_id = 1, routine_id = 2, created_at=fake.date_between(start_date='-5y', end_date='today')
     )
     comment7 = Comment(
-        content="Great work out, Love it", user_id = 2, workout_id = 6, created_at=fake.date_between(start_date='-5y', end_date='today')
+        content="My body is working hard with this", user_id = 2, routine_id = 3, created_at=fake.date_between(start_date='-5y', end_date='today')
     )
     comment8 = Comment(
-        content="Great work out, Love it", user_id = 1, workout_id = 3, created_at=fake.date_between(start_date='-5y', end_date='today')
+        content="Legs were so sore the next day", user_id = 3, routine_id = 3, created_at=fake.date_between(start_date='-5y', end_date='today')
     )
 
     comments = [comment1,comment2,comment3,comment4,comment5,comment6,comment7,comment8]
