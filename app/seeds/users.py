@@ -1,15 +1,17 @@
 from app.models import db, User, environment, SCHEMA
 from sqlalchemy.sql import text
+from faker import Faker
 
+fake = Faker()
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password')
+        username='Demo', email='demo@aa.io',first_name='Demo',last_name='Lition',gender='M',phone='469-999-8888',birthday="1993-02-14",status='Active', enrolled_with_coach=True, password='password',created_at=fake.date_between(start_date='-5y', end_date='today'),trainer_id = 2 )
     marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
+        username='Marnie', email='marnie@aa.io',first_name='Marnie',last_name='Doe',gender='F',phone='469-999-8888',birthday="1993-02-14",status='Active', enrolled_with_coach=True, password='password',created_at=fake.date_between(start_date='-5y', end_date='today'),trainer_id = 3)
     bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
+        username='Bobbie', email='bobbie@aa.io',first_name='Bobbie',last_name='Doe',gender='M',phone='469-999-8888',birthday="1993-02-14",status='Active', enrolled_with_coach=True, password='password',created_at=fake.date_between(start_date='-5y', end_date='today'),trainer_id = 1)
 
     db.session.add(demo)
     db.session.add(marnie)
@@ -28,5 +30,5 @@ def undo_users():
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM users"))
-        
+
     db.session.commit()

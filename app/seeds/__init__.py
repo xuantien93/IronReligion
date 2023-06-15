@@ -7,6 +7,7 @@ from .routines import seed_routines,undo_routines
 from .products import seed_products,undo_products
 from .reviews import seed_reviews,undo_reviews
 from .routines import seed_routines,undo_routines
+from .enrollments import seed_enrollments,undo_enrollments
 
 from app.models.db import db, environment, SCHEMA
 
@@ -29,10 +30,12 @@ def seed():
         undo_routines()
         undo_comments()
         undo_classes()
+        undo_enrollments()
         undo_trainers()
         undo_users()
     seed_users()
     seed_trainers()
+    seed_enrollments()
     seed_classes()
     seed_comments()
     seed_routines()
@@ -51,6 +54,7 @@ def undo():
     undo_routines()
     undo_comments()
     undo_classes()
+    undo_enrollments()
     undo_trainers()
     undo_users()
     # Add other undo functions here

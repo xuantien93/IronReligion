@@ -1,8 +1,8 @@
-"""new table
+"""empty message
 
-Revision ID: da1877eafdd8
-Revises: ffdc0a98111c
-Create Date: 2023-06-14 13:06:04.009779
+Revision ID: e59588a53062
+Revises: 
+Create Date: 2023-06-14 20:58:14.836807
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'da1877eafdd8'
-down_revision = 'ffdc0a98111c'
+revision = 'e59588a53062'
+down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -36,9 +36,26 @@ def upgrade():
     sa.Column('specialization', sa.String(length=2000), nullable=False),
     sa.Column('bio', sa.String(length=5000), nullable=False),
     sa.Column('created_at', sa.Date(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('users',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('username', sa.String(length=40), nullable=False),
+    sa.Column('first_name', sa.String(length=50), nullable=False),
+    sa.Column('last_name', sa.String(length=50), nullable=False),
+    sa.Column('gender', sa.String(length=10), nullable=False),
+    sa.Column('phone', sa.String(length=12), nullable=False),
+    sa.Column('birthday', sa.String(), nullable=False),
+    sa.Column('status', sa.String(), nullable=False),
+    sa.Column('enrolled_with_coach', sa.Boolean(), nullable=True),
+    sa.Column('email', sa.String(length=255), nullable=False),
+    sa.Column('created_at', sa.Date(), nullable=False),
+    sa.Column('hashed_password', sa.String(length=255), nullable=False),
+    sa.Column('trainer_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['trainer_id'], ['trainers.id'], ),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('email'),
+    sa.UniqueConstraint('username')
     )
     op.create_table('carts',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -52,7 +69,7 @@ def upgrade():
     )
     op.create_table('classes',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('trainer_id', sa.Integer(), nullable=False),
     sa.Column('class_name', sa.String(length=50), nullable=False),
     sa.Column('date', sa.Date(), nullable=False),
@@ -62,6 +79,13 @@ def upgrade():
     sa.ForeignKeyConstraint(['trainer_id'], ['trainers.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('enrollments',
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('trainer_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['trainer_id'], ['trainers.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('user_id', 'trainer_id')
     )
     op.create_table('reviews',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -82,18 +106,6 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('workouts',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('exercise', sa.String(), nullable=False),
-    sa.Column('sets', sa.Integer(), nullable=False),
-    sa.Column('reps', sa.Integer(), nullable=False),
-    sa.Column('weights', sa.Integer(), nullable=False),
-    sa.Column('notes', sa.String(), nullable=True),
-    sa.Column('created_at', sa.Date(), nullable=False),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
     op.create_table('comments',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('content', sa.String(), nullable=True),
@@ -104,41 +116,33 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    with op.batch_alter_table('users', schema=None) as batch_op:
-        batch_op.add_column(sa.Column('first_name', sa.String(length=50), nullable=False))
-        batch_op.add_column(sa.Column('last_name', sa.String(length=50), nullable=False))
-        batch_op.add_column(sa.Column('gender', sa.String(length=10), nullable=False))
-        batch_op.add_column(sa.Column('phone', sa.String(length=12), nullable=False))
-        batch_op.add_column(sa.Column('birthday', sa.Date(), nullable=False))
-        batch_op.add_column(sa.Column('status', sa.String(), nullable=False))
-        batch_op.add_column(sa.Column('enrolled_with_coach', sa.Boolean(), nullable=True))
-        batch_op.add_column(sa.Column('created_at', sa.Date(), nullable=False))
-        batch_op.add_column(sa.Column('trainer_id', sa.Integer(), nullable=True))
-        batch_op.create_foreign_key(None, 'trainers', ['trainer_id'], ['id'])
-
+    op.create_table('workouts',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('routine_id', sa.Integer(), nullable=False),
+    sa.Column('exercise', sa.String(), nullable=False),
+    sa.Column('sets', sa.Integer(), nullable=False),
+    sa.Column('reps', sa.Integer(), nullable=False),
+    sa.Column('weights', sa.Integer(), nullable=False),
+    sa.Column('notes', sa.String(), nullable=True),
+    sa.Column('created_at', sa.Date(), nullable=False),
+    sa.ForeignKeyConstraint(['routine_id'], ['routines.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     # ### end Alembic commands ###
 
 
 def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
-    with op.batch_alter_table('users', schema=None) as batch_op:
-        batch_op.drop_constraint(None, type_='foreignkey')
-        batch_op.drop_column('trainer_id')
-        batch_op.drop_column('created_at')
-        batch_op.drop_column('enrolled_with_coach')
-        batch_op.drop_column('status')
-        batch_op.drop_column('birthday')
-        batch_op.drop_column('phone')
-        batch_op.drop_column('gender')
-        batch_op.drop_column('last_name')
-        batch_op.drop_column('first_name')
-
-    op.drop_table('comments')
     op.drop_table('workouts')
+    op.drop_table('comments')
     op.drop_table('routines')
     op.drop_table('reviews')
+    op.drop_table('enrollments')
     op.drop_table('classes')
     op.drop_table('carts')
+    op.drop_table('users')
     op.drop_table('trainers')
     op.drop_table('products')
     # ### end Alembic commands ###

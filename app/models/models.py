@@ -5,6 +5,19 @@ import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
+
+enrollments = db.Table(
+    'enrollments',
+    db.Model.metadata,
+    db.Column('user_id',db.Integer,db.ForeignKey(add_prefix_for_prod('users.id')),primary_key=True),
+    db.Column('trainer_id',db.Integer,db.ForeignKey(add_prefix_for_prod('trainers.id')),primary_key=True)
+
+)
+
+if environment == "production":
+    enrollments.schema = SCHEMA
+
+
 class Trainer(db.Model):
     __tablename__ = 'trainers'
     id = db.Column(db.Integer, primary_key=True)
@@ -20,8 +33,13 @@ class Trainer(db.Model):
     specialization = db.Column(db.String(2000),nullable=False)
     bio = db.Column(db.String(5000),nullable=False)
     created_at = db.Column(db.Date(), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('users.id')), nullable=True)
+    # user_id = db.Column(db.Integer, db.ForeignKey(
+    #     add_prefix_for_prod('users.id')), nullable=False)
+    trainer_enrollments = db.relationship(
+        'User',
+        secondary = enrollments,
+        back_populates = 'user_enrollments'
+    )
 
     classes = db.relationship('Class',back_populates='trainer')
     users = db.relationship('User', back_populates='trainer')
@@ -49,7 +67,7 @@ class Class(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     user_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('users.id')), nullable=True)
+        add_prefix_for_prod('users.id')), nullable=False)
     trainer_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('trainers.id')), nullable=False)
 
@@ -89,6 +107,8 @@ class Class(db.Model):
 
         }
 
+
+
 class Workout(db.Model):
     __tablename__ = 'workouts'
 
@@ -98,6 +118,8 @@ class Workout(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
+    routine_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('routines.id')), nullable=False)
     exercise = db.Column(db.String(),nullable=False)
     sets = db.Column(db.Integer(),nullable=False)
     reps = db.Column(db.Integer(),nullable=False)
@@ -106,8 +128,8 @@ class Workout(db.Model):
     created_at = db.Column(db.Date(), nullable=False)
 
     user = db.relationship('User', back_populates = 'workouts')
-    comments = db.relationship('Comment', back_populates='workout',cascade="all, delete-orphan")
-    routine = db.relationship('Routine', back_populates='workouts')
+    # comments = db.relationship('Comment', back_populates='workout',foreign_keys=[comment_id],cascade="all, delete-orphan")
+    routine = db.relationship('Routine', back_populates='workouts',foreign_keys=[routine_id])
 
     def __repr__(self):
         return f'<User {self.id}, {self.user.username}, just created Workout #{self.id}>'
@@ -132,44 +154,6 @@ class Workout(db.Model):
         }
 
 
-class Routine(db.Model):
-    __tablename__ = 'routines'
-
-    if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
-
-    id = db.Column(db.Integer, primary_key=True)
-
-
-    user_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('users.id')), nullable=False)
-    # workout_id = db.Column(db.Integer, db.ForeignKey(
-    #     add_prefix_for_prod('workouts.id')), nullable=True)
-    notes = db.Column(db.String(5000))
-    created_at = db.Column(db.Date(), nullable=False)
-
-    workouts = db.relationship('Workout', back_populates = 'routine',cascade="all, delete-orphan")
-    user = db.relationship('User', back_populates='routines')
-    comments = db.relationship('Comment', back_populates='routine',cascade="all, delete-orphan" )
-
-    def __repr__(self):
-        return f'<User {self.id}, {self.user.username}, just made Routine #{self.id}>'
-
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'notes':self.notes,
-            'created_at':self.created_at,
-            'user': {
-                'id':self.user.id,
-                'username':self.user.username,
-                'fisrt_name':self.user.first_name,
-                'last_name':self.user.last_name,
-                'phone':self.user.phone
-            },
-            'workouts': [workout.to_dict() for workout in self.workouts]
-        }
-
 class Comment(db.Model):
     __tablename__ = 'comments'
 
@@ -186,7 +170,8 @@ class Comment(db.Model):
         add_prefix_for_prod('routines.id')), nullable=False)
 
     user = db.relationship('User', back_populates='comments')
-    routine = db.relationship('Workout', back_populates='comments')
+    routine = db.relationship('Routine', back_populates='comments')
+    # workout = db.relationship('Workout',back_populates='comments')
 
     def __repr__(self):
         return f'<User {self.id}, {self.user.username}, just posted Comment #{self.id}>'
@@ -205,6 +190,47 @@ class Comment(db.Model):
             }
         }
 
+class Routine(db.Model):
+    __tablename__ = 'routines'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    notes = db.Column(db.String(5000))
+    created_at = db.Column(db.Date(), nullable=False)
+
+
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('users.id')), nullable=False)
+    # workout_id = db.Column(db.Integer, db.ForeignKey(
+    #     add_prefix_for_prod('workouts.id')), nullable=True)
+    # comment_id = db.Column(db.Integer, db.ForeignKey(
+    #     add_prefix_for_prod('comments.id')), nullable=True)
+
+    workouts = db.relationship('Workout', back_populates = 'routine',cascade="all, delete")
+    user = db.relationship('User', back_populates='routines')
+    comments = db.relationship('Comment', back_populates='routine',cascade="all, delete" )
+
+    def __repr__(self):
+        return f'<User {self.id}, {self.user.username}, just made Routine #{self.id}>'
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'notes':self.notes,
+            'created_at':self.created_at,
+            'user': {
+                'id':self.user.id,
+                'username':self.user.username,
+                'fisrt_name':self.user.first_name,
+                'last_name':self.user.last_name,
+                'phone':self.user.phone
+            },
+            'workouts': [workout.to_dict() for workout in self.workouts],
+            'comments': [comment.to_dict() for comment in self.comments]
+        }
+
 class Product(db.Model):
     __tablename__ = 'products'
 
@@ -219,7 +245,7 @@ class Product(db.Model):
 
 
     reviews = db.relationship('Review', back_populates='product')
-    cart = db.relationship('Cart', back_populates='products')
+    cart = db.relationship('Cart', back_populates='products',cascade='all, delete-orphan')
 
 
     def __repr__(self):
@@ -254,7 +280,7 @@ class Review(db.Model):
 
     product = db.relationship('Product', back_populates='reviews')
     user = db.relationship('User', back_populates='reviews')
-    cart = db.relationship('Cart', back_populates='products')
+    # cart = db.relationship('Cart', back_populates='products')
 
     def __repr__(self):
         return f'<User {self.user_id}, {self.user.username}, posted a new Review #{self.id}>'
@@ -294,7 +320,7 @@ class Cart(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('users.id')), nullable=False)
 
-    products = db.relationship('Product', back_populates='cart', cascade='all, delete-orphan')
+    products = db.relationship('Product', back_populates='cart')
     user = db.relationship('User',back_populates='cart')
 
     def __repr__(self):

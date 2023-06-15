@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from .models import enrollments
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -15,7 +16,7 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(50), nullable=False)
     gender = db.Column(db.String(10),nullable=False)
     phone = db.Column(db.String(12),nullable=False)
-    birthday = db.Column(db.Date(),nullable=False)
+    birthday = db.Column(db.String(),nullable=False)
     status = db.Column(db.String(),nullable=False)
     enrolled_with_coach = db.Column(db.Boolean(),default=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
@@ -31,6 +32,13 @@ class User(db.Model, UserMixin):
     reviews = db.relationship('Review', back_populates='user')
     cart = db.relationship('Cart', back_populates='user')
     routines = db.relationship('Routine', back_populates='user')
+
+
+    user_enrollments = db.relationship(
+        'Trainer',
+        secondary = enrollments,
+        back_populates = 'trainer_enrollments'
+    )
 
 
     @property
