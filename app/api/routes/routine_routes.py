@@ -4,6 +4,7 @@ from datetime import date
 from ...models.db import db
 from ...models.user import User
 from ...models.models import Routine,Workout,Comment
+from ...forms.routine_form import WorkoutForm,RoutineForm
 
 
 
@@ -61,3 +62,42 @@ def single_routine(id):
     res = {}
     res[routine_id] = routine_detail
     return res
+
+
+@routines.route("",methods=['POST'])
+@login_required
+def create_routines():
+    routine_form = RoutineForm()
+    routine_form["csrf_token"].data = request.cookies["csrf_token"]
+
+    workout_form = WorkoutForm()
+    workout_form["csrf_token"].data = request.cookies["csrf_token"]
+
+    selected_user = User.query.get(current_user.id)
+    if routine_form.validate_on_submit():
+        result = Routine(
+            notes = routine_form.data['notes'],
+            image = routine_form.data['image'],
+            created_at = date.today(),
+            user = selected_user
+        )
+
+        db.session.add(result)
+    if workout_form.validate_on_submit():
+        res = Workout(
+            exercise = workout_form.data['exercise'],
+            sets = workout_form.data['sets'],
+            reps = workout_form.data['sets'],
+            weights = workout_form.data['weights'],
+            notes = workout_form.data['notes'],
+            created_at = date.today(),
+            user = selected_user
+        )
+
+        db.session.add(res)
+        db.session.commit()
+        return {"resRoutine":result.to_dict(),"resWorkout":res.to_dict()}
+    if routine_form.errors:
+        return {'errors': validation_errors_to_error_messages(routine_form.errors)}, 400
+    if workout_form.errors:
+        return {'errors': validation_errors_to_error_messages(workout_form.errors)}, 400
