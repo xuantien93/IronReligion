@@ -152,8 +152,7 @@ class Workout(db.Model):
                 'fisrt_name':self.user.first_name,
                 'last_name':self.user.last_name,
                 'phone':self.user.phone
-            },
-            'comments':{}
+            }
         }
 
 

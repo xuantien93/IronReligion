@@ -50,3 +50,21 @@
   box-shadow: 0px 0px 6px white;
   transition: all .4s ease;
 }
+
+.user-menu-content {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  grid-gap: 5px;
+  grid-gap: 5px;
+  gap: 5px;
+  font-size: 90%;
+  text-align: center;
+  position: relative;
+  right: 80px;
+  top: 90px;
+  width: 130px;
+  padding: 10px;
+  box-shadow: -2px 5px 8px #151616;
+}

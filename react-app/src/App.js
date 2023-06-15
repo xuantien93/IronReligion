@@ -7,6 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import LandingPage from "./components/LandingPage";
 import RoutinePage from "./components/RoutinePage";
+import SingleRoutinePage from "./components/SingleRoutinePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/routines/:id">
+            <SingleRoutinePage />
           </Route>
           <Route path="/routines">
             <RoutinePage />

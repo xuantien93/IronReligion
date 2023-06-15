@@ -1,13 +1,12 @@
 //actions
 const LOAD_ROUTINES = 'routines/LOAD_ROUTINES'
-
+const SINGLE_ROUTINE = 'routines/SINGLE_ROUTINE'
 
 //action creators
 const loadRoutines = (routines) => ({
     type: LOAD_ROUTINES,
     routines
 })
-
 
 
 //thunk action creators

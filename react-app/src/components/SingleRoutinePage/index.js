@@ -1,27 +1,33 @@
-import { useHistory } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux"
+import { useParams } from "react-router-dom"
+import { useEffect } from "react"
+import { getAllRoutines } from "../../store/routine"
 
 
 
 
-const RoutineDetail = ({ routine }) => {
-    const history = useHistory()
+
+
+const SingleRoutinePage = () => {
+    const { id } = useParams()
+    const dispatch = useDispatch()
+    const routine = useSelector(state => state.routines)
     const user = useSelector(state => state.session.user)
 
-    const handleClick = () => {
-        history.push(`/routines/${routine.id}`)
-    }
+    useEffect(() => {
+        dispatch(getAllRoutines())
+    }, [dispatch])
 
-    // console.log("this is routine on routine detail", routine.workouts)
+    const routineById = routine[id]
+    console.log("this is single routine====", routineById)
 
     return (
         <div className='all-routines'>
-            <div className='detail-routine' onClick={handleClick}>
+            <div className='detail-routine'>
                 <div className='routine-image-container'>
-                    <img id="routine-image" src={routine.image}></img>
+                    <img id="routine-image" src={routineById.image}></img>
                 </div>
-                {routine.workouts.map(workout => {
+                {routineById.workouts.map(workout => {
                     return (
                         <div className="workout-block" key={workout.id}>
                             <span>{workout.exercise}</span>
@@ -37,9 +43,7 @@ const RoutineDetail = ({ routine }) => {
             </div>
         </div>
     )
-
-
 }
 
 
-export default RoutineDetail
+export default SingleRoutinePage

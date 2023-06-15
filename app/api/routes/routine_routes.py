@@ -31,7 +31,7 @@ def all_routines():
     routine_workouts = Workout.query.filter(Workout.routine_id.in_(routine_ids)).all()
 
     comment_list = [comment.to_dict() for comment in routine_comments]
-    workout_list = [workout.to_dict() for workout in routine_workouts]
+    # workout_list = [workout.to_dict() for workout in routine_workouts]
     routine_list = [routine.to_dict() for routine in routines]
 
     for routine in routine_list:
@@ -50,4 +50,14 @@ def all_routines():
         routine_id = routine['id']
         res[routine_id] = routine
 
+    return res
+
+@routines.route("/<int:id>")
+@login_required
+def single_routine(id):
+    routine = Routine.query.get(id)
+    routine_detail = routine.to_dict()
+    routine_id = routine_detail['id']
+    res = {}
+    res[routine_id] = routine_detail
     return res
