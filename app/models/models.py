@@ -87,6 +87,7 @@ class Class(db.Model):
         return {
             'id':self.id,
             'class_name':self.class_name,
+            'trainer_id':self.trainer_id,
             'date':self.date,
             'time_start':self.time_start,
             'time_end':self.time_end,
@@ -142,6 +143,8 @@ class Workout(db.Model):
             'reps':self.reps,
             'weights':self.weights,
             'notes':self.notes,
+            'routine_id':self.routine_id,
+            'user_id':self.user_id,
             'created_at':self.created_at,
             'user':{
                 'id':self.user.id,
@@ -180,6 +183,8 @@ class Comment(db.Model):
         return {
             'id': self.id,
             'content':self.content,
+            'routine_id':self.routine_id,
+            'user_id':self.user_id,
             'created_at':self.created_at,
             'user': {
                 'id':self.user.id,
@@ -198,6 +203,7 @@ class Routine(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     notes = db.Column(db.String(5000))
+    image = db.Column(db.String())
     created_at = db.Column(db.Date(), nullable=False)
 
 
@@ -219,7 +225,9 @@ class Routine(db.Model):
         return {
             'id': self.id,
             'notes':self.notes,
+            'image':self.image,
             'created_at':self.created_at,
+            'user_id':self.user_id,
             'user': {
                 'id':self.user.id,
                 'username':self.user.username,
@@ -228,7 +236,8 @@ class Routine(db.Model):
                 'phone':self.user.phone
             },
             'workouts': [workout.to_dict() for workout in self.workouts],
-            'comments': [comment.to_dict() for comment in self.comments]
+            # 'comments': [comment.to_dict() for comment in self.comments]
+            'comments':{}
         }
 
 class Product(db.Model):
@@ -291,6 +300,8 @@ class Review(db.Model):
             'id': self.id,
             'stars':self.stars,
             'content':self.content,
+            'product_id':self.product_id,
+            'user_id':self.user_id,
             'created_at':self.created_at,
             'user': {
                 'id': self.user.id,
@@ -332,6 +343,7 @@ class Cart(db.Model):
             'id':self.id,
             'quantity':self.quantity,
             'created_at':self.created_at,
+            'user_id':self.user_id,
             'user': {
                 'id': self.user.id,
                 'name':self.name,

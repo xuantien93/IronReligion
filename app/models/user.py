@@ -64,5 +64,6 @@ class User(db.Model, UserMixin):
             'birthday':self.birthday,
             'status':self.status,
             'enrolled_with_coach':self.enrolled_with_coach,
+            'trainer_id':self.trainer_id,
             'created_at':self.created_at
         }

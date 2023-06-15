@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.detail-routine {
+    border: 1px solid red;
+}
+
+
+#routine-image {
+    width: 30%;
+
+}
+
+.single-routine {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.all-routines {
+    display: flex;
+}
+
+.workout-block {
+    border: 1px solid pink;
+}
