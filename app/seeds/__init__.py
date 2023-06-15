@@ -26,8 +26,8 @@ def seed():
         # Make sure to add all your other model's undo functions below
         undo_reviews()
         undo_products()
-        undo_routines()
         undo_comments()
+        undo_routines()
         undo_classes()
         undo_enrollments()
         undo_users()
@@ -36,8 +36,8 @@ def seed():
     seed_users()
     seed_enrollments()
     seed_classes()
-    seed_comments()
     seed_routines()
+    seed_comments()
     seed_products()
     seed_reviews()
     # Add other seed functions here
@@ -48,8 +48,8 @@ def seed():
 def undo():
     undo_reviews()
     undo_products()
-    undo_routines()
     undo_comments()
+    undo_routines()
     undo_classes()
     undo_enrollments()
     undo_users()
