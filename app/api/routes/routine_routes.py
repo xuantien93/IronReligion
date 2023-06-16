@@ -4,8 +4,7 @@ from datetime import date
 from ...models.db import db
 from ...models.user import User
 from ...models.models import Routine,Workout,Comment
-from ...forms.routine_form import RoutineForm
-from ....app.forms.routine_form import WorkoutForm
+from ...forms.routine_form import RoutineForm,WorkoutForm
 
 
 
