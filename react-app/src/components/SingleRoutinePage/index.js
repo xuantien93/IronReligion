@@ -40,7 +40,7 @@ const SingleRoutinePage = () => {
                     )
                 })}
                 <div className='routine-notes'>
-                    {routine.notes}
+                    {routine.description}
                 </div>
             </div>
         </div>

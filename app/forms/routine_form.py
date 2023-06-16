@@ -11,9 +11,14 @@ def text_length(form, field):
 
 
 class RoutineForm(FlaskForm):
-    notes = TextAreaField("Notes",text_length)
+    description = TextAreaField("Description",validators=[text_length])
     image = StringField("Image")
-    created_at = DateField("Date")
+    exercise = StringField('Exercise',validators=[DataRequired()])
+    sets = IntegerField('Sets')
+    reps = IntegerField('Reps')
+    weights = IntegerField('Weights')
+    notes = StringField('Notes')
+    created_at = DateField('Date')
     submit = SubmitField('Submit')
 
 
