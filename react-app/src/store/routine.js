@@ -61,7 +61,7 @@ export const createWorkout = (routineId, data) => async (dispatch) => {
     })
     if (res.ok) {
         const { resWorkout } = await res.json()
-        dispatch(addRoutine(resWorkout))
+        dispatch(addWorkout(resWorkout))
         // dispatch(addWorkout(resWorkout))
         return resWorkout
     } else {
@@ -91,7 +91,7 @@ const routinesReducer = (state = initialState, action) => {
             return newState
         case ADD_WORKOUT:
             newState = { ...state }
-            newState[action.routine.workouts].push(action.workout)
+            newState[action.workout.routine_id].workouts.push(action.workout)
             return newState
         default:
             return state;

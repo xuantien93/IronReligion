@@ -50,11 +50,7 @@ const CreateRoutine = () => {
         routineData.append("notes", notes)
 
 
-        // console.log("sadasdasdsadadadasdasdsadsadasdasd description", routineData.get('description'))
-        // console.log("sadasdasdsadadadasdasdsadsadasdasd image", routineData.get('image'))
-        // console.log("sadasdasdsadadadasdasdsadsadasdasd exercise", routineData.get('exercise'))
-        // console.log("sadasdasdsadadadasdasdsadsadasdasd reps", routineData.get('reps'))
-        // console.log("sadasdasdsadadadasdasdsadsadasdasd notes", routineData.get('notes'))
+
 
         if (!Object.values(errors).length) {
             const data = await dispatch(createRoutine(routineData))

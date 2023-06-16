@@ -102,7 +102,7 @@ def create_routines():
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
-@routines.route("/<int:id>/workouts")
+@routines.route("/<int:id>/workouts",methods=['POST'])
 @login_required
 def create_workout(id):
     workout_form = WorkoutForm()
@@ -112,7 +112,7 @@ def create_workout(id):
         new_workout = Workout(
             exercise = workout_form.data['exercise'],
             sets = workout_form.data['sets'],
-            reps = workout_form.data['sets'],
+            reps = workout_form.data['reps'],
             weights = workout_form.data['weights'],
             notes = workout_form.data['notes'],
             created_at = date.today(),
@@ -122,6 +122,6 @@ def create_workout(id):
 
         db.session.add(new_workout)
         db.session.commit()
-
+        return {"resWorkout":new_workout.to_dict()}
     if workout_form.errors:
         return {'errors': validation_errors_to_error_messages(workout_form.errors)}, 400
