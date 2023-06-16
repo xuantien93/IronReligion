@@ -18,6 +18,8 @@ const SingleRoutinePage = () => {
         dispatch(getAllRoutines())
     }, [dispatch])
 
+
+
     const routineById = routine[id]
     console.log("this is single routine====", routineById)
 
@@ -25,9 +27,9 @@ const SingleRoutinePage = () => {
         <div className='all-routines'>
             <div className='detail-routine'>
                 <div className='routine-image-container'>
-                    <img id="routine-image" src={routineById.image}></img>
+                    <img id="routine-image" src={routineById?.image}></img>
                 </div>
-                {routineById.workouts.map(workout => {
+                {routineById?.workouts.map(workout => {
                     return (
                         <div className="workout-block" key={workout.id}>
                             <span>{workout.exercise}</span>
@@ -38,7 +40,7 @@ const SingleRoutinePage = () => {
                     )
                 })}
                 <div className='routine-notes'>
-                    {routine.notes}
+                    {routine.description}
                 </div>
             </div>
         </div>

@@ -201,7 +201,7 @@ class Routine(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    notes = db.Column(db.String(5000))
+    description = db.Column(db.String(5000))
     image = db.Column(db.String())
     created_at = db.Column(db.Date(), nullable=False)
 
@@ -223,7 +223,7 @@ class Routine(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'notes':self.notes,
+            'description':self.description,
             'image':self.image,
             'created_at':self.created_at,
             'user_id':self.user_id,

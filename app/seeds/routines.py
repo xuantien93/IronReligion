@@ -7,7 +7,7 @@ fake = Faker()
 
 def seed_routines():
     routine1 = Routine(
-       user_id = 1, notes = "Push day routine", image="https://i.imgur.com/3xhNGT0.jpg",created_at=fake.date_between(start_date='-5y', end_date='today')
+       user_id = 1, description = "Push day routine", image="https://i.imgur.com/3xhNGT0.jpg",created_at=fake.date_between(start_date='-5y', end_date='today')
     )
 
     workout1 = Workout(
@@ -23,7 +23,7 @@ def seed_routines():
     routine1.workouts.extend([workout1,workout2,workout3])
 
     routine2 = Routine(
-        user_id = 2, notes = "Pull day routine",image="https://i.imgur.com/Sgixqx8.jpg",created_at=fake.date_between(start_date='-5y', end_date='today')
+        user_id = 2, description = "Pull day routine",image="https://i.imgur.com/Sgixqx8.jpg",created_at=fake.date_between(start_date='-5y', end_date='today')
     )
 
     workout4 = Workout(
@@ -39,7 +39,7 @@ def seed_routines():
     routine2.workouts.extend([workout4,workout5,workout6])
 
     routine3 = Routine(
-        user_id = 3, notes = "Legs day routine",image="https://i.imgur.com/lJ1ocqA.png",created_at=fake.date_between(start_date='-5y', end_date='today')
+        user_id = 3, description = "Legs day routine",image="https://i.imgur.com/lJ1ocqA.png",created_at=fake.date_between(start_date='-5y', end_date='today')
     )
 
 
