@@ -125,3 +125,6 @@ def create_workout(id):
         return {"resWorkout":new_workout.to_dict()}
     if workout_form.errors:
         return {'errors': validation_errors_to_error_messages(workout_form.errors)}, 400
+
+
+

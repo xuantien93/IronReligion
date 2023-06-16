@@ -2,6 +2,7 @@
 const LOAD_ROUTINES = 'routines/LOAD_ROUTINES'
 const ADD_ROUTINES = 'routines/ADD_ROUTINES'
 const ADD_WORKOUT = 'routines/ADD_WORKOUT'
+const EDIT_WORKOUT = 'routines/EDIT_WORKOUT'
 
 //action creators
 const loadRoutines = (routines) => ({
@@ -17,6 +18,11 @@ const addRoutine = (routine) => ({
 const addWorkout = (workout) => ({
     type: ADD_WORKOUT,
     workout
+})
+
+const editWorkout = (wokrout) => ({
+    type: EDIT_WORKOUT,
+    wokrout
 })
 
 //thunk action creators
