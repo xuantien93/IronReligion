@@ -15,13 +15,15 @@ const EditRoutine = () => {
 
     const routine = routineObj[id]
 
+
+
     const [description, setDescription] = useState(routine?.description || "")
     const [image, setImage] = useState(routine?.image || "")
-    const [exercise, setExercise] = useState(routine?.exercise || "")
-    const [sets, setSets] = useState(routine?.sets || "")
-    const [reps, setReps] = useState(routine?.reps || "")
-    const [weights, setWeights] = useState(routine?.weights || "")
-    const [notes, setNotes] = useState(routine?.notes || "")
+    const [exercise, setExercise] = useState(routine?.workouts[0]?.exercise || "")
+    const [sets, setSets] = useState(routine?.workouts[0]?.sets || "")
+    const [reps, setReps] = useState(routine?.workouts[0]?.reps || "")
+    const [weights, setWeights] = useState(routine?.workouts[0]?.weights || "")
+    const [notes, setNotes] = useState(routine?.workouts[0]?.notes || "")
     const [errors, setErrors] = useState({})
     const [submitted, setSubmitted] = useState(false);
 
@@ -61,7 +63,7 @@ const EditRoutine = () => {
 
 
         if (!Object.values(errors).length) {
-            const data = await dispatch(editRoutineThunk(routineData))
+            const data = await dispatch(editRoutineThunk(routine.id, routineData))
             history.push("/routines")
             setDescription("")
             setNotes("")

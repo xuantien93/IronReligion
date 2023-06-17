@@ -5,6 +5,7 @@ import OpenModalButton from '../OpenModalButton';
 import CreateWorkoutModal from './CreateWorkoutModal';
 import EditWorkoutModal from './EditWorkoutModal';
 import { deleteWorkoutThunk } from '../../store/routine';
+import EditRoutine from './EditRoutine';
 
 
 

@@ -5,6 +5,7 @@ const ADD_WORKOUT = 'routines/ADD_WORKOUT'
 const EDIT_WORKOUT = 'routines/EDIT_WORKOUT'
 const DELETE_WORKOUT = 'routines/DELETE_WORKOUT'
 const EDIT_ROUTINE = 'routines/EDIT_ROUTINE'
+const DELETE_ROUTINE = 'routines/DELETE_ROUTINE'
 
 //action creators
 const loadRoutines = (routines) => ({
@@ -36,6 +37,11 @@ const deleteWorkout = (workoutId, routineId) => ({
 const editRoutine = (routine) => ({
     type: EDIT_ROUTINE,
     routine
+})
+
+const deleteRoutine = (routineId) => ({
+    type: DELETE_ROUTINE,
+    routineId
 })
 
 //thunk action creators
@@ -135,6 +141,14 @@ export const editRoutineThunk = (routineId, info) => async (dispatch) => {
     }
 }
 
+export const deleteRoutineThunk = (routineId) => async (dispatch) => {
+    const res = await fetch(`/api/routines/${routineId}/delete`, {
+        method: 'DELETE'
+    })
+    if (res.ok) {
+        dispatch(deleteRoutine(routineId))
+    }
+}
 
 const initialState = {}
 
@@ -174,6 +188,10 @@ const routinesReducer = (state = initialState, action) => {
         case EDIT_ROUTINE:
             newState = { ...state }
             newState[action.routine.id] = action.routine
+            return newState
+        case DELETE_ROUTINE:
+            newState = { ...state }
+            delete newState[action.routineId]
             return newState
         default:
             return state;

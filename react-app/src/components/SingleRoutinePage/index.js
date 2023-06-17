@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { useEffect } from "react"
-import { getAllRoutines } from "../../store/routine"
+import { deleteRoutineThunk, getAllRoutines } from "../../store/routine"
 import { useHistory } from "react-router-dom"
 import OpenModalButton from '../OpenModalButton';
 import CreateWorkoutModal from "../RoutinePage/CreateWorkoutModal"
@@ -23,15 +23,17 @@ const SingleRoutinePage = () => {
         dispatch(getAllRoutines())
     }, [dispatch])
 
-    const handleClick = () => {
-        history.push(`/routines/${routine.id}`)
-    }
-
-    if (!user) history.push("/login")
-
 
     const routineById = routine[id]
-    console.log("this is single routine====", routineById)
+    if (!user) history.push("/login")
+
+    const deleteRoutineBtn = async (e) => {
+        e.preventDefault()
+        await dispatch(deleteRoutineThunk(routineById?.id))
+        history.push("/routines")
+    }
+
+    // console.log("this is single routine====", routineById)
 
     return (
         <div className='all-routines'>
@@ -41,6 +43,7 @@ const SingleRoutinePage = () => {
                 </div>
                 <div className='routine-image-container'>
                     <img id="routine-image" src={routineById?.image}></img>
+                    <button id="delete-routine-button" onClick={deleteRoutineBtn}><i className="fa-solid fa-eraser"></i></button>
                 </div>
                 {routineById?.workouts.map(workout => {
                     if (!workout) return null
