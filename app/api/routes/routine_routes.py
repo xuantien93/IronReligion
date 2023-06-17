@@ -67,9 +67,8 @@ def single_routine(id):
 @routines.route("", methods=['POST'])
 @login_required
 def create_routines():
-    # print("this is hitting create_routine===============================================>", request.files.get('description'))
+
     form = RoutineForm()
-    # print("this is hitting ==============================")
     form["csrf_token"].data = request.cookies["csrf_token"]
 
 
@@ -96,7 +95,7 @@ def create_routines():
 
         db.session.add(new_workout)
         db.session.commit()
-        # print("this is new routine ----------------------",new_routine.to_dict())
+
         return {"resRoutine":new_routine.to_dict()}
     if form.errors:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
@@ -115,9 +114,9 @@ def create_workout(id):
             reps = workout_form.data['reps'],
             weights = workout_form.data['weights'],
             notes = workout_form.data['notes'],
-            created_at = date.today(),
             routine_id = id,
-            user_id = current_user.id
+            user_id = current_user.id,
+            created_at = date.today()
         )
 
         db.session.add(new_workout)
@@ -125,6 +124,3 @@ def create_workout(id):
         return {"resWorkout":new_workout.to_dict()}
     if workout_form.errors:
         return {'errors': validation_errors_to_error_messages(workout_form.errors)}, 400
-
-
-

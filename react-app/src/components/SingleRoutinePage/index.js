@@ -2,7 +2,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { useEffect } from "react"
 import { getAllRoutines } from "../../store/routine"
-
+import { useHistory } from "react-router-dom"
+import OpenModalButton from '../OpenModalButton';
+import CreateWorkoutModal from "../RoutinePage/CreateWorkoutModal"
+import EditWorkoutModal from "../RoutinePage/EditWorkoutModal"
+import { deleteWorkoutThunk } from '../../store/routine';
 
 
 
@@ -11,6 +15,7 @@ import { getAllRoutines } from "../../store/routine"
 const SingleRoutinePage = () => {
     const { id } = useParams()
     const dispatch = useDispatch()
+    const history = useHistory()
     const routine = useSelector(state => state.routines)
     const user = useSelector(state => state.session.user)
 
@@ -18,6 +23,11 @@ const SingleRoutinePage = () => {
         dispatch(getAllRoutines())
     }, [dispatch])
 
+    const handleClick = () => {
+        history.push(`/routines/${routine.id}`)
+    }
+
+    if (!user) history.push("/login")
 
 
     const routineById = routine[id]
@@ -26,21 +36,41 @@ const SingleRoutinePage = () => {
     return (
         <div className='all-routines'>
             <div className='detail-routine'>
+                <div className='routine-description'>
+                    {routineById?.description}
+                </div>
                 <div className='routine-image-container'>
                     <img id="routine-image" src={routineById?.image}></img>
                 </div>
                 {routineById?.workouts.map(workout => {
+                    if (!workout) return null
+                    const deleteWorkoutBtn = async (e) => {
+                        e.preventDefault()
+                        await dispatch(deleteWorkoutThunk(workout.id, routineById?.id))
+                    }
                     return (
                         <div className="workout-block" key={workout.id}>
                             <span>{workout.exercise}</span>
                             <span> Sets {workout.sets}</span>
                             <span> Reps {workout.reps}</span>
                             <span> Notes: {workout.notes}</span>
+                            <div className='edit-workout-modal'>
+                                <OpenModalButton
+                                    buttonText={<i className="fa-solid fa-pen-fancy"></i>}
+                                    modalComponent={<EditWorkoutModal workoutId={workout.id} workout={workout} />}
+
+                                />
+                            </div>
+                            <div className='delete-workout' onClick={deleteWorkoutBtn}><i className="fa-solid fa-trash"></i></div>
                         </div>
                     )
                 })}
-                <div className='routine-notes'>
-                    {routine.description}
+                <div className='create-workout-modal'>
+                    <OpenModalButton
+                        buttonText={<i className="fa-regular fa-pen-to-square"></i>}
+                        modalComponent={<CreateWorkoutModal routineId={routineById?.id} />}
+
+                    />
                 </div>
             </div>
         </div>

@@ -30,12 +30,13 @@ def update_workout(id):
     if form.validate_on_submit():
         workout = Workout.query.get(id)
         routineId = workout.routine_id
+
         workout.exercise = form.data['exercise']
         workout.sets = form.data['sets']
         workout.reps = form.data['reps']
         workout.weights = form.data['weights']
         workout.notes = form.data['notes']
-        workout.created_at = date.today(),
+        workout.created_at = date.today()
         workout.routine_id = routineId
         workout.user_id = current_user.id
 
@@ -44,7 +45,7 @@ def update_workout(id):
     if form.errors:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
-@workouts.route("<int:id>/delete",methods=['DELETE'])
+@workouts.route("/<int:id>/delete",methods=['DELETE'])
 @login_required
 def delete_workout(id):
     workout_to_delete = Workout.query.get(id)
