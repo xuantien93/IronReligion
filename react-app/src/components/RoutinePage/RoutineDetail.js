@@ -31,6 +31,7 @@ const RoutineDetail = ({ routine }) => {
                 </div>
                 <div className='routine-image-container'>
                     <img id="routine-image" src={routine.image}></img>
+                    <button onClick={() => history.push(`/routines/${routine.id}/update`)}>Update Routine</button>
                 </div>
                 {routine.workouts?.map(workout => {
                     if (!workout) return null

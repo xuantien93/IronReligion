@@ -124,3 +124,38 @@ def create_workout(id):
         return {"resWorkout":new_workout.to_dict()}
     if workout_form.errors:
         return {'errors': validation_errors_to_error_messages(workout_form.errors)}, 400
+
+@routines.route("/<int:id>/update", methods=['PUT'])
+@login_required
+def update_routine(id):
+    routine_form = RoutineForm()
+    routine_form["csrf_token"].data = request.cookies["csrf_token"]
+
+    if routine_form.validate_on_submit():
+        routine = Routine.query.get(id)
+        routine.description = routine_form.data['description']
+        routine.image = routine_form.data['image']
+        routine.created_at = date.today()
+        routine.user_id = current_user.id
+
+
+        db.session.commit()
+
+    workout = Workout.query.filter_by(routine_id=id).first()
+    if workout:
+        workout.exercise = routine_form.data['exercise']
+        workout.sets = routine_form.data['sets']
+        workout.reps = routine_form.data['reps']
+        workout.weights = routine_form.data['weights']
+        workout.notes = routine_form.data['notes']
+        workout.created_at = date.today()
+        workout.routine_id = routine.id,
+        workout.user_id = current_user.id
+
+
+
+        db.session.commit()
+
+        return {"resRoutine":routine.to_dict()}
+    if routine_form.errors:
+        return {'errors': validation_errors_to_error_messages(routine_form.errors)}, 400

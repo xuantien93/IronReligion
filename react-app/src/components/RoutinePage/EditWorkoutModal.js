@@ -22,13 +22,6 @@ const EditWorkoutModal = ({ workoutId, workout }) => {
 
 
 
-    // useEffect(() => {
-    //     dispatch(getAllRoutines())
-    // }, [dispatch])
-
-    console.log("this is current_workout ========", workout)
-
-
     const submitForm = async (e) => {
         e.preventDefault()
         setSubmitted(true)

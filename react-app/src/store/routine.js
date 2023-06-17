@@ -4,6 +4,7 @@ const ADD_ROUTINES = 'routines/ADD_ROUTINES'
 const ADD_WORKOUT = 'routines/ADD_WORKOUT'
 const EDIT_WORKOUT = 'routines/EDIT_WORKOUT'
 const DELETE_WORKOUT = 'routines/DELETE_WORKOUT'
+const EDIT_ROUTINE = 'routines/EDIT_ROUTINE'
 
 //action creators
 const loadRoutines = (routines) => ({
@@ -31,6 +32,12 @@ const deleteWorkout = (workoutId, routineId) => ({
     workoutId,
     routineId
 });
+
+const editRoutine = (routine) => ({
+    type: EDIT_ROUTINE,
+    routine
+})
+
 //thunk action creators
 export const getAllRoutines = () => async (dispatch) => {
     const res = await fetch('/api/routines')
@@ -111,6 +118,24 @@ export const deleteWorkoutThunk = (workoutId, routineId) => async (dispatch) => 
     }
 };
 
+export const editRoutineThunk = (routineId, info) => async (dispatch) => {
+    const res = await fetch(`/api/routines/${routineId}/update`, {
+        method: 'PUT',
+        body: info
+    })
+    if (res.ok) {
+        const { resRoutine } = await res.json()
+        dispatch(editRoutine(resRoutine))
+        return resRoutine
+    } else {
+        const data = await res.json()
+        if (data.errors) {
+            return data
+        }
+    }
+}
+
+
 const initialState = {}
 
 //Reducer
@@ -146,6 +171,10 @@ const routinesReducer = (state = initialState, action) => {
             const updatedWorkouts = workoutArray.filter(workout => workout.id !== action.workoutId);
             newState[routineId].workouts = updatedWorkouts;
             return newState;
+        case EDIT_ROUTINE:
+            newState = { ...state }
+            newState[action.routine.id] = action.routine
+            return newState
         default:
             return state;
     }
