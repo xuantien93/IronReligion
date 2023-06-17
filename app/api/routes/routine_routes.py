@@ -149,7 +149,7 @@ def update_routine(id):
         workout.weights = routine_form.data['weights']
         workout.notes = routine_form.data['notes']
         workout.created_at = date.today()
-        workout.routine_id = routine.id,
+        workout.routine_id = routine.id
         workout.user_id = current_user.id
 
 
@@ -159,3 +159,11 @@ def update_routine(id):
         return {"resRoutine":routine.to_dict()}
     if routine_form.errors:
         return {'errors': validation_errors_to_error_messages(routine_form.errors)}, 400
+
+@routines.route("/<int:id>/delete",methods=['DELETE'])
+@login_required
+def delete_routine(id):
+    routine = Routine.query.get(id)
+    db.session.delete(routine)
+    db.session.commit()
+    return {"res":"Successfully deleted"}

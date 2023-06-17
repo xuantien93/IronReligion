@@ -7,6 +7,7 @@ import OpenModalButton from '../OpenModalButton';
 import CreateWorkoutModal from "../RoutinePage/CreateWorkoutModal"
 import EditWorkoutModal from "../RoutinePage/EditWorkoutModal"
 import { deleteWorkoutThunk } from '../../store/routine';
+import DeleteRoutineModal from "../RoutinePage/DeleteRoutineModal"
 
 
 
@@ -27,11 +28,11 @@ const SingleRoutinePage = () => {
     const routineById = routine[id]
     if (!user) history.push("/login")
 
-    const deleteRoutineBtn = async (e) => {
-        e.preventDefault()
-        await dispatch(deleteRoutineThunk(routineById?.id))
-        history.push("/routines")
-    }
+    // const deleteRoutineBtn = async (e) => {
+    //     e.preventDefault()
+    //     await dispatch(deleteRoutineThunk(routineById?.id))
+    //     history.push("/routines")
+    // }
 
     // console.log("this is single routine====", routineById)
 
@@ -43,7 +44,14 @@ const SingleRoutinePage = () => {
                 </div>
                 <div className='routine-image-container'>
                     <img id="routine-image" src={routineById?.image}></img>
-                    <button id="delete-routine-button" onClick={deleteRoutineBtn}><i className="fa-solid fa-eraser"></i></button>
+                    {/* <button id="delete-routine-button" onClick={deleteRoutineBtn}><i className="fa-solid fa-eraser"></i></button> */}
+                </div>
+                <div className='edit-workout-modal'>
+                    <OpenModalButton
+                        buttonText={<i className="fa-solid fa-eraser"></i>}
+                        modalComponent={<DeleteRoutineModal routineId={routineById?.id} />}
+
+                    />
                 </div>
                 {routineById?.workouts.map(workout => {
                     if (!workout) return null
