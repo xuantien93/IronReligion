@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, NavLink } from "react-router-dom";
 import { getAllClasses } from '../../store/class';
 import './ClassPage.css'
+import { createBooking } from '../../store/booking';
 
 
 const ClassPage = () => {
@@ -12,8 +13,6 @@ const ClassPage = () => {
 
     const classes = Object.values(useSelector(state => state.classes))
     const user = useSelector(state => state.session.user)
-
-
 
 
     useEffect(() => {
@@ -31,6 +30,11 @@ const ClassPage = () => {
 
                     const durationInMilliseconds = timeEnd.getTime() - timeStart.getTime();
                     const durationInMinutes = Math.floor(durationInMilliseconds / (1000 * 60));
+
+                    const handleReserve = async (e) => {
+                        e.preventDefault()
+                        await dispatch(createBooking(classItem))
+                    }
                     return (
                         < div className='single-class-block' key={classItem.id} >
                             <span>{classItem.class_name}</span>
@@ -38,6 +42,9 @@ const ClassPage = () => {
                             <span>End: {classItem.time_end}</span>
                             <span>Duration: {durationInMinutes} mins</span>
                             <span>Trainer: {classItem.trainer.first_name} {classItem.trainer.last_name}</span>
+                            <div className='reserve-block'>
+                                <button id="reserve-btn" onClick={handleReserve}>Reserve</button>
+                            </div>
                         </div>
                     )
                 })}
