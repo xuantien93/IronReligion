@@ -66,19 +66,18 @@ class Class(db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-    user_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod('users.id')), nullable=False)
     trainer_id = db.Column(db.Integer, db.ForeignKey(
         add_prefix_for_prod('trainers.id')), nullable=False)
 
     class_name = db.Column(db.String(50), nullable=False)
-    date = db.Column(db.Date(), nullable=False)
-    time_start = db.Column(db.String(10),nullable=False)
-    time_end = db.Column(db.String(10),nullable=False)
+    # date = db.Column(db.Date(), nullable=False)
+    time_start = db.Column(db.DateTime(),nullable=False)
+    time_end = db.Column(db.DateTime(),nullable=False)
     created_at = db.Column(db.Date(), nullable=False)
 
-    user = db.relationship('User', back_populates = 'classes')
+
     trainer = db.relationship('Trainer', back_populates = 'classes')
+    bookings = db.relationship('Booking',back_populates='one_class')
 
     def __repr__(self):
         return f'<Class {self.class_name} was posted by {self.trainer.first_name} {self.trainer.last_name}>'
@@ -88,17 +87,10 @@ class Class(db.Model):
             'id':self.id,
             'class_name':self.class_name,
             'trainer_id':self.trainer_id,
-            'date':self.date,
+            # 'date':self.date,
             'time_start':self.time_start,
             'time_end':self.time_end,
             'created_at':self.created_at,
-            'user':{
-                'id':self.user.id,
-                'username':self.user.username,
-                'fisrt_name':self.user.first_name,
-                'last_name':self.user.last_name,
-                'phone':self.user.phone
-            },
             'trainer':{
                 'id':self.trainer.id,
                 'first_name':self.trainer.first_name,
@@ -109,6 +101,48 @@ class Class(db.Model):
         }
 
 
+class Booking(db.Model):
+    __tablename__='bookings'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    class_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('classes.id')), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod('users.id')), nullable=False)
+    time_start = db.Column(db.DateTime())
+    time_end = db.Column(db.DateTime())
+
+    user = db.relationship('User', back_populates='bookings')
+    one_class = db.relationship('Class', back_populates='bookings')
+
+    def __repr__(self):
+        return f'<User {self.id}, {self.user.username}, just created Booking #{self.id}>'
+
+    def to_dict(self):
+        return {
+            'id':self.id,
+            'class_id':self.class_id,
+            'user_id':self.user_id,
+            'time_start':self.time_start,
+            'time_end':self.time_end,
+            'user': {
+                'id':self.user.id,
+                'username':self.user.username,
+                'fisrt_name':self.user.first_name,
+                'last_name':self.user.last_name,
+                'phone':self.user.phone
+            },
+            'class':{
+                'id':self.one_class.id,
+                'class_name':self.one_class.class_name,
+                'trainer_id':self.one_class.trainer_id,
+                'time_start':self.one_class.time_start,
+                'time_end':self.one_class.time_end
+            }
+        }
 
 class Workout(db.Model):
     __tablename__ = 'workouts'

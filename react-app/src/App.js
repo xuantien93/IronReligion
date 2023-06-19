@@ -9,6 +9,8 @@ import LandingPage from "./components/LandingPage";
 import RoutinePage from "./components/RoutinePage";
 import SingleRoutinePage from "./components/SingleRoutinePage";
 import CreateRoutine from "./components/RoutinePage/CreateRoutine";
+import EditRoutine from "./components/RoutinePage/EditRoutine";
+import ClassPage from "./components/ClassPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,11 +36,17 @@ function App() {
           <Route path="/routines/create">
             <CreateRoutine />
           </Route>
+          <Route path="/routines/:id/update">
+            <EditRoutine />
+          </Route>
           <Route path="/routines/:id">
             <SingleRoutinePage />
           </Route>
           <Route path="/routines">
             <RoutinePage />
+          </Route>
+          <Route path="/classes">
+            <ClassPage />
           </Route>
         </Switch>
       )}

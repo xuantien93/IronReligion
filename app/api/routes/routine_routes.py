@@ -40,10 +40,6 @@ def all_routines():
             if comment['routine_id'] == routine['id']:
                 comments = routine['comments']
                 comments[comment['id']] = comment
-        # for workout in workout_list:
-        #     if workout['routine_id'] == routine['id']:
-        #         workouts = routine['workouts']
-        #         workouts[workout['id']] = workout
 
     res = {}
 
@@ -67,9 +63,8 @@ def single_routine(id):
 @routines.route("", methods=['POST'])
 @login_required
 def create_routines():
-    # print("this is hitting create_routine===============================================>", request.files.get('description'))
+
     form = RoutineForm()
-    # print("this is hitting ==============================")
     form["csrf_token"].data = request.cookies["csrf_token"]
 
 
@@ -96,7 +91,7 @@ def create_routines():
 
         db.session.add(new_workout)
         db.session.commit()
-        # print("this is new routine ----------------------",new_routine.to_dict())
+
         return {"resRoutine":new_routine.to_dict()}
     if form.errors:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
@@ -115,9 +110,9 @@ def create_workout(id):
             reps = workout_form.data['reps'],
             weights = workout_form.data['weights'],
             notes = workout_form.data['notes'],
-            created_at = date.today(),
             routine_id = id,
-            user_id = current_user.id
+            user_id = current_user.id,
+            created_at = date.today()
         )
 
         db.session.add(new_workout)
@@ -125,3 +120,46 @@ def create_workout(id):
         return {"resWorkout":new_workout.to_dict()}
     if workout_form.errors:
         return {'errors': validation_errors_to_error_messages(workout_form.errors)}, 400
+
+@routines.route("/<int:id>/update", methods=['PUT'])
+@login_required
+def update_routine(id):
+    routine_form = RoutineForm()
+    routine_form["csrf_token"].data = request.cookies["csrf_token"]
+
+    if routine_form.validate_on_submit():
+        routine = Routine.query.get(id)
+        routine.description = routine_form.data['description']
+        routine.image = routine_form.data['image']
+        routine.created_at = date.today()
+        routine.user_id = current_user.id
+
+
+        db.session.commit()
+
+    workout = Workout.query.filter_by(routine_id=id).first()
+    if workout:
+        workout.exercise = routine_form.data['exercise']
+        workout.sets = routine_form.data['sets']
+        workout.reps = routine_form.data['reps']
+        workout.weights = routine_form.data['weights']
+        workout.notes = routine_form.data['notes']
+        workout.created_at = date.today()
+        workout.routine_id = routine.id
+        workout.user_id = current_user.id
+
+
+
+        db.session.commit()
+
+        return {"resRoutine":routine.to_dict()}
+    if routine_form.errors:
+        return {'errors': validation_errors_to_error_messages(routine_form.errors)}, 400
+
+@routines.route("/<int:id>/delete",methods=['DELETE'])
+@login_required
+def delete_routine(id):
+    routine = Routine.query.get(id)
+    db.session.delete(routine)
+    db.session.commit()
+    return {"res":"Successfully deleted"}
