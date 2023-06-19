@@ -12,6 +12,7 @@ const EditRoutine = () => {
     const history = useHistory()
     const { id } = useParams()
     const routineObj = useSelector(state => state.routines)
+    const user = useSelector(state => state.session.user)
 
     const routine = routineObj[id]
 
@@ -27,7 +28,6 @@ const EditRoutine = () => {
     const [errors, setErrors] = useState({})
     const [submitted, setSubmitted] = useState(false);
 
-    const user = useSelector(state => state.session.user)
 
 
     useEffect(() => {
@@ -45,6 +45,9 @@ const EditRoutine = () => {
     useEffect(() => {
         dispatch(getAllRoutines())
     }, [dispatch])
+
+    if (!routine) return null
+
 
     const submitForm = async (e) => {
         e.preventDefault()

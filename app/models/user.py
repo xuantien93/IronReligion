@@ -26,12 +26,12 @@ class User(db.Model, UserMixin):
         add_prefix_for_prod('trainers.id')), nullable=True)
 
     trainer = db.relationship('Trainer', back_populates='users')
-    classes = db.relationship('Class', back_populates='user')
     workouts = db.relationship('Workout', back_populates='user')
     comments = db.relationship('Comment', back_populates='user')
     reviews = db.relationship('Review', back_populates='user')
     cart = db.relationship('Cart', back_populates='user')
     routines = db.relationship('Routine', back_populates='user')
+    bookings = db.relationship('Booking',back_populates='user')
 
 
     user_enrollments = db.relationship(

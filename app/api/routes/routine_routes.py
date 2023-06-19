@@ -40,10 +40,6 @@ def all_routines():
             if comment['routine_id'] == routine['id']:
                 comments = routine['comments']
                 comments[comment['id']] = comment
-        # for workout in workout_list:
-        #     if workout['routine_id'] == routine['id']:
-        #         workouts = routine['workouts']
-        #         workouts[workout['id']] = workout
 
     res = {}
 

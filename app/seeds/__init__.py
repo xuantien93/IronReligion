@@ -8,6 +8,8 @@ from .products import seed_products,undo_products
 from .reviews import seed_reviews,undo_reviews
 from .routines import seed_routines,undo_routines
 from .enrollments import seed_enrollments,undo_enrollments
+from .bookings import seed_bookings,undo_bookings
+
 
 from app.models.db import db, environment, SCHEMA
 
@@ -28,6 +30,7 @@ def seed():
         undo_products()
         undo_comments()
         undo_routines()
+        undo_bookings()
         undo_classes()
         undo_enrollments()
         undo_users()
@@ -36,6 +39,7 @@ def seed():
     seed_users()
     seed_enrollments()
     seed_classes()
+    seed_bookings()
     seed_routines()
     seed_comments()
     seed_products()
@@ -50,6 +54,7 @@ def undo():
     undo_products()
     undo_comments()
     undo_routines()
+    undo_bookings()
     undo_classes()
     undo_enrollments()
     undo_users()
