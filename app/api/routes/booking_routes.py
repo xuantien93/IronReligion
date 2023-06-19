@@ -23,4 +23,18 @@ def validation_errors_to_error_messages(validation_errors):
 
 @bookings.route("")
 def all_bookings():
-    pass
+    bookings = Booking.query.all()
+    booking_list = [booking.to_dict() for booking in bookings]
+
+    res = {}
+    for booking in booking_list:
+        booking_id = booking['id']
+        res[booking_id] = booking
+
+    return res
+
+@bookings.route("/<int:id>/bookings",methods=['POST'])
+@login_required
+def create_booking(id):
+    data = request.get_json()
+    booking = Booking.query.get(id)

@@ -10,6 +10,7 @@ import RoutinePage from "./components/RoutinePage";
 import SingleRoutinePage from "./components/SingleRoutinePage";
 import CreateRoutine from "./components/RoutinePage/CreateRoutine";
 import EditRoutine from "./components/RoutinePage/EditRoutine";
+import ClassPage from "./components/ClassPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,9 @@ function App() {
           </Route>
           <Route path="/routines">
             <RoutinePage />
+          </Route>
+          <Route path="/classes">
+            <ClassPage />
           </Route>
         </Switch>
       )}

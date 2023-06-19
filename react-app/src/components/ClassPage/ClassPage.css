@@ -1,0 +1,22 @@
+.classes-page-container {
+    border: 1px solid red;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.single-class {
+    border: 1px solid blue;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    position: absolute;
+    right: 25%;
+    top: 30px;
+}
+
+.single-class-block {
+    border: 1px solid pink;
+    display: flex;
+    flex-direction: column;
+}

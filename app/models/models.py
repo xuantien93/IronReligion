@@ -126,8 +126,8 @@ class Booking(db.Model):
             'id':self.id,
             'class_id':self.class_id,
             'user_id':self.user_id,
-            'start_date':self.start_date,
-            'end_date':self.end_date,
+            'time_start':self.time_start,
+            'time_end':self.time_end,
             'user': {
                 'id':self.user.id,
                 'username':self.user.username,
