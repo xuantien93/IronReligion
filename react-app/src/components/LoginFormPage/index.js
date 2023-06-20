@@ -26,11 +26,11 @@ function LoginFormPage() {
     <>
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
-        <ul>
+        <span>
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <p style={{ color: "red" }} key={idx}>{error}</p>
           ))}
-        </ul>
+        </span>
         <label>
           Email
           <input
