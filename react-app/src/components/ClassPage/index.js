@@ -16,23 +16,33 @@ const ClassPage = () => {
     const bookings = Object.values(useSelector(state => state.bookings))
 
     const [reservedClasses, setReservedClasses] = useState([]);
+    const [errors, setErrors] = useState('');
 
     useEffect(() => {
         dispatch(getAllClasses())
         dispatch(getAllBooking())
     }, [dispatch])
 
+    useEffect(() => {
+        if (user) {
+            setErrors('')
+        }
+    }, [user])
 
     const getCurrentDateTime = () => {
         const now = new Date();
         return now.getTime();
     };
 
+
+    // if (!user) {
+    //     return <Redirect to="/" />
+    // }
     // console.log("this is now", new Date())
     // console.log("this is getcurrentdatetime", getCurrentDateTime())
 
 
-    const myBooking = bookings.filter(booking => booking.user_id === user.id)
+    const myBooking = bookings.filter(booking => booking.user_id === user?.id)
 
     return (
         <div className='classes-page-container'>
@@ -46,8 +56,12 @@ const ClassPage = () => {
 
                     const handleReserve = async (e) => {
                         e.preventDefault()
-                        await dispatch(createBooking(classItem))
-                        setReservedClasses([...reservedClasses, classItem.id])
+                        const data = await dispatch(createBooking(classItem))
+                        if (data.errors) {
+                            setErrors(`${data.errors[0]}: Please login to reserve`)
+                        } else {
+                            setReservedClasses([...reservedClasses, classItem.id])
+                        }
                     }
 
                     const isReserved = reservedClasses.includes(classItem.id)
@@ -55,6 +69,7 @@ const ClassPage = () => {
                     const isAlreadyBooked = myBooking.some(booking => booking.class_id === classItem.id);
                     return (
                         < div className='single-class-block' key={classItem.id} >
+                            {errors && <p style={{ color: "red" }}>{errors}</p>}
                             <span>{classItem.class_name}</span>
                             <span>Start: {classItem.time_start}</span>
                             <span>End: {classItem.time_end}</span>

@@ -32,12 +32,27 @@ const EditRoutine = () => {
 
     useEffect(() => {
         const error = {}
+        const imageExtensions = ['.png', '.jpg', 'jpeg']
         if (!description) error.description = "Description is required"
+        if (description.length < 5) error.description = "Minimum of 5 characters is required"
+        if (description.length > 5000) error.description = "Maximum of 5000 characters only"
         if (!image) error.image = "Image is required"
+        if (image && !imageExtensions.includes(image.slice(-4))) {
+            error.image = "Please make sure your images end with either .png, .jpg, or .jpeg"
+        }
         if (!exercise) error.exercise = "Excercise is required"
+        if (exercise.length < 5) error.exercise = "Minimum of 5 characters is required"
+        if (exercise.length > 200) error.exercise = "Maximum of 200 characters only"
         if (!sets) error.sets = "Sets is required"
+        if (sets.length < 5) error.sets = "Minimum of 5 characters is required"
+        if (sets.length > 200) error.sets = "Maximum of 200 characters only"
         if (!reps) error.reps = "Reps is required"
+        if (reps.length < 5) error.reps = "Minimum of 5 characters is required"
+        if (reps.length > 200) error.reps = "Maximum of 200 characters only"
         if (!weights) error.weights = "Weights is required"
+        if (weights.length < 5) error.weights = "Minimum of 5 characters is required"
+        if (weights.length > 200) error.weights = "Maximum of 200 characters only"
+        if (notes.length > 1000) error.notes = "Maximum of 1000 characters only"
         setErrors(error)
 
     }, [description, image, exercise, sets, reps, weights])
@@ -47,7 +62,9 @@ const EditRoutine = () => {
     }, [dispatch])
 
     if (!routine) return null
-
+    if (!user) {
+        return <Redirect to="/" />
+    }
 
     const submitForm = async (e) => {
         e.preventDefault()
@@ -88,7 +105,7 @@ const EditRoutine = () => {
                 <form className="routine-form" onSubmit={submitForm}>
                     <div className="inside-routine-form">
                         <label>
-                            <div>Description</div>
+                            <div>Description <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
                             {errors.description && submitted && < p style={{ color: "red" }}>{errors.description}</p>}
                             <input
                                 id="routine-description"
@@ -99,7 +116,7 @@ const EditRoutine = () => {
                             ></input>
                         </label>
                         <label>
-                            <div>Image</div>
+                            <div>Image <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
                             {errors.image && submitted && < p style={{ color: "red" }}>{errors.image}</p>}
                             <input
                                 id="routine-image"
@@ -111,7 +128,7 @@ const EditRoutine = () => {
                         </label>
 
                         <label>
-                            <div>Exercise</div>
+                            <div>Exercise <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
                             {errors.exercise && submitted && < p style={{ color: "red" }}>{errors.exercise}</p>}
                             <input
                                 id="workout-exercise"
@@ -122,7 +139,7 @@ const EditRoutine = () => {
                             ></input>
                         </label>
                         <label>
-                            <div>Sets</div>
+                            <div>Sets <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
                             {errors.sets && submitted && < p style={{ color: "red" }}>{errors.sets}</p>}
                             <textarea
                                 id="workout-sets"
@@ -133,7 +150,7 @@ const EditRoutine = () => {
                             />
                         </label>
                         <label>
-                            <div>Reps</div>
+                            <div>Reps <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
                             {errors.reps && submitted && < p style={{ color: "red" }}>{errors.reps}</p>}
                             <input
                                 id="workout-reps"
@@ -144,7 +161,7 @@ const EditRoutine = () => {
                             ></input>
                         </label>
                         <label>
-                            <div>Weights</div>
+                            <div>Weights <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
                             {errors.weights && submitted && < p style={{ color: "red" }}>{errors.weights}</p>}
                             <input
                                 id="workout-reps"
@@ -156,10 +173,10 @@ const EditRoutine = () => {
                         </label>
                         <label>
                             <div>Notes</div>
-                            {errors.workoutNotes && submitted && < p style={{ color: "red" }}>{errors.workoutNotes}</p>}
+                            {errors.notes && submitted && < p style={{ color: "red" }}>{errors.notes}</p>}
                             <input
                                 id="workout-notes"
-                                placeholder="Notes..."
+                                placeholder="Notes...(optional)"
                                 type="text"
                                 value={notes}
                                 onChange={(e) => setNotes(e.target.value)}

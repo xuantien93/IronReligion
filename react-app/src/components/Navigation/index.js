@@ -16,10 +16,12 @@ function Navigation({ isLoaded }) {
 			</div>
 			{isLoaded && (
 				<div className='topright-nav'>
-					{sessionUser &&
-						<NavLink to="/routines" className="topright-nav-create-text">
-							<button id="dumbell-button" title="Routines"><i className="fa-solid fa-dumbbell"></i></button>
-						</NavLink>}
+					<NavLink to="/routines" className="topright-nav-create-text">
+						<button id="dumbell-button" title="Routines"><i className="fa-solid fa-dumbbell"></i></button>
+					</NavLink>
+					{/* <NavLink to="/routines" className="topright-nav-create-text">
+						<button id="dumbell-button" title="Routines"><i className="fa-solid fa-dumbbell"></i></button>
+					</NavLink> */}
 					<NavLink to="/classes">Classes</NavLink>
 					<NavLink to="/bookings">My bookings</NavLink>
 					<ProfileButton user={sessionUser} />

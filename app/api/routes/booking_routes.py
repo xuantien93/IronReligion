@@ -40,6 +40,7 @@ def all_bookings():
 def create_booking():
     data = request.get_json()
 
+
     time_format = '%a, %d %b %Y %H:%M:%S GMT'
     time_start = datetime.strptime(data['time_start'], time_format)
     time_end = datetime.strptime(data['time_end'], time_format)

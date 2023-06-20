@@ -22,7 +22,6 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 @routines.route("")
-@login_required
 def all_routines():
     routines = Routine.query.order_by(Routine.created_at.desc()).all()
 

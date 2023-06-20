@@ -12,6 +12,7 @@ import CreateRoutine from "./components/RoutinePage/CreateRoutine";
 import EditRoutine from "./components/RoutinePage/EditRoutine";
 import ClassPage from "./components/ClassPage";
 import Mybooking from "./components/MyBookings";
+import MyRoutine from "./components/RoutinePage/MyRoutine";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,9 @@ function App() {
           </Route>
           <Route path="/routines/create">
             <CreateRoutine />
+          </Route>
+          <Route path="/routines/me">
+            <MyRoutine />
           </Route>
           <Route path="/routines/:id/update">
             <EditRoutine />
