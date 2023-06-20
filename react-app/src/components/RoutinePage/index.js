@@ -25,8 +25,8 @@ const RoutinePage = () => {
 
     return (
         <div className='routine-landing-container'>
-            <div>
-                <button onClick={() => history.push("/routines/create")}>Create Routine</button>
+            <div className='create-routine-page-btn-container'>
+                <button id="create-routine-btn" onClick={() => history.push("/routines/create")}>Create Routine</button>
             </div>
             <div className="single-routine">
                 {routines.toReversed().map(routine => <RoutineDetail key={routine.id} routine={routine} />)}

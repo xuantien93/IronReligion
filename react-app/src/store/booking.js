@@ -5,15 +5,16 @@ const DELETE_BOOKING = 'bookings/DELETE_BOOKING'
 
 
 //action creators
+const allBooking = (bookings) => ({
+    type: ALL_BOOKING,
+    bookings
+})
+
 const addBooking = (booking) => ({
     type: ADD_BOOKING,
     booking
 })
 
-const allBooking = (bookings) => ({
-    type: ALL_BOOKING,
-    bookings
-})
 
 const deleteBooking = (bookingId) => ({
     type: DELETE_BOOKING,
@@ -31,7 +32,7 @@ export const getAllBooking = () => async (dispatch) => {
     } else {
         const data = await res.json()
         if (data.errors) {
-            return data.errors
+            return data
         }
     }
 }
@@ -44,12 +45,15 @@ export const createBooking = (data) => async (dispatch) => {
         body: JSON.stringify(data)
     })
     if (res.ok) {
-        const booking = await res.json()
-        dispatch(addBooking(booking))
-        return booking
+        const { resBooking } = await res.json()
+        dispatch(addBooking(resBooking))
+        return resBooking
+
     } else {
-        const error = await res.json()
-        return error
+        const data = await res.json()
+        if (data.errors) {
+            return data
+        }
     }
 }
 
