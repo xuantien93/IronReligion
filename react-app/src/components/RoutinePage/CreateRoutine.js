@@ -27,25 +27,25 @@ const CreateRoutine = () => {
         const error = {}
         const imageExtensions = ['.png', '.jpg', 'jpeg']
         if (!description) error.description = "Description is required"
-        if (description.length < 5) error.description = "Minimum of 5 characters is required"
-        if (description.length > 5000) error.description = "Maximum of 5000 characters only"
+        if (description.trim().length < 5) error.description = "Minimum of 5 characters is required"
+        if (description.trim().length > 5000) error.description = "Maximum of 5000 characters only"
         if (!image) error.image = "Image is required"
         if (image && !imageExtensions.includes(image.slice(-4))) {
             error.image = "Please make sure your images end with either .png, .jpg, or .jpeg"
         }
         if (!exercise) error.exercise = "Excercise is required"
-        if (exercise.length < 5) error.exercise = "Minimum of 5 characters is required"
-        if (exercise.length > 200) error.exercise = "Maximum of 200 characters only"
+        if (exercise.trim().length < 5) error.exercise = "Minimum of 5 characters is required"
+        if (exercise.trim().length > 200) error.exercise = "Maximum of 200 characters only"
         if (!sets) error.sets = "Sets is required"
-        if (sets.length < 5) error.sets = "Minimum of 5 characters is required"
-        if (sets.length > 200) error.sets = "Maximum of 200 characters only"
+        if (sets.trim().length < 5) error.sets = "Minimum of 5 characters is required"
+        if (sets.trim().length > 200) error.sets = "Maximum of 200 characters only"
         if (!reps) error.reps = "Reps is required"
-        if (reps.length < 5) error.reps = "Minimum of 5 characters is required"
-        if (reps.length > 200) error.reps = "Maximum of 200 characters only"
+        if (reps.trim().length < 5) error.reps = "Minimum of 5 characters is required"
+        if (reps.trim().length > 200) error.reps = "Maximum of 200 characters only"
         if (!weights) error.weights = "Weights is required"
-        if (weights.length < 5) error.weights = "Minimum of 5 characters is required"
-        if (weights.length > 200) error.weights = "Maximum of 200 characters only"
-        if (notes.length > 1000) error.notes = "Maximum of 1000 characters only"
+        if (weights.trim().length < 5) error.weights = "Minimum of 5 characters is required"
+        if (weights.trim().length > 200) error.weights = "Maximum of 200 characters only"
+        if (notes.trim().length > 1000) error.notes = "Maximum of 1000 characters only"
         setErrors(error)
 
     }, [description, image, exercise, sets, reps, weights])

@@ -2,6 +2,8 @@ from flask import Blueprint, jsonify, session, request
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
+from datetime import date
+from random import randint
 from flask_login import current_user, login_user, logout_user, login_required
 
 auth_routes = Blueprint('auth', __name__)
@@ -63,9 +65,19 @@ def sign_up():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user = User(
-            username=form.data['username'],
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            username=form.data['username'],
+            gender = form.data['gender'],
+            phone = form.data['phone'],
+            birthday = form.data['birthday'],
+            status = form.data['status'],
+            enrolled_with_coach= True,
+            created_at = date.today(),
+            trainer_id = randint(1,3)
+
         )
         db.session.add(user)
         db.session.commit()

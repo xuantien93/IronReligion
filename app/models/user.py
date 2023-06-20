@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     phone = db.Column(db.String(12),nullable=False)
     birthday = db.Column(db.String(),nullable=False)
     status = db.Column(db.String(),nullable=False)
-    enrolled_with_coach = db.Column(db.Boolean(),default=False)
+    enrolled_with_coach = db.Column(db.Boolean(),default=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     created_at = db.Column(db.Date(), nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
