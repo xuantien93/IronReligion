@@ -8,7 +8,7 @@ import RoutineDetail from './RoutineDetail';
 
 
 
-const RoutinePage = () => {
+const RoutinePage = ({ myRoutines, isMyRoutine }) => {
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -29,7 +29,9 @@ const RoutinePage = () => {
                 <button id="create-routine-btn" onClick={() => history.push("/routines/create")}>Create Routine</button>
             </div>
             <div className="single-routine">
-                {routines.toReversed().map(routine => <RoutineDetail key={routine.id} routine={routine} />)}
+                {isMyRoutine ?
+                    myRoutines.toReversed().map(routine => <RoutineDetail key={routine.id} routine={routine} />)
+                    : routines.toReversed().map(routine => <RoutineDetail key={routine.id} routine={routine} />)}
             </div>
         </div>
     )

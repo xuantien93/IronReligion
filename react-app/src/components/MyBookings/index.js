@@ -17,6 +17,10 @@ const Mybooking = () => {
         dispatch(getAllBooking())
     }, [dispatch])
 
+    const getCurrentDateTime = () => {
+        const now = new Date();
+        return now.getTime();
+    };
 
     if (!user) {
         history.push(`/`)
@@ -25,7 +29,7 @@ const Mybooking = () => {
     return (
         <div className='mybooking-container'>
             <div className='mybooking-header'>
-                <h1>My bookings</h1>
+                <h1>My Classes</h1>
             </div>
             <div className='mybooking-content'>
                 {bookings.toReversed().map(booking => {
@@ -34,7 +38,7 @@ const Mybooking = () => {
 
                     const durationInMilliseconds = timeEnd.getTime() - timeStart.getTime();
                     const durationInMinutes = Math.floor(durationInMilliseconds / (1000 * 60));
-
+                    const isAlreadyPassed = getCurrentDateTime() > timeStart.getTime();
                     return (
                         booking.user_id === user.id && <div key={booking.id}>
                             <div className='mybooking-detail'>
@@ -43,18 +47,19 @@ const Mybooking = () => {
                                 <p>End: {booking.class.time_end}</p>
                                 <p>Duration: {durationInMinutes}</p>
                             </div>
-                            <div className='mybooking-delete-modal'>
-                                <OpenModalButton
-                                    buttonText="Delete"
-                                    modalComponent={<DeleteBookingModal bookingId={booking.id} />}
-                                />
-                            </div>
+                            {isAlreadyPassed ? (<button disabled={true}>Completed</button>) :
+                                < div className='mybooking-delete-modal'>
+                                    <OpenModalButton
+                                        buttonText="Delete"
+                                        modalComponent={<DeleteBookingModal bookingId={booking.id} />}
+                                    />
+                                </div>}
                         </div>
 
                     )
                 })}
             </div>
-        </div>
+        </div >
 
     )
 }
