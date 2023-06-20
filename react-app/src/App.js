@@ -11,6 +11,7 @@ import SingleRoutinePage from "./components/SingleRoutinePage";
 import CreateRoutine from "./components/RoutinePage/CreateRoutine";
 import EditRoutine from "./components/RoutinePage/EditRoutine";
 import ClassPage from "./components/ClassPage";
+import Mybooking from "./components/MyBookings";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,9 @@ function App() {
           </Route>
           <Route path="/classes">
             <ClassPage />
+          </Route>
+          <Route path="/bookings">
+            <Mybooking />
           </Route>
         </Switch>
       )}
