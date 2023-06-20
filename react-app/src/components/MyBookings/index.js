@@ -23,7 +23,7 @@ const Mybooking = () => {
     };
 
     if (!user) {
-        history.push(`/`)
+        return <Redirect to="/" />
     }
 
     return (
@@ -40,7 +40,7 @@ const Mybooking = () => {
                     const durationInMinutes = Math.floor(durationInMilliseconds / (1000 * 60));
                     const isAlreadyPassed = getCurrentDateTime() > timeStart.getTime();
                     return (
-                        booking.user_id === user.id && <div key={booking.id}>
+                        booking.user_id === user?.id && <div key={booking.id}>
                             <div className='mybooking-detail'>
                                 <h3>{booking.class.class_name}</h3>
                                 <p>Start: {booking.class.time_start}</p>

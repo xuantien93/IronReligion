@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import RoutinePage from '.';
 import { getAllRoutines } from '../../store/routine';
 
@@ -19,9 +20,11 @@ const MyRoutine = () => {
     }, [dispatch])
 
     const myRoutines = routines.filter(routine => routine.user_id === user.id)
-    console.log("this is my routine0,", myRoutines)
+    // console.log("this is my routine0,", myRoutines)
 
-    if (!user) history.push("/")
+    if (!user) {
+        return <Redirect to="/" />
+    }
     return (
         <RoutinePage myRoutines={myRoutines} isMyRoutine={true} />
     )
