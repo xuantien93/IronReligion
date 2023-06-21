@@ -26,15 +26,8 @@ const SingleRoutinePage = () => {
 
 
     const routineById = routine[id]
-    // if (!user) history.push("/login")
 
-    // const deleteRoutineBtn = async (e) => {
-    //     e.preventDefault()
-    //     await dispatch(deleteRoutineThunk(routineById?.id))
-    //     history.push("/routines")
-    // }
-
-    // console.log("this is single routine====", routineById)
+    if (!routineById) return null
 
     return (
         <div className='all-routines'>
@@ -49,7 +42,7 @@ const SingleRoutinePage = () => {
                     <img id="routine-image" src={routineById?.image}></img>
                     {/* <button id="delete-routine-button" onClick={deleteRoutineBtn}><i className="fa-solid fa-eraser"></i></button> */}
                 </div>
-                {routine.user_id === user?.id && user && <div className='edit-workout-modal'>
+                {routineById.user_id === user?.id && user && <div className='edit-workout-modal'>
                     <OpenModalButton
                         buttonText={<i className="fa-solid fa-eraser"></i>}
                         modalComponent={<DeleteRoutineModal routineId={routineById?.id} />}

@@ -14,13 +14,29 @@ const CreateWorkoutModal = ({ routineId }) => {
     const [sets, setSets] = useState("")
     const [reps, setReps] = useState("")
     const [notes, setNotes] = useState("")
+    const [errors, setErrors] = useState({});
 
     const user = useSelector(state => state.session.user)
-    const [errors, setErrors] = useState('');
 
     useEffect(() => {
         dispatch(getAllRoutines())
     }, [dispatch])
+
+
+    useEffect(() => {
+        const error = {}
+        if (!exercise) error.exercise = "Excercise is required"
+        if (exercise.trim().length < 2) error.exercise = "Minimum of 2 characters is required"
+        if (exercise.trim().length > 200) error.exercise = "Maximum of 200 characters only"
+        if (!sets) error.sets = "Sets is required"
+        if (sets.trim().length > 200) error.sets = "Maximum of 200 characters only"
+        if (!reps) error.reps = "Reps is required"
+        if (reps.trim().length > 200) error.reps = "Maximum of 200 characters only"
+        if (!weights) error.weights = "Weights is required"
+        if (weights.trim().length > 200) error.weights = "Maximum of 200 characters only"
+        if (notes.trim().length > 1000) error.notes = "Maximum of 1000 characters only"
+        setErrors(error)
+    }, [exercise, reps, sets, notes])
 
     const submitForm = async (e) => {
         e.preventDefault()
@@ -52,8 +68,8 @@ const CreateWorkoutModal = ({ routineId }) => {
     return (
         <div className='workout-form-container'>
             <form className='workout-form' onSubmit={submitForm}>
-                {errors && (
-                    <p style={{ color: "red" }}>{errors}</p>
+                {errors.exercise && (
+                    <p style={{ color: "red" }}>{errors.exercise}</p>
                 )}
                 <div className='inside-workout-form'>
                     <label>
@@ -67,6 +83,9 @@ const CreateWorkoutModal = ({ routineId }) => {
                             onChange={(e) => setExercise(e.target.value)}
                         ></input>
                     </label>
+                    {errors.sets && (
+                        <p style={{ color: "red" }}>{errors.sets}</p>
+                    )}
                     <label>
                         <div>Sets</div>
 
@@ -78,6 +97,9 @@ const CreateWorkoutModal = ({ routineId }) => {
                             onChange={(e) => setSets(e.target.value)}
                         ></input>
                     </label>
+                    {errors.reps && (
+                        <p style={{ color: "red" }}>{errors.reps}</p>
+                    )}
                     <label>
                         <div>Reps</div>
 
@@ -89,6 +111,9 @@ const CreateWorkoutModal = ({ routineId }) => {
                             onChange={(e) => setReps(e.target.value)}
                         ></input>
                     </label>
+                    {errors.weights && (
+                        <p style={{ color: "red" }}>{errors.weights}</p>
+                    )}
                     <label>
                         <div>Weight</div>
 
@@ -100,6 +125,9 @@ const CreateWorkoutModal = ({ routineId }) => {
                             onChange={(e) => setWeights(e.target.value)}
                         ></input>
                     </label>
+                    {errors.notes && (
+                        <p style={{ color: "red" }}>{errors.notes}</p>
+                    )}
                     <label>
                         <div>Notes</div>
 
