@@ -54,6 +54,7 @@ class Trainer(db.Model):
             'last_name':self.last_name,
             'email':self.email,
             'phone':self.phone,
+            'image':self.image,
             'specialization':self.specialization,
             'bio':self.bio,
             'created_at':self.created_at
