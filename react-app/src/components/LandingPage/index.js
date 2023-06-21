@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, NavLink } from "react-router-dom";
-
+import './LandingPage.css'
 
 const LandingPage = () => {
 
@@ -10,13 +10,15 @@ const LandingPage = () => {
 
     return (
         <div className='landing-page-container'>
-            <div className='landing-page-intro'>
-                <h1>Join The Iron Elite</h1>
-                <h3>Unleash your potential, redefine your limits, and sculpt the body of a warrior. With an unwavering dedication to excellence, we empower individuals to rise above and beyond, transforming both mind and body.</h3>
-            </div>
-            <div className='ambition-section'>
-                <h2>THE FORGE OF TRANSFORMATION</h2>
-                <p>Ignite the fire within, stoke the flames of change, and sculpt your physique to embody raw power. Our iron sanctuary provides the tools, the guidance, and the inspiration to craft your own destiny.</p>
+            <div className='sub-landing-page'>
+                <div className='landing-page-intro'>
+                    <h1>Join The Iron Elite</h1>
+                    <h3>Unleash your potential, redefine your limits, and sculpt the body of a warrior. With an unwavering dedication to excellence, we empower individuals to rise above and beyond, transforming both mind and body.</h3>
+                </div>
+                <div className='ambition-section'>
+                    <h2>THE FORGE OF TRANSFORMATION</h2>
+                    <p>Ignite the fire within, stoke the flames of change, and sculpt your physique to embody raw power. Our iron sanctuary provides the tools, the guidance, and the inspiration to craft your own destiny.</p>
+                </div>
             </div>
             <div className='join-the-moment-section'>
                 <h3>Join The Movement</h3>

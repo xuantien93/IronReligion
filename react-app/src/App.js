@@ -13,6 +13,7 @@ import EditRoutine from "./components/RoutinePage/EditRoutine";
 import ClassPage from "./components/ClassPage";
 import Mybooking from "./components/MyBookings";
 import MyRoutine from "./components/RoutinePage/MyRoutine";
+import TrainerPage from "./components/TrainerPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/trainers">
+            <TrainerPage />
           </Route>
           <Route path="/routines/create">
             <CreateRoutine />

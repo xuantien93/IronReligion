@@ -4,12 +4,14 @@ import session from './session'
 import routinesReducer from './routine';
 import classReducer from './class';
 import bookingReducer from './booking';
+import trainerReducer from './trainer';
 
 const rootReducer = combineReducers({
   session,
   routines: routinesReducer,
   classes: classReducer,
-  bookings: bookingReducer
+  bookings: bookingReducer,
+  trainers: trainerReducer
 });
 
 

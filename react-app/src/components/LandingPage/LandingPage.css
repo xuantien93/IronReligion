@@ -1,0 +1,17 @@
+.landing-page-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.sub-landing-page {
+    background-image: url("https://i.imgur.com/lXcsJQ2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.landing-page-intro {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+}

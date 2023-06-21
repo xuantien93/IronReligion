@@ -41,7 +41,13 @@ function SignupFormPage() {
     const today = new Date();
     const selectedDate = new Date(birthday);
 
-    if (selectedDate >= today) {
+    const todayUTC = new Date(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate());
+    const selectedDateUTC = new Date(selectedDate.getUTCFullYear(), selectedDate.getUTCMonth(), selectedDate.getUTCDate());
+
+
+    // console.log("this is today", todayUTC)
+    // console.log("this is birthday", selectedDateUTC)
+    if (selectedDateUTC >= todayUTC) {
       errors.birthday = "Birthday cannot be today or in the future";
     }
     setErrors(errors)

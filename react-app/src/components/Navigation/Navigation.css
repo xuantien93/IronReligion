@@ -1,3 +1,9 @@
+body {
+  background-color: #1A1A1A;
+  color: #FFFFFF;
+}
+
+
 .profile-dropdown {
   position: absolute;
 }
@@ -11,18 +17,17 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-bottom: 1px solid #484a4d;
+  /* border-bottom: 1px solid #484a4d; */
   ;
   align-items: center;
   padding: 10px;
   position: sticky;
   top: 0px;
   background-color: #151616;
-  z-index: 20;
+  z-index: 2;
   /* border: 1px red solid; */
 
 }
-
 
 .topright-nav {
   display: flex;
@@ -39,7 +44,7 @@
 
 #ironreligionimage {
   /* border-radius: 150px; */
-  height: 70px;
+  height: 55px;
   width: 100%;
   cursor: pointer;
   background-color: transparent;
@@ -62,9 +67,58 @@
   font-size: 90%;
   text-align: center;
   position: relative;
-  right: 80px;
+  right: 100px;
   top: 90px;
   width: 130px;
   padding: 10px;
   box-shadow: -2px 5px 8px #151616;
+}
+
+.my-class-btn {
+  cursor: pointer;
+}
+
+.nav-container {
+  background-color: transparent;
+  /* border: 1px solid red; */
+}
+
+.menu-links {
+  display: flex;
+  /* border: 1px solid pink; */
+  justify-content: flex-end;
+  background-color: transparent;
+  position: relative;
+  top: -20px;
+  z-index: 2;
+}
+
+
+.menu-links>* {
+  text-decoration: none;
+  /* border: 1px solid red; */
+  padding: 0px 20px;
+  color: #e6e6e6;
+  position: relative;
+  right: 100px;
+}
+
+
+.menu-links>*::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: #B6BEC0;
+  transition: width 0.35s linear;
+}
+
+.menu-links>*:hover::after {
+  width: 100%;
+}
+
+.menu-links>*:not(:hover)::after {
+  width: 0;
 }
