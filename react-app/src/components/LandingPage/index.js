@@ -101,6 +101,26 @@ const LandingPage = () => {
                 <div className='pay-package'>
                     <h3>Packages</h3>
                 </div>
+                <div className='cards'>
+                    <div className='card'>
+                        <div className='day-pass'>
+                            <h2>1 Day</h2>
+                            <span>pass</span>
+                            <div className='line'></div>
+                            <div className='dollar-sign'>$</div>
+                            <div className='day-price'>30</div>
+                            <div className='detail-price-container'>
+                                <ul>
+                                    <li>Valid 24 hours</li>
+                                    <li>Receipt needed for re-entry</li>
+                                    <li>Online purchases time-stamp starts at front desk</li>
+                                </ul>
+                            </div>
+                            <div className='line'></div>
+                            <button className='shop-now-btn' onClick={() => alert("Feature Coming Soon")}>SHOP NOW</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div className='address'>
                 Address: 1602 Industrial Dr, Dallas, TX 76107, United States
