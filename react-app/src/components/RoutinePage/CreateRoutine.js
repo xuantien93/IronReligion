@@ -34,16 +34,13 @@ const CreateRoutine = () => {
             error.image = "Please make sure your images end with either .png, .jpg, or .jpeg"
         }
         if (!exercise) error.exercise = "Excercise is required"
-        if (exercise.trim().length < 5) error.exercise = "Minimum of 5 characters is required"
+        if (exercise.trim().length < 2) error.exercise = "Minimum of 2 characters is required"
         if (exercise.trim().length > 200) error.exercise = "Maximum of 200 characters only"
         if (!sets) error.sets = "Sets is required"
-        if (sets.trim().length < 5) error.sets = "Minimum of 5 characters is required"
         if (sets.trim().length > 200) error.sets = "Maximum of 200 characters only"
         if (!reps) error.reps = "Reps is required"
-        if (reps.trim().length < 5) error.reps = "Minimum of 5 characters is required"
         if (reps.trim().length > 200) error.reps = "Maximum of 200 characters only"
         if (!weights) error.weights = "Weights is required"
-        if (weights.trim().length < 5) error.weights = "Minimum of 5 characters is required"
         if (weights.trim().length > 200) error.weights = "Maximum of 200 characters only"
         if (notes.trim().length > 1000) error.notes = "Maximum of 1000 characters only"
         setErrors(error)

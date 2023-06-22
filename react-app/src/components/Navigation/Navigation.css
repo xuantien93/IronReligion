@@ -1,5 +1,5 @@
 body {
-  background-color: #1A1A1A;
+  background-color: black;
   color: #FFFFFF;
 }
 
@@ -112,13 +112,14 @@ body {
   height: 2px;
   width: 0;
   background-color: #B6BEC0;
-  transition: width 0.35s linear;
+  transform: bottom right;
+  transition: width 0.35s ease-in;
 }
 
 .menu-links>*:hover::after {
   width: 100%;
 }
 
-.menu-links>*:not(:hover)::after {
+/* .menu-links>*:not(:hover)::after {
   width: 0;
-}
+} */
