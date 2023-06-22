@@ -4,7 +4,9 @@
 }
 
 .sub-landing-page {
-    background-image: url("https://i.imgur.com/lXcsJQ2.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)),
+        url("https://i.imgur.com/lXcsJQ2.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -14,7 +16,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-top: 25%;
+    margin-top: 15%;
 }
 
 .landing-page-intro>h1 {
@@ -34,13 +36,14 @@
     padding: 25px 0px;
     font-size: 30px;
     color: white;
-    margin-top: 4%;
+    margin-top: 10%;
     cursor: pointer;
     border: 2px solid white;
     background-color: transparent;
     width: 330px;
     height: 100px;
     text-align: center;
+    margin-bottom: 20%;
 }
 
 #try-us-btn:hover {
@@ -70,12 +73,133 @@
     opacity: 1;
 }
 
+.ambition-section-cover {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)), url(https://i.imgur.com/mS0Z4m2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 .ambition-section {
     display: flex;
     flex-direction: column;
+    align-items: center;
     text-align: center;
-    text-align: center;
-    margin-top: 12%;
 }
 
-.ambition-section>h2 {}
+
+.ambition-section>h2 {
+    margin-bottom: 4%;
+    font-size: 50px;
+    margin-top: 22%;
+    color: rgb(223, 14, 14);
+}
+
+.ambition-section>p {
+    width: 70%;
+    font-size: 35px;
+    padding-bottom: 30%;
+}
+
+.ambition-section {
+    opacity: 0;
+    /* Initially hide the div */
+    transform: translateY(200px);
+    /* Move the div down by 50px */
+    transition: opacity 0.5s ease, transform 1s ease;
+}
+
+.ambition-section.show {
+    opacity: 1;
+    /* Show the div */
+    transform: translateY(0);
+    /* Reset the div's position */
+}
+
+
+.join-the-movement-cover {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)), url(https://i.imgur.com/33JrlG9.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.join-the-movement-section {
+    display: flex;
+    flex-direction: column;
+    margin-top: 18%;
+    padding-left: 7%;
+}
+
+.join-the-movement-section>h3 {
+    font-size: 50px;
+    margin-bottom: 2%;
+    color: rgb(223, 14, 14);
+}
+
+.join-the-movement-section>p {
+    font-size: 27px;
+    margin-bottom: 5%;
+    width: 70%;
+}
+
+.slogan-section {
+    margin-left: 50%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.slogan-section>h2 {
+    margin-top: 10%;
+    font-size: 50px;
+    margin-bottom: 2%;
+}
+
+.slogan-section>p {
+    margin-left: 10%;
+    font-size: 30px;
+    margin-bottom: 40%;
+
+}
+
+.slogan-section.show {
+    opacity: 1;
+}
+
+.slogan-section h2 {
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(-100%);
+    animation: word-appear 5s ease forwards;
+    animation-delay: 1s;
+}
+
+@keyframes word-appear {
+    from {
+        opacity: 0;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.pay-package-container {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)), url(https://i.imgur.com/fGHQSuv.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.pay-package {
+    display: flex;
+    flex-direction: column;
+}
+
+.pay-package>h3 {
+    font-size: 40px;
+    margin-top: 15%;
+    margin-left: 5%;
+}
