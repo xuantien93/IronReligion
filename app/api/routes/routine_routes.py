@@ -135,8 +135,9 @@ def update_routine(id):
 
 
         db.session.commit()
+    workout = Workout.query.filter_by(routine_id = id).first()
 
-    workout = Workout.query.filter_by(routine_id=id).first()
+
     if workout:
         workout.exercise = routine_form.data['exercise']
         workout.sets = routine_form.data['sets']
@@ -147,8 +148,22 @@ def update_routine(id):
         workout.routine_id = routine.id
         workout.user_id = current_user.id
 
+        db.session.commit()
+        return {"resRoutine":routine.to_dict()}
+    if workout is None:
+        new_workout = Workout(
+            exercise = routine_form.data['exercise'],
+            sets = routine_form.data['sets'],
+            reps = routine_form.data['reps'],
+            weights = routine_form.data['weights'],
+            notes = routine_form.data['notes'],
+            created_at = date.today(),
+            routine_id = id,
+            user_id = current_user.id,
+                )
 
 
+        db.session.add(new_workout)
         db.session.commit()
 
         return {"resRoutine":routine.to_dict()}

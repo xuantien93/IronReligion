@@ -78,7 +78,7 @@ const LandingPage = () => {
                 <div className='landing-page-intro'>
                     <h1>Join The Iron Elite</h1>
                     <h3>Unleash your potential, redefine your limits, and sculpt the body of a warrior. With an unwavering dedication to excellence, we empower individuals to rise above and beyond, transforming both mind and body.</h3>
-                    <button id="try-us-btn" onClick={() => history.push("/signup")}>Join the <span className="fading-text">culture</span></button>
+                    <button id="try-us-btn" onClick={(e) => history.push("/signup")}>Join the <span className="fading-text">culture</span></button>
                 </div>
             </div>
             <div className='ambition-section-cover'>
@@ -101,14 +101,17 @@ const LandingPage = () => {
                 <div className='pay-package'>
                     <h3>Packages</h3>
                 </div>
+
                 <div className='cards'>
                     <div className='card'>
                         <div className='day-pass'>
                             <h2>1 Day</h2>
                             <span>pass</span>
                             <div className='line'></div>
-                            <div className='dollar-sign'>$</div>
-                            <div className='day-price'>30</div>
+                            <h1 className='price'>
+                                <span className='price-sign'>$ </span>
+                                30
+                            </h1>
                             <div className='detail-price-container'>
                                 <ul>
                                     <li>Valid 24 hours</li>
@@ -117,21 +120,73 @@ const LandingPage = () => {
                                 </ul>
                             </div>
                             <div className='line'></div>
-                            <button className='shop-now-btn' onClick={() => alert("Feature Coming Soon")}>SHOP NOW</button>
+                            <div className='shop-now-btn'>
+                                <button onClick={() => alert("Feature Coming Soon")}>SHOP NOW</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='card'>
+                        <div className='day-pass'>
+                            <h2>7 Day</h2>
+                            <span>punch card</span>
+                            <div className='line'></div>
+                            <h1 className='price'>
+                                <span className='price-sign'>$ </span>
+                                90
+                            </h1>
+                            <div className='detail-price-container'>
+                                <ul>
+                                    <li>Valid 24 hours</li>
+                                    <li>Must show punch card for re-entry</li>
+                                    <li>Online purchases time-stamp starts at front desk</li>
+                                </ul>
+                            </div>
+                            <div className='line'></div>
+                            <div className='shop-now-btn'>
+                                <button onClick={() => alert("Feature Coming Soon")}>SHOP NOW</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div className='card'>
+                        <div className='day-pass'>
+                            <h2>1 Month</h2>
+                            <span>pass</span>
+                            <div className='line'></div>
+                            <h1 className='price'>
+                                <span className='price-sign'>$ </span>
+                                65
+                            </h1>
+                            <div className='detail-price-container'>
+                                <ul>
+                                    <li>Valid 24 hours</li>
+                                    <li>Must show punch card for re-entry</li>
+                                    <li>Online purchases time-stamp starts at front desk</li>
+                                </ul>
+                            </div>
+                            <div className='line'></div>
+                            <div className='shop-now-btn'>
+                                <button onClick={() => alert("Feature Coming Soon")}>SHOP NOW</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div className='bottom-background'>
+                <div className='hours-operation'>
+                    <div className='address'>
+                        Address: 1602 Industrial Dr, Dallas, TX 76107, United States
+                        <div className='hours-day-time'>
+                            Hours: 24/7
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className='address'>
-                Address: 1602 Industrial Dr, Dallas, TX 76107, United States
-            </div>
-            <div className='hours-operation'>
-                <div className='hours-day-time'>
-                    Hours: 24/7
+                <div className='frequently-asked-questions'>
+                    <h2>Frequently Asked Questions</h2>
                 </div>
-            </div>
-            <div className='frequently-asked-questions'>
-                <h2>Frequently Asked Questions</h2>
             </div>
         </div>
 
