@@ -307,6 +307,8 @@
 .hours-operation {
     display: flex;
     margin-top: 15%;
+    margin-left: 5%;
+    margin-bottom: 15%;
 }
 
 .address {
@@ -314,5 +316,5 @@
 }
 
 .hours-day-time {
-    margin-top: 5%;
+    margin-top: 2%;
 }

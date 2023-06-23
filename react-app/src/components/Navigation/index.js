@@ -15,16 +15,20 @@ function Navigation({ isLoaded }) {
 						<NavLink exact to="/"><img id="ironreligionimage" src="https://i.imgur.com/hL3YORh.png" alt='page logo'></img></NavLink>
 					</div>
 				</div>
-				{isLoaded && (
-					<div className='topright-nav'>
-						<ProfileButton user={sessionUser} />
+				<div className='menu-links-container'>
+					<div className='menu-links'>
+						<NavLink to="/trainers">Coaches</NavLink>
+						<NavLink to="/classes">Classes</NavLink>
+						<NavLink to="/routines" className="topright-nav-create-text">Exercises</NavLink>
+						<NavLink to="/" className="topright-nav-create-text">FAQ</NavLink>
+						<NavLink to="/" className="topright-nav-create-text">Contact</NavLink>
+						{isLoaded && (
+							<div className='topright-nav'>
+								<ProfileButton user={sessionUser} />
+							</div>
+						)}
 					</div>
-				)}
-			</div>
-			<div className='menu-links'>
-				<NavLink to="/trainers">Coaches</NavLink>
-				<NavLink to="/classes">Classes</NavLink>
-				<NavLink to="/routines" className="topright-nav-create-text">Exercises</NavLink>
+				</div>
 			</div>
 		</div>
 

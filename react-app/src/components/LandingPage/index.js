@@ -178,7 +178,7 @@ const LandingPage = () => {
             <div className='bottom-background'>
                 <div className='hours-operation'>
                     <div className='address'>
-                        Address: 1602 Industrial Dr, Dallas, TX 76107, United States
+                        <span>Address: 1602 Industrial Dr, Dallas, TX 76107, United States </span>
                         <div className='hours-day-time'>
                             Hours: 24/7
                         </div>
