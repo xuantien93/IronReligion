@@ -1,11 +1,40 @@
 body {
   background-color: black;
   color: #FFFFFF;
+  font-family: 'Noto Sans', sans-serif;
 }
 
 
 .profile-dropdown {
   position: absolute;
+  /* border: 1px solid red; */
+  top: 100%;
+  right: 1%;
+}
+
+.top-right-modal {
+  display: flex;
+  flex-direction: column;
+  width: 115px;
+  background-color: transparent;
+  color: white;
+}
+
+.top-right-modal>button {
+  background-color: transparent;
+  color: white;
+  font-size: 15px;
+  padding: 7px 0px;
+  border-style: none;
+  border: 1px solid grey;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.top-right-modal>button:hover {
+  background-color: white;
+  color: black;
+  transition: all 0.4s ease;
 }
 
 .hidden {
@@ -48,16 +77,16 @@ body {
   width: 100%;
   cursor: pointer;
   background-color: transparent;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
-#ironreligionimage:hover {
-  box-shadow: 0px 0px 6px white;
+/* #ironreligionimage:hover {
+  box-shadow: 0px 0px 10px white;
   transition: all .4s ease;
-}
+} */
 
 .user-menu-content {
-  /* border: 1px solid red; */
+  border: 1px solid red;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -67,8 +96,8 @@ body {
   font-size: 90%;
   text-align: center;
   position: relative;
-  right: 100px;
-  top: 90px;
+  right: 1%;
+  top: 100%;
   width: 130px;
   padding: 10px;
   box-shadow: -2px 5px 8px #151616;
@@ -83,28 +112,47 @@ body {
   /* border: 1px solid red; */
 }
 
+.menu-links-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* border: 1px solid pink; */
+  height: 70px;
+  width: 70%;
+}
+
 .menu-links {
   display: flex;
-  /* border: 1px solid pink; */
-  justify-content: flex-end;
-  background-color: transparent;
-  position: relative;
-  top: -20px;
-  z-index: 2;
+  /* border: 1px solid red; */
+  justify-content: space-around;
+  padding: 15px 0px;
 }
 
 
-.menu-links>* {
+.menu-links a {
   text-decoration: none;
+  font-size: 18px;
   /* border: 1px solid red; */
   padding: 0px 20px;
   color: #e6e6e6;
-  position: relative;
-  right: 100px;
 }
 
 
-.menu-links>*::after {
+.menu-links:hover a {
+  color: gray;
+  transition: all 0.4s ease;
+}
+
+.menu-links a:hover {
+  color: white;
+  transition: all 0.2s ease-in-out;
+}
+
+.my-account {
+  cursor: pointer;
+}
+
+/* .menu-links a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -116,9 +164,9 @@ body {
   transition: width 0.35s ease-in;
 }
 
-.menu-links>*:hover::after {
+.menu-links a:hover::after {
   width: 100%;
-}
+} */
 
 /* .menu-links>*:not(:hover)::after {
   width: 0;

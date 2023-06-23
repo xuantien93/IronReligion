@@ -41,15 +41,15 @@ const EditRoutine = () => {
             error.image = "Please make sure your images end with either .png, .jpg, or .jpeg"
         }
         if (!exercise) error.exercise = "Excercise is required"
-        if (exercise.trim().length < 2) error.exercise = "Minimum of 2 characters is required"
-        if (exercise.trim().length > 200) error.exercise = "Maximum of 200 characters only"
-        if (!sets.toString().trim()) error.sets = "Sets is required"
-        if (sets.toString().trim().length > 200) error.sets = "Maximum of 200 characters only"
-        if (!reps.toString().trim()) error.reps = "Reps is required"
-        if (reps.toString().trim().length > 200) error.reps = "Maximum of 200 characters only"
-        if (!weights.toString().trim()) error.weights = "Weights is required"
-        if (weights.toString().trim().length > 200) error.weights = "Maximum of 200 characters only"
-        if (notes.toString().trim().length > 1000) error.notes = "Maximum of 1000 characters only"
+        if (exercise?.toString().trim().length < 2) error.exercise = "Minimum of 2 characters is required"
+        if (exercise?.toString().trim().length > 200) error.exercise = "Maximum of 200 characters only"
+        if (!sets?.toString().trim()) error.sets = "Sets is required"
+        if (sets?.toString().trim().length > 200) error.sets = "Maximum of 200 characters only"
+        if (!reps?.toString().trim()) error.reps = "Reps is required"
+        if (reps?.toString().trim().length > 200) error.reps = "Maximum of 200 characters only"
+        if (!weights?.toString().trim()) error.weights = "Weights is required"
+        if (weights?.toString().trim().length > 200) error.weights = "Maximum of 200 characters only"
+        if (notes?.toString().trim().length > 1000) error.notes = "Maximum of 1000 characters only"
         setErrors(error)
 
 
@@ -59,14 +59,13 @@ const EditRoutine = () => {
         dispatch(getAllRoutines())
             // dispatch()
             .then(routine => {
-                console.log(routine)
                 setDescription(routine[id].description)
                 setImage(routine[id].image)
-                setExercise(routine[id].workouts[0].exercise)
-                setReps(routine[id].workouts[0].reps)
-                setSets(routine[id].workouts[0].sets)
-                setWeights(routine[id].workouts[0].weights)
-                setNotes(routine[id].workouts[0].notes)
+                setExercise(routine[id].workouts[0]?.exercise)
+                setReps(routine[id].workouts[0]?.reps)
+                setSets(routine[id].workouts[0]?.sets)
+                setWeights(routine[id].workouts[0]?.weights)
+                setNotes(routine[id].workouts[0]?.notes)
             })
     }, [dispatch])
 

@@ -21,6 +21,10 @@ function LoginFormPage() {
     }
   };
 
+  const demoUser = (e) => {
+    e.preventDefault()
+    dispatch(login("demo@aa.io", "password"))
+  }
 
   return (
     <>
@@ -50,6 +54,7 @@ function LoginFormPage() {
           />
         </label>
         <button type="submit">Log In</button>
+        <button onClick={demoUser} className="demo-button">Demo User</button>
       </form>
     </>
   );
