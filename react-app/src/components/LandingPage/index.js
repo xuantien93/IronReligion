@@ -72,6 +72,7 @@ const LandingPage = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
     const toggleCollapse = (event) => {
         let faqContent = event.currentTarget;
         let collapseDiv = faqContent.querySelector(".faq-collapse");
@@ -105,6 +106,48 @@ const LandingPage = () => {
                 <div className='slogan-section'>
                     <h2>RISE REDEFINE REIGN</h2>
                     <p>Dare to defy the ordinary.</p>
+                </div>
+            </div>
+            <div className='gallery-container'>
+                <div className='each-gallery'>
+                    <div className='gallery-name'>Outdoor gym</div>
+                    <img src="https://i.imgur.com/rDwKpS5.jpg"></img>
+                </div>
+                <div className='each-gallery'>
+                    <div className='gallery-name'>Equipments</div>
+                    <img src="https://i.imgur.com/7z6JV9s.jpg"></img>
+                </div>
+                <div className='each-gallery'>
+                    <div className='gallery-name'>Indoor gym</div>
+                    <img src="https://i.imgur.com/st7LZ3X.jpg"></img>
+                </div>
+                <div className='each-gallery'>
+                    <div className='gallery-name'>Indoor gym</div>
+                    <img src="https://i.imgur.com/C7J7zbq.jpg"></img>
+                </div>
+                <div className='each-gallery'>
+                    <div className='gallery-name'>PowerLifting Equipments</div>
+                    <img src="https://i.imgur.com/9G04UdE.jpg"></img>
+                </div>
+                <div className='each-gallery'>
+                    <div className='gallery-name'>Private Studio</div>
+                    <img src="https://i.imgur.com/EeTcbRU.jpg"></img>
+                </div>
+                <div className='each-gallery'>
+                    <div className='gallery-name'>Boxing Room</div>
+                    <img src="https://i.imgur.com/N9uaI7T.jpg"></img>
+                </div>
+                <div className='each-gallery'>
+                    <div className='gallery-name'>Patio</div>
+                    <img src="https://i.imgur.com/U97x53B.jpg"></img>
+                </div>
+                <div className='each-gallery'>
+                    <div className='gallery-name'>Locker-room</div>
+                    <img src="https://i.imgur.com/Vn2Fp2I.jpg"></img>
+                </div>
+                <div className='each-gallery'>
+                    <div className='gallery-name'>Tower Service</div>
+                    <img src="https://i.imgur.com/OuMwefr.jpg"></img>
                 </div>
             </div>
             <div className='pay-package-container'>
@@ -186,14 +229,6 @@ const LandingPage = () => {
                 </div>
             </div>
             <div className='bottom-background'>
-                <div className='hours-operation'>
-                    <div className='address'>
-                        <span>Address: 1602 Industrial Dr, Dallas, TX 76107, United States </span>
-                        <div className='hours-day-time'>
-                            Hours: 24/7
-                        </div>
-                    </div>
-                </div>
                 <div className='frequently-asked-questions'>
                     <h2>Frequently Asked Questions</h2>
                     <div className='faq-content' onClick={toggleCollapse} >
@@ -341,8 +376,21 @@ const LandingPage = () => {
                         </div>
                     </div>
                 </div>
+                <div className='hours-operation'>
+                    <div className='address'>
+                        <span id="address">Address:</span>
+                        <br />
+                        <span id="address2"> 1602 Industrial Dr, Dallas, TX 76107, United States </span>
+                        <div className='hours-day-time'>
+                            Hours: 24/7
+                        </div>
+                        <span id="address2">Phone: 469-555-3366 </span>
+                        <br />
+                        <span id="address2">Email: <span id="email2">memberships@ironreligion.com</span></span>
+                    </div>
+                </div>
             </div>
-        </div>
+        </div >
 
     )
 }

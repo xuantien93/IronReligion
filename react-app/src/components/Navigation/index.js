@@ -20,7 +20,7 @@ function Navigation({ isLoaded }) {
 						<NavLink to="/trainers">Coaches</NavLink>
 						<NavLink to="/classes">Classes</NavLink>
 						<NavLink to="/routines" className="topright-nav-create-text">Exercises</NavLink>
-						<NavLink to="/" className="topright-nav-create-text">FAQ</NavLink>
+						<NavLink to="/" className="topright-nav-create-text">Apparel</NavLink>
 						<NavLink to="/" className="topright-nav-create-text">Contact</NavLink>
 						{isLoaded && (
 							<div className='topright-nav'>
