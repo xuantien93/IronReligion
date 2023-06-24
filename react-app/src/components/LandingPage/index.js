@@ -217,6 +217,8 @@ const LandingPage = () => {
                                     <li>Valid 24 hours</li>
                                     <li>Must show punch card for re-entry</li>
                                     <li>Online purchases time-stamp starts at front desk</li>
+                                    <li>Month-to-Month - No commitment</li>
+                                    <li style={{ fontWeight: "bold" }}>Initiation fees: $100</li>
                                 </ul>
                             </div>
                             <div className='line'></div>
