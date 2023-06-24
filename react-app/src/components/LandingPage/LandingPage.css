@@ -318,3 +318,129 @@
 .hours-day-time {
     margin-top: 2%;
 }
+
+.frequently-asked-questions {
+    margin-bottom: 50%;
+}
+
+.frequently-asked-questions>h2 {
+    margin-left: 2%;
+    margin-bottom: 2%;
+}
+
+.faq-content {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid white;
+    width: 50%;
+    margin-left: 2%;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 2%;
+}
+
+.faq-title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin: 3% 3%;
+}
+
+.line2 {
+    border-bottom: 1px solid white;
+    margin-bottom: 2%;
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+
+#first-answer {
+    font-weight: 800;
+}
+
+.faq-answers {
+    margin-bottom: 4%;
+    margin-left: 2%;
+}
+
+.faq-answers span {
+    display: block;
+    margin-bottom: 3%;
+    word-wrap: break-word;
+    font-weight: lighter;
+
+    margin-left: 2%;
+    margin-right: 2%;
+
+    .bold-words {
+        font-weight: 800;
+    }
+}
+
+
+.faq-collapse {
+    max-height: 0;
+    /* Adjust to the desired maximum height */
+    overflow: hidden;
+    transition: max-height 0.6s ease, opacity 0.7s ease;
+    opacity: 0;
+}
+
+.faq-collapse.collapsed {
+    max-height: 1000px;
+    opacity: 1;
+}
+
+.faq-collapse.collapsed>* {
+    opacity: 1;
+    transition: opacity 0.7s ease;
+}
+
+.x-btn {
+    transition: transform 0.3s ease;
+    background-color: transparent;
+    color: white;
+    border-style: none;
+    font-size: 25px;
+    cursor: pointer;
+    /* border: 1px solid red; */
+    border-radius: 20px;
+    padding: 0px 7px;
+    margin-bottom: 5px;
+}
+
+.x-btn:hover {
+    background-color: rgb(150, 144, 144);
+    transition: all 0.3s ease-in-out;
+}
+
+.rotate-225 {
+    transform: rotate(225deg);
+}
+
+
+.bounce-animation {
+    animation: bounce 0.5s linear;
+}
+
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(0.99);
+    }
+
+    50% {
+        transform: scale(1.01);
+    }
+
+    75% {
+        transform: scale(0.995);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
