@@ -19,7 +19,7 @@ const MyRoutine = () => {
         dispatch(getAllRoutines())
     }, [dispatch])
 
-    const myRoutines = routines.filter(routine => routine.user_id === user.id)
+    const myRoutines = routines.filter(routine => routine.user_id === user?.id)
     // console.log("this is my routine0,", myRoutines)
 
     if (!user) {

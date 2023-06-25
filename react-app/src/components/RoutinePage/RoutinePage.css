@@ -4,26 +4,178 @@
     box-sizing: border-box;
 }
 
-
-.detail-routine {
-    border: 1px solid red;
+.create-routine-page-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    /* border: 1px solid red; */
+    position: relative;
+    top: 110px;
+    right: 160px;
 }
 
-
-#routine-image {
-    width: 30%;
-
+#create-routine-btn {
+    color: black;
+    background-color: #9E896E;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 2px 6px;
+    border-style: none;
+    cursor: pointer;
+    font-size: 20px;
+    margin-top: 2%;
 }
+
+#create-routine-btn:hover {
+    transform: scale(1.05);
+    filter: brightness(1.3);
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
 
 .single-routine {
     display: flex;
-    flex-flow: row wrap;
+    flex-direction: column;
+    align-items: center;
 }
+
+.single-routine>h1 {
+    margin: 3% 0%;
+}
+
 
 .all-routines {
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+
+.detail-routine {
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.routine-description {
+    font-size: 20px;
+    margin-left: 2%;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    font-weight: bold;
+    word-wrap: break-word;
+    /* border: 1px solid red; */
+    width: 68%;
+    cursor: pointer;
+}
+
+
+.routine-description:hover {
+    filter: brightness(0.8);
+    transition: all 0.2s ease;
+}
+
+.routine-image-container {
+    /* border: 1px solid red; */
+    position: relative;
+    width: 70%;
+    margin-bottom: 3%;
+}
+
+#update-routine-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #9E896E;
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 5px 10px;
+    border-style: none;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+#update-routine-btn:hover {
+    background-color: black;
+    color: #9E896E;
+    transition: all 0.3s ease;
+}
+
+#routine-image {
+    width: 100%;
+    border-radius: 10px;
+}
+
+
+
 .workout-block {
-    border: 1px solid pink;
+    border: 1px solid #9E896E;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 8px;
+    margin-bottom: 2px;
+}
+
+.workout-block:last-child {
+    margin-bottom: 10%;
+}
+
+.delete-edit-button {
+    display: flex;
+    /* border: 1px solid red; */
+    justify-content: space-around;
+    width: 7%;
+}
+
+.edit-workout-modal>button {
+    background-color: transparent;
+    color: white;
+    border-radius: 5px;
+    padding: 2px 6px;
+    border-style: none;
+    cursor: pointer;
+}
+
+.edit-workout-modal>button:hover {
+    background-color: #9E896E;
+    color: black;
+    transition: all 0.3s ease;
+}
+
+.delete-workout {
+    background-color: transparent;
+    color: white;
+    font-size: 14px;
+    border-radius: 5px;
+    padding: 2px 6px;
+    border-style: none;
+    cursor: pointer;
+}
+
+.delete-workout:hover {
+    background-color: #9E896E;
+    color: black;
+    transition: all 0.3s ease;
+}
+
+.create-workout-modal {
+    margin-bottom: 15%;
+}
+
+.create-workout-modal>button {
+    background-color: transparent;
+    color: white;
+    border-radius: 5px;
+    padding: 2px 6px;
+    border-style: none;
+    cursor: pointer;
+    font-size: 20px;
+    margin-top: 2%;
+}
+
+.create-workout-modal>button:hover {
+    background-color: #9E896E;
+    color: black;
+    transition: all 0.3s ease;
 }

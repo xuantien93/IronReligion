@@ -28,9 +28,10 @@ const RoutinePage = ({ myRoutines, isMyRoutine }) => {
     return (
         <div className='routine-landing-container'>
             {user && <div className='create-routine-page-btn-container'>
-                <button id="create-routine-btn" onClick={() => history.push("/routines/create")}>Create Routine</button>
+                <button id="create-routine-btn" onClick={() => history.push("/routines/create")}>Add Routine</button>
             </div>}
             <div className="single-routine">
+                <h1>Workout Library</h1>
                 {isMyRoutine ?
                     myRoutines.toReversed().map(routine => <RoutineDetail key={routine.id} routine={routine} />)
                     : routines.toReversed().map(routine => <RoutineDetail key={routine.id} routine={routine} />)}

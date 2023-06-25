@@ -29,7 +29,7 @@ const TrainerPage = () => {
                         <img src={trainer.image} id="trainer-img"></img>
                     </div>
                     <div className='trainer-info-block'>
-                        <span>{trainer.first_name} {trainer.last_name}</span>
+                        <span style={{ fontSize: "30px" }}>{trainer.first_name} {trainer.last_name}</span>
                         <span> {trainer.email}</span>
                         <span> {trainer.specialization}</span>
                     </div>
