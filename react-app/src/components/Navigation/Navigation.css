@@ -77,16 +77,18 @@ body {
   width: 100%;
   cursor: pointer;
   background-color: transparent;
+  transition: transform 0.3s ease, filter 0.3s ease;
   /* border-radius: 10px; */
 }
 
-/* #ironreligionimage:hover {
-  box-shadow: 0px 0px 10px white;
-  transition: all .4s ease;
-} */
+#ironreligionimage:hover {
+  transform: scale(1.02);
+  filter: brightness(1.5);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
 
 .user-menu-content {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -98,14 +100,51 @@ body {
   position: relative;
   right: 1%;
   top: 100%;
-  width: 130px;
+  width: 150px;
   padding: 10px;
   box-shadow: -2px 5px 8px #151616;
 }
 
 .my-class-btn {
+  background-color: transparent;
+  color: white;
+  font-size: 15px;
+  padding: 6px 0px;
+  border-style: none;
+  border: 1px solid grey;
+  border-radius: 7px;
   cursor: pointer;
+  width: 100%;
 }
+
+.my-class-btn:hover {
+  background-color: white;
+  color: black;
+  transition: all 0.4s ease;
+}
+
+#logout-btn-cover {
+  width: 100%;
+}
+
+#logout-btn {
+  background-color: transparent;
+  color: white;
+  font-size: 15px;
+  padding: 7px 0px;
+  border-style: none;
+  border: 1px solid grey;
+  border-radius: 7px;
+  cursor: pointer;
+  width: 100%;
+}
+
+#logout-btn:hover {
+  background-color: white;
+  color: black;
+  transition: all 0.4s ease;
+}
+
 
 .nav-container {
   background-color: transparent;

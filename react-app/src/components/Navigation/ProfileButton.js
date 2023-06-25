@@ -59,9 +59,17 @@ function ProfileButton({ user }) {
             >
               My Classes
             </span>
+            <span className="my-class-btn"
+              onClick={() => {
+                history.push("/routines/me")
+                closeMenu()
+              }}
+            >
+              My Routines
+            </span>
 
-            <span>
-              <button onClick={handleLogout}>Log Out</button>
+            <span id="logout-btn-cover">
+              <button id="logout-btn" onClick={handleLogout}>Log Out</button>
             </span>
           </div>
         ) : (

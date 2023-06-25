@@ -32,7 +32,7 @@ const RoutineDetail = ({ routine }) => {
                 </div>
                 <div className='routine-image-container'>
                     <img id="routine-image" src={routine.image}></img>
-                    {routine.user_id === user?.id && <button onClick={() => history.push(`/routines/${routine.id}/update`)}>Update Routine</button>}
+                    {routine.user_id === user?.id && <button id="update-routine-btn" onClick={() => history.push(`/routines/${routine.id}/update`)}>Update Routine</button>}
                 </div>
                 {routine.workouts?.map(workout => {
                     if (!workout) return null
@@ -47,20 +47,22 @@ const RoutineDetail = ({ routine }) => {
                             <span> Reps {workout.reps}</span>
                             <span> Weights {workout.weights}lbs</span>
                             <span> Notes: {workout.notes}</span>
-                            {workout.user_id === user?.id && <div className='edit-workout-modal'>
-                                <OpenModalButton
-                                    buttonText={<i className="fa-solid fa-pen-fancy"></i>}
-                                    modalComponent={<EditWorkoutModal workoutId={workout.id} workout={workout} />}
+                            <div className='delete-edit-button'>
+                                {workout.user_id === user?.id && <div className='edit-workout-modal'>
+                                    <OpenModalButton
+                                        buttonText={<i className="fa-solid fa-pen-fancy"></i>}
+                                        modalComponent={<EditWorkoutModal workoutId={workout.id} workout={workout} />}
 
-                                />
-                            </div>}
-                            {workout.user_id === user?.id && <div className='delete-workout' onClick={deleteWorkoutBtn}><i className="fa-solid fa-trash"></i></div>}
+                                    />
+                                </div>}
+                                {workout.user_id === user?.id && <div className='delete-workout' onClick={deleteWorkoutBtn}><i className="fa-solid fa-trash"></i></div>}
+                            </div>
                         </div>
                     )
                 })}
                 {routine.user_id === user?.id && <div className='create-workout-modal'>
                     <OpenModalButton
-                        buttonText={<i className="fa-regular fa-pen-to-square"></i>}
+                        buttonText={<i class="fa-solid fa-plus"></i>}
                         modalComponent={<CreateWorkoutModal routineId={routine.id} />}
 
                     />

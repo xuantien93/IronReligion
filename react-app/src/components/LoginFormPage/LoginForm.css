@@ -1,0 +1,96 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #9E896E;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: black;
+    border-radius: 10px;
+}
+
+#login-error>p {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.login-container>h1 {
+    text-align: center;
+    border-bottom: 1px solid #9E896E;
+    margin: 0 5%;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.login-container form {
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+form .txt_field {
+    position: relative;
+    border-bottom: 2px solid #9E896E;
+    margin: 20px 0;
+
+}
+
+.txt_field input {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+    color: white;
+    transform: translateY(10%);
+}
+
+
+.txt_field label {
+    color: #9E896E
+}
+
+
+.bottom-login {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+
+.bottom-login>button {
+    transition: transform 0.3s ease;
+    background-color: transparent;
+    color: white;
+    border-style: none;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 0px 7px;
+    margin-bottom: 5px;
+    height: 40px;
+    width: 100%;
+}
+
+.bottom-login>button:hover {
+    background-color: rgb(150, 144, 144);
+    transition: all 0.3s ease-in-out;
+}
+
+.bottom-login>span {
+    margin-bottom: 6%;
+}
+
+#login-signup {
+    cursor: pointer;
+    color: #9E896E;
+    font-weight: bold;
+}
+
+#login-signup:hover {
+    filter: brightness(1.5);
+    transition: filter 0.3s ease;
+}
