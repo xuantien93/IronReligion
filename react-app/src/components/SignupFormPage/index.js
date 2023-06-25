@@ -78,131 +78,151 @@ function SignupFormPage() {
 
 
   return (
-    <>
+    <div className="login-container-2">
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         {errors.firstName && submitted && (
           <p className="sign-in-errors">{errors.firstName}</p>
         )}
-        <label>
-          First Name
-          <input
-            type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-        </label>
+        <div className="txt_field">
+          <label>
+            First Name
+            <input
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+          </label>
+        </div>
         {errors.lastName && submitted && (
           <p className="sign-in-errors">{errors.lastName}</p>
         )}
-        <label>
-          Last Name
-          <input
-            type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
-        </label>
+        <div className="txt_field">
+          <label>
+            Last Name
+            <input
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+          </label>
+        </div>
         {errors.email && submitted && (
           <p className="sign-in-errors">{errors.email}</p>
         )}
-        <label>
-          Email
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
+        <div className="txt_field">
+          <label>
+            Email
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </label>
+        </div>
         {errors.gender && submitted && (
           <p className="sign-in-errors">{errors.gender}</p>
         )}
-        <label>
-          Gender
-          <select
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
-            required
-          >
-            <option value="">Select</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-            <option value="O">Others</option>
-          </select>
-        </label>
+        <div className="txt_field">
+          <label>
+            Gender
+            <select
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              required
+            >
+              <option value="">Select</option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+              <option value="O">Others</option>
+            </select>
+          </label>
+        </div>
         {errors.birthday && submitted && (
           <p className="sign-in-errors">{errors.birthday}</p>
         )}
-        <label>
-          Birthday
-          <input
-            type="date"
-            value={birthday}
-            onChange={(e) => setBirthday(e.target.value)}
-            required
-          />
-        </label>
+        <div className="txt_field">
+          <label>
+            Birthday
+            <input
+              type="date"
+              value={birthday}
+              onChange={(e) => setBirthday(e.target.value)}
+              required
+            />
+          </label>
+        </div>
         {errors.phone && submitted && (
           <p className="sign-in-errors">{errors.phone}</p>
         )}
-        <label>
-          Phone
-          <input
-            type="text"
-            value={phone}
-            onChange={(e) => {
-              const input = e.target.value;
-              const formattedInput = input
-                .replace(/\D/g, "")
-                .slice(0, 10)
-                .replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
-              setPhone(formattedInput);
-            }}
-            required
-          />
-        </label>
+        <div className="txt_field">
+          <label>
+            Phone
+            <input
+              type="text"
+              value={phone}
+              onChange={(e) => {
+                const input = e.target.value;
+                const formattedInput = input
+                  .replace(/\D/g, "")
+                  .slice(0, 10)
+                  .replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
+                setPhone(formattedInput);
+              }}
+              required
+            />
+          </label>
+        </div>
         {errors.username && submitted && (
           <p className="sign-in-errors">{errors.username}</p>
         )}
-        <label>
-          Username
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </label>
+        <div className="txt_field">
+          <label>
+            Username
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </label>
+        </div>
         {errors.password && submitted && (
           <p className="sign-in-errors">{errors.password}</p>
         )}
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
+        <div className="txt_field">
+          <label>
+            Password
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+        </div>
         {errors.confirmPassword && submitted && (
           <p className="sign-in-errors">{errors.confirmPassword}</p>
         )}
-        <label>
-          Confirm Password
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Sign Up</button>
+        <div className="txt_field">
+          <label>
+            Confirm Password
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </label>
+        </div>
+        <div className="bottom-login">
+          <button id="signup-btn" type="submit">Sign Up</button>
+        </div>
       </form>
-    </>
+    </div>
   );
 }
 

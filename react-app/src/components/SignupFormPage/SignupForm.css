@@ -1,3 +1,71 @@
 .sign-in-errors {
     color: red
 }
+
+
+#signup-btn {
+    margin-bottom: 5%;
+}
+
+.login-container-2 {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #9E896E;
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: black;
+    border-radius: 10px;
+}
+
+
+.login-container-2>h1 {
+    text-align: center;
+    border-bottom: 1px solid #9E896E;
+    margin: 0 5%;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.login-container-2 form {
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+form .txt_field {
+    position: relative;
+    border-bottom: 2px solid #9E896E;
+    margin: 20px 0;
+
+}
+
+.txt_field input {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+    color: white;
+    transform: translateY(10%);
+}
+
+
+.txt_field select {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+    color: white;
+    transform: translateY(10%);
+}
+
+.txt_field label {
+    color: #9E896E
+}
