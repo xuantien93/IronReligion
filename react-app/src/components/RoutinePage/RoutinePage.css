@@ -120,7 +120,7 @@
 
 .delete-edit-button {
     display: flex;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     justify-content: space-around;
     width: 7%;
 }
