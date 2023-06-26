@@ -345,6 +345,8 @@
     right: -100%;
     /* Initial position outside the screen */
     animation: slide-in 1.5s forwards;
+    font-size: 20px;
+    color: white;
 }
 
 @keyframes slide-in {
@@ -353,7 +355,7 @@
     }
 
     100% {
-        right: 37%;
+        right: 28%;
         /* Final position next to the loading spinner */
     }
 }

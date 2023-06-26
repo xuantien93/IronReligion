@@ -37,7 +37,7 @@ function App() {
       {isLoading ? (
         <div className="loading-screen">
           <RingLoader color="#d636c4" size={100} />
-          <p className="loading-message">IR by Muytien</p>
+          <p className="loading-message">IronReligion by Muytien</p>
         </div >
       ) : (
         <>
