@@ -35,9 +35,10 @@ function App() {
   return (
     <>
       {isLoading ? (
-        <div className={`loading-screen ${isLoading ? "show" : ""}`}>
+        <div className="loading-screen">
           <RingLoader color="#d636c4" size={100} />
-        </div>
+          <p className="loading-message">IR by Muytien</p>
+        </div >
       ) : (
         <>
           <Navigation isLoaded={isLoaded} />
@@ -82,7 +83,8 @@ function App() {
             </Switch>
           )}
         </>
-      )}
+      )
+      }
     </>
   );
 

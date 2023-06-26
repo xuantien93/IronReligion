@@ -338,10 +338,22 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    opacity: 0;
-    transition: opacity 1s ease-in;
 }
 
-.loading-screen.show {
-    opacity: 1;
+.loading-message {
+    position: absolute;
+    right: -100%;
+    /* Initial position outside the screen */
+    animation: slide-in 1.5s forwards;
+}
+
+@keyframes slide-in {
+    0% {
+        right: -100%;
+    }
+
+    100% {
+        right: 37%;
+        /* Final position next to the loading spinner */
+    }
 }
