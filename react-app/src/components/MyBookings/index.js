@@ -47,13 +47,15 @@ const Mybooking = () => {
                                 <p>End: {booking.class.time_end}</p>
                                 <p>Duration: {durationInMinutes}</p>
                             </div>
-                            {isAlreadyPassed ? (<button disabled={true}>Completed</button>) :
-                                < div className='mybooking-delete-modal'>
-                                    <OpenModalButton
-                                        buttonText="Delete"
-                                        modalComponent={<DeleteBookingModal bookingId={booking.id} />}
-                                    />
-                                </div>}
+                            <div className='mybooking-bottom-btn'>
+                                {isAlreadyPassed ? (<button disabled={true}>Completed</button>) :
+                                    < div className='mybooking-delete-modal'>
+                                        <OpenModalButton
+                                            buttonText="Delete"
+                                            modalComponent={<DeleteBookingModal bookingId={booking.id} />}
+                                        />
+                                    </div>}
+                            </div>
                         </div>
 
                     )

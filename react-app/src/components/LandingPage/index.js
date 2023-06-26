@@ -83,6 +83,7 @@ const LandingPage = () => {
         faqContent.classList.toggle("bounce-animation");
     };
 
+
     return (
         <div className='landing-page-container'>
             <div className='sub-landing-page'>
@@ -378,7 +379,7 @@ const LandingPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className='hours-operation'>
+                <div id="hours-operation" className='hours-operation'>
                     <div className='address'>
                         <span id="address">Address:</span>
                         <br />
@@ -390,6 +391,40 @@ const LandingPage = () => {
                         <br />
                         <span id="address2">Email: <span id="email2">memberships@ironreligion.com</span></span>
                     </div>
+                </div>
+                <div className="footer">
+
+
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="python" />
+
+
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" alt="flask" />
+
+
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="react" />
+
+
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" alt="redux" />
+
+
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="postgresql" />
+
+
+
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlalchemy/sqlalchemy-original.svg" alt="sqlalchemy" />
+
+
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="javascript" />
+
+
+
+                </div>
+                <div className='footer-about'>
+                    <span style={{ fontSize: "15px" }}>© 2023 | Muytien LLC | All Rights Reserved</span>
+                    <br />
+                    <span style={{ fontWeight: "bold" }}>UNLEASH YOUR POTENTIAL | EMBRACE AMBITION | DEFINE SUCCESS</span>
+                    <br />
+                    <span>PRIVACY POLICY | TERMS OF SERVICE | CCPA</span>
                 </div>
             </div>
         </div >

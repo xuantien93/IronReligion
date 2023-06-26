@@ -25,18 +25,31 @@ const CreateWorkoutModal = ({ routineId }) => {
 
     useEffect(() => {
         const error = {}
-        if (!exercise) error.exercise = "Excercise is required"
-        if (exercise.trim().length < 2) error.exercise = "Minimum of 2 characters is required"
-        if (exercise.trim().length > 200) error.exercise = "Maximum of 200 characters only"
-        if (!sets) error.sets = "Sets is required"
-        if (sets.trim().length > 200) error.sets = "Maximum of 200 characters only"
-        if (!reps) error.reps = "Reps is required"
-        if (reps.trim().length > 200) error.reps = "Maximum of 200 characters only"
-        if (!weights) error.weights = "Weights is required"
-        if (weights.trim().length > 200) error.weights = "Maximum of 200 characters only"
-        if (notes.trim().length > 1000) error.notes = "Maximum of 1000 characters only"
+        const integerRegex = /^\d+$/;
+        if (!exercise) error.exercise = 'Exercise is required';
+        if (exercise.trim().length < 2)
+            error.exercise = 'Minimum of 2 characters is required';
+        if (exercise.trim().length > 200)
+            error.exercise = 'Maximum of 200 characters only';
+        if (!sets) error.sets = 'Sets is required';
+        if (sets.trim().length > 200)
+            error.sets = 'Maximum of 200 characters only';
+        if (!integerRegex.test(sets))
+            error.sets = 'Please enter a valid integer for Sets';
+        if (!reps) error.reps = 'Reps is required';
+        if (reps.trim().length > 200)
+            error.reps = 'Maximum of 200 characters only';
+        if (!integerRegex.test(reps))
+            error.reps = 'Please enter a valid integer for Reps';
+        if (!weights) error.weights = 'Weights is required';
+        if (weights.trim().length > 200)
+            error.weights = 'Maximum of 200 characters only';
+        if (!integerRegex.test(weights))
+            error.weights = 'Please enter a valid integer for Weights';
+        if (notes.trim().length > 1000)
+            error.notes = 'Maximum of 1000 characters only';
         setErrors(error)
-    }, [exercise, reps, sets, notes])
+    }, [exercise, reps, sets, weights, notes])
 
     const submitForm = async (e) => {
         e.preventDefault()
@@ -48,19 +61,30 @@ const CreateWorkoutModal = ({ routineId }) => {
         formData.append('weights', weights)
         formData.append('notes', notes)
 
-        const data = await dispatch(createWorkout(routineId, formData));
-
-        if (data.errors) {
-            return setErrors(data.errors[0])
+        // const data = await dispatch(editWorkoutThunk(workoutId, formData));
+        if (!Object.values(errors).length) {
+            const data = await dispatch(createWorkout(routineId, formData));
+            setExercise("")
+            setSets("")
+            setReps("")
+            setWeights("")
+            closeModal()
         }
-
-        if (submitted && errors) {
-            console.log('errors was reset!')
-            setErrors('');
-        }
-
-        return closeModal()
     }
+
+    // if (data.errors) {
+    //     return setErrors(data.errors[0])
+    // }
+
+
+
+    // if (submitted && errors) {
+    //     console.log('errors was reset!')
+    //     setErrors('');
+    // }
+
+
+
 
 
 
@@ -68,38 +92,41 @@ const CreateWorkoutModal = ({ routineId }) => {
     return (
         <div className='workout-form-container'>
             <form className='workout-form' onSubmit={submitForm}>
-                {errors.exercise && (
-                    <p style={{ color: "red" }}>{errors.exercise}</p>
+                {errors.exercise && submitted && (
+                    <p style={{ color: "red", marginTop: "2%" }}>{errors.exercise}</p>
                 )}
-                <div className='inside-workout-form'>
+                <div className='txt_field'>
                     <label>
                         <div>Exercise</div>
-
                         <input
                             id="workout-exercise"
-                            placeholder="exercise..."
+                            placeholder="Exercise..."
                             type="text"
                             value={exercise}
                             onChange={(e) => setExercise(e.target.value)}
                         ></input>
                     </label>
-                    {errors.sets && (
-                        <p style={{ color: "red" }}>{errors.sets}</p>
-                    )}
+                </div>
+                {errors.sets && submitted && (
+                    <p style={{ color: "red" }}>{errors.sets}</p>
+                )}
+                <div className='txt_field'>
                     <label>
                         <div>Sets</div>
 
                         <input
                             id="workout-sets"
-                            placeholder="sets..."
+                            placeholder="Sets..."
                             type="text"
                             value={sets}
                             onChange={(e) => setSets(e.target.value)}
                         ></input>
                     </label>
-                    {errors.reps && (
-                        <p style={{ color: "red" }}>{errors.reps}</p>
-                    )}
+                </div>
+                {errors.reps && submitted && (
+                    <p style={{ color: "red" }}>{errors.reps}</p>
+                )}
+                <div className='txt_field'>
                     <label>
                         <div>Reps</div>
 
@@ -111,9 +138,11 @@ const CreateWorkoutModal = ({ routineId }) => {
                             onChange={(e) => setReps(e.target.value)}
                         ></input>
                     </label>
-                    {errors.weights && (
-                        <p style={{ color: "red" }}>{errors.weights}</p>
-                    )}
+                </div>
+                {errors.weights && submitted && (
+                    <p style={{ color: "red" }}>{errors.weights}</p>
+                )}
+                <div className='txt_field'>
                     <label>
                         <div>Weight</div>
 
@@ -125,21 +154,22 @@ const CreateWorkoutModal = ({ routineId }) => {
                             onChange={(e) => setWeights(e.target.value)}
                         ></input>
                     </label>
-                    {errors.notes && (
-                        <p style={{ color: "red" }}>{errors.notes}</p>
-                    )}
+                </div>
+                {errors.notes && submitted && (
+                    <p style={{ color: "red" }}>{errors.notes}</p>
+                )}
+                <div className='txt_field'>
                     <label>
                         <div>Notes</div>
 
                         <input
                             id="workout-notes"
-                            placeholder="notes..."
+                            placeholder="notes...(optional)"
                             type="text"
                             value={notes}
                             onChange={(e) => setNotes(e.target.value)}
                         ></input>
                     </label>
-
                 </div>
                 <div className='workout-submit'>
                     <button type="submit" className='workout-submit-btn'>Submit</button>

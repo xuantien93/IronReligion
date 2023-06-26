@@ -41,14 +41,14 @@ const SingleRoutinePage = () => {
                 <div className='routine-image-container'>
                     <img id="routine-image" src={routineById?.image}></img>
                     {/* <button id="delete-routine-button" onClick={deleteRoutineBtn}><i className="fa-solid fa-eraser"></i></button> */}
-                </div>
-                {routineById.user_id === user?.id && user && <div className='edit-workout-modal'>
-                    <OpenModalButton
-                        buttonText={<i className="fa-solid fa-eraser"></i>}
-                        modalComponent={<DeleteRoutineModal routineId={routineById?.id} />}
+                    {routineById.user_id === user?.id && user && <div className='edit-workout-modal-2'>
+                        <OpenModalButton
+                            buttonText={<i className="fa-solid fa-eraser"></i>}
+                            modalComponent={<DeleteRoutineModal routineId={routineById?.id} />}
 
-                    />
-                </div>}
+                        />
+                    </div>}
+                </div>
                 {routineById?.workouts.map(workout => {
                     if (!workout) return null
                     const deleteWorkoutBtn = async (e) => {
