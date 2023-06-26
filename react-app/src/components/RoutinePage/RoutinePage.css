@@ -308,10 +308,11 @@
     flex-direction: column;
     text-align: center;
     align-items: center;
+    margin: 10px;
 }
 
 .routine-delete-modal-house>h1 {
-    color: red;
+    color: #9E896E;
     margin-bottom: 2%;
 }
 
