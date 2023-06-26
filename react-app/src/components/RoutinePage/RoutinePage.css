@@ -311,7 +311,7 @@
 }
 
 .routine-delete-modal-house>h1 {
-    color: white;
+    color: red;
     margin-bottom: 2%;
 }
 
@@ -330,4 +330,18 @@
 .routine-delete-modal-house>button:hover {
     background-color: rgb(150, 144, 144);
     transition: all 0.3s ease-in-out;
+}
+
+
+.loading-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
+
+.loading-screen.show {
+    opacity: 1;
 }
