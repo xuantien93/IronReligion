@@ -311,7 +311,7 @@
 }
 
 .routine-delete-modal-house>h1 {
-    color: white;
+    color: red;
     margin-bottom: 2%;
 }
 
@@ -330,4 +330,32 @@
 .routine-delete-modal-house>button:hover {
     background-color: rgb(150, 144, 144);
     transition: all 0.3s ease-in-out;
+}
+
+
+.loading-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.loading-message {
+    position: absolute;
+    right: -100%;
+    /* Initial position outside the screen */
+    animation: slide-in 1.5s forwards;
+    font-size: 20px;
+    color: white;
+}
+
+@keyframes slide-in {
+    0% {
+        right: -100%;
+    }
+
+    100% {
+        right: 28%;
+        /* Final position next to the loading spinner */
+    }
 }
