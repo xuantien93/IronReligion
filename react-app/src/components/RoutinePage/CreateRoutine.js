@@ -24,28 +24,47 @@ const CreateRoutine = () => {
 
 
     useEffect(() => {
-        const error = {}
-        const imageExtensions = ['.png', '.jpg', 'jpeg']
-        if (!description) error.description = "Description is required"
-        if (description.trim().length < 5) error.description = "Minimum of 5 characters is required"
-        if (description.trim().length > 5000) error.description = "Maximum of 5000 characters only"
-        if (!image) error.image = "Image is required"
-        if (image && !imageExtensions.includes(image.slice(-4))) {
-            error.image = "Please make sure your images end with either .png, .jpg, or .jpeg"
-        }
-        if (!exercise) error.exercise = "Excercise is required"
-        if (exercise.trim().length < 2) error.exercise = "Minimum of 2 characters is required"
-        if (exercise.trim().length > 200) error.exercise = "Maximum of 200 characters only"
-        if (!sets) error.sets = "Sets is required"
-        if (sets.trim().length > 200) error.sets = "Maximum of 200 characters only"
-        if (!reps) error.reps = "Reps is required"
-        if (reps.trim().length > 200) error.reps = "Maximum of 200 characters only"
-        if (!weights) error.weights = "Weights is required"
-        if (weights.trim().length > 200) error.weights = "Maximum of 200 characters only"
-        if (notes.trim().length > 1000) error.notes = "Maximum of 1000 characters only"
-        setErrors(error)
+        const error = {};
+        const imageExtensions = ['.png', '.jpg', 'jpeg'];
+        const integerRegex = /^\d+$/;
 
-    }, [description, image, exercise, sets, reps, weights])
+        if (!description) error.description = 'Description is required';
+        if (description.trim().length < 5)
+            error.description = 'Minimum of 5 characters is required';
+        if (description.trim().length > 5000)
+            error.description = 'Maximum of 5000 characters only';
+        if (!image) error.image = 'Image is required';
+        if (image && !imageExtensions.includes(image.slice(-4))) {
+            error.image =
+                'Please make sure your images end with either .png, .jpg, or .jpeg';
+        }
+        if (!exercise) error.exercise = 'Exercise is required';
+        if (exercise.trim().length < 2)
+            error.exercise = 'Minimum of 2 characters is required';
+        if (exercise.trim().length > 200)
+            error.exercise = 'Maximum of 200 characters only';
+        if (!sets) error.sets = 'Sets is required';
+        if (sets.trim().length > 200)
+            error.sets = 'Maximum of 200 characters only';
+        if (!integerRegex.test(sets))
+            error.sets = 'Please enter a valid integer for Sets';
+        if (!reps) error.reps = 'Reps is required';
+        if (reps.trim().length > 200)
+            error.reps = 'Maximum of 200 characters only';
+        if (!integerRegex.test(reps))
+            error.reps = 'Please enter a valid integer for Reps';
+        if (!weights) error.weights = 'Weights is required';
+        if (weights.trim().length > 200)
+            error.weights = 'Maximum of 200 characters only';
+        if (!integerRegex.test(weights))
+            error.weights = 'Please enter a valid integer for Weights';
+        if (notes.trim().length > 1000)
+            error.notes = 'Maximum of 1000 characters only';
+
+        setErrors(error);
+    }, [description, image, exercise, sets, reps, weights]);
+
+    if (!user) return <Redirect to="/" />
 
     const submitForm = async (e) => {
         e.preventDefault()
@@ -74,17 +93,13 @@ const CreateRoutine = () => {
             setReps("")
             setWeights("")
         }
-
-
-        if (!user) history.push("/login")
-
     }
     return (
         <div className='routine-form-container'>
+            <h1>Create Routine</h1>
             <div className='routine-form-subform'>
-                <h1>Create Routine</h1>
                 <form className="routine-form" onSubmit={submitForm}>
-                    <div className="inside-routine-form">
+                    <div className="txt_field">
                         <label>
                             <div>Description <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
                             {errors.description && submitted && < p style={{ color: "red" }}>{errors.description}</p>}
@@ -96,18 +111,20 @@ const CreateRoutine = () => {
                                 onChange={(e) => setDescription(e.target.value)}
                             ></input>
                         </label>
+                    </div>
+                    <div className='txt_field'>
                         <label>
                             <div>Image <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
                             {errors.image && submitted && < p style={{ color: "red" }}>{errors.image}</p>}
                             <input
-                                id="routine-image"
                                 placeholder="Image..."
                                 type="text"
                                 value={image}
                                 onChange={(e) => setImage(e.target.value)}
                             ></input>
                         </label>
-
+                    </div>
+                    <div className='txt_field'>
                         <label>
                             <div>Exercise <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
                             {errors.exercise && submitted && < p style={{ color: "red" }}>{errors.exercise}</p>}
@@ -119,10 +136,12 @@ const CreateRoutine = () => {
                                 onChange={(e) => setExercise(e.target.value)}
                             ></input>
                         </label>
+                    </div>
+                    <div className='txt_field'>
                         <label>
                             <div>Sets <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
                             {errors.sets && submitted && < p style={{ color: "red" }}>{errors.sets}</p>}
-                            <textarea
+                            <input
                                 id="workout-sets"
                                 placeholder="Sets..."
                                 type="text"
@@ -130,6 +149,9 @@ const CreateRoutine = () => {
                                 onChange={(e) => setSets(e.target.value)}
                             />
                         </label>
+                    </div>
+                    <div className='txt_field'>
+
                         <label>
                             <div>Reps <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
                             {errors.reps && submitted && < p style={{ color: "red" }}>{errors.reps}</p>}
@@ -141,6 +163,9 @@ const CreateRoutine = () => {
                                 onChange={(e) => setReps(e.target.value)}
                             ></input>
                         </label>
+                    </div>
+                    <div className='txt_field'>
+
                         <label>
                             <div>Weights <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
                             {errors.weights && submitted && < p style={{ color: "red" }}>{errors.weights}</p>}
@@ -152,6 +177,9 @@ const CreateRoutine = () => {
                                 onChange={(e) => setWeights(e.target.value)}
                             ></input>
                         </label>
+                    </div>
+                    <div className='txt_field'>
+
                         <label>
                             <div>Notes</div>
                             {errors.notes && submitted && < p style={{ color: "red", fontSize: "0.7rem" }}>{errors.notes}</p>}
@@ -164,8 +192,8 @@ const CreateRoutine = () => {
                             ></input>
                         </label>
                     </div>
-                    <div className='routine-submmit'>
-                        <button type="submit" className='routine-submit-btn'>Submit</button>
+                    <div className='routine-submit-btn'>
+                        <button type="submit" >Submit</button>
                     </div>
                 </form >
             </div>

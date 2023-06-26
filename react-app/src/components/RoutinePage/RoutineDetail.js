@@ -31,7 +31,11 @@ const RoutineDetail = ({ routine }) => {
                     {routine.description}
                 </div>
                 <div className='routine-image-container'>
-                    <img id="routine-image" src={routine.image}></img>
+                    {routine.image ? (
+                        <img id="routine-image" src={routine.image} alt="Routine" />
+                    ) : (
+                        <img id="routine-image" src="https://i.imgur.com/IySASzx.jpg" alt="Default Routine" />
+                    )}
                     {routine.user_id === user?.id && <button id="update-routine-btn" onClick={() => history.push(`/routines/${routine.id}/update`)}>Update Routine</button>}
                 </div>
                 {routine.workouts?.map(workout => {
@@ -46,7 +50,9 @@ const RoutineDetail = ({ routine }) => {
                             <span> Sets {workout.sets}</span>
                             <span> Reps {workout.reps}</span>
                             <span> Weights {workout.weights}lbs</span>
-                            <span> Notes: {workout.notes}</span>
+                            <div className='workout-note-div'>
+                                <span> Notes: {workout.notes}</span>
+                            </div>
                             <div className='delete-edit-button'>
                                 {workout.user_id === user?.id && <div className='edit-workout-modal'>
                                     <OpenModalButton

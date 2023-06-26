@@ -24,6 +24,7 @@
 }
 
 
+
 .single-routine {
     display: flex;
     flex-direction: column;
@@ -112,6 +113,20 @@
     justify-content: space-around;
     border-radius: 8px;
     margin-bottom: 2px;
+    width: 110%;
+}
+
+.workout-block span {
+    /* border: 1px solid pink; */
+    width: 30%;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.workout-note-div {
+    /* border: 1px solid red; */
+    width: 30%;
+    word-wrap: break-word;
 }
 
 .workout-block:last-child {
@@ -164,8 +179,9 @@
     color: white;
     font-size: 14px;
     border-radius: 5px;
+    /* border: 1px solid red; */
+    height: fit-content;
     padding: 2px 6px;
-    border-style: none;
     cursor: pointer;
 }
 
@@ -194,4 +210,124 @@
     background-color: #9E896E;
     color: black;
     transition: all 0.3s ease;
+}
+
+.routine-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.routine-form-container>h1 {
+    color: #9E896E;
+    text-align: center;
+    margin: 2% 5%;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.routine-form-subform {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #9E896E;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background: black;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.routine-submit-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+
+.routine-submit-btn>button {
+    transition: transform 0.3s ease;
+    background-color: transparent;
+    color: white;
+    border-style: none;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 0px 7px;
+    margin: 2% 0% 3% 0;
+    height: 40px;
+    width: 100%;
+}
+
+.routine-submit-btn>button:hover {
+    background-color: rgb(150, 144, 144);
+    transition: all 0.3s ease-in-out;
+}
+
+.workout-form-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #9E896E;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: black;
+    border-radius: 10px;
+}
+
+.workout-form-container form {
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.workout-submit>button {
+    transition: transform 0.3s ease;
+    background-color: transparent;
+    color: white;
+    border-style: none;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 0px 7px;
+    margin: 2% 0% 3% 0;
+    height: 40px;
+    width: 100%;
+}
+
+.workout-submit>button:hover {
+    background-color: rgb(150, 144, 144);
+    transition: all 0.3s ease-in-out;
+}
+
+.routine-delete-modal-house {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.routine-delete-modal-house>h1 {
+    color: white;
+    margin-bottom: 2%;
+}
+
+.routine-delete-modal-house>button {
+    transition: transform 0.3s ease;
+    background-color: transparent;
+    color: white;
+    border-style: none;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 40px;
+    width: 30%;
+}
+
+.routine-delete-modal-house>button:hover {
+    background-color: rgb(150, 144, 144);
+    transition: all 0.3s ease-in-out;
 }

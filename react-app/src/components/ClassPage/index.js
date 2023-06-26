@@ -46,6 +46,7 @@ const ClassPage = () => {
 
     return (
         <div className='classes-page-container'>
+            <h1>Classes</h1>
             <div className='single-class'>
                 {classes.map(classItem => {
                     const timeStart = new Date(classItem.time_start);
@@ -69,14 +70,18 @@ const ClassPage = () => {
                     const isAlreadyBooked = myBooking.some(booking => booking.class_id === classItem.id);
                     return (
                         < div className='single-class-block' key={classItem.id} >
-                            {errors && <p style={{ color: "red" }}>{errors}</p>}
                             <span>{classItem.class_name}</span>
                             <span>Start: {classItem.time_start}</span>
                             <span>End: {classItem.time_end}</span>
                             <span>Duration: {durationInMinutes} mins</span>
                             <span>Trainer: {classItem.trainer.first_name} {classItem.trainer.last_name}</span>
+                            {errors && <p style={{ color: "red" }}>{errors}</p>}
                             <div className='reserve-block'>
-                                <button id="reserve-btn" disabled={isReserved || isAlreadyBooked || isAlreadyPassed} onClick={handleReserve}>{isReserved ? "Reserved" : (isAlreadyPassed ? 'Already Passed' : (isAlreadyBooked ? 'Already Booked' : 'Reserve'))}</button>
+                                <button id="reserve-btn"
+                                    disabled={isReserved || isAlreadyBooked || isAlreadyPassed}
+                                    onClick={handleReserve}
+                                    className={isAlreadyPassed || isAlreadyBooked ? "already-passed" : ""}
+                                >{isReserved ? "Reserved" : (isAlreadyPassed ? 'Already Passed' : (isAlreadyBooked ? 'Already Booked' : 'Reserve'))}</button>
                             </div>
                         </div>
                     )

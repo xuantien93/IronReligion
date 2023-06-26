@@ -60,6 +60,9 @@ function App() {
           <Route path="/bookings">
             <Mybooking />
           </Route>
+          <Route>
+            <h1>Page not found</h1>
+          </Route>
         </Switch>
       )}
     </>

@@ -1,11 +1,24 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
+	const history = useHistory()
+	function scrollToSection(event, sectionId) {
+		event.preventDefault();
+
+		const targetElement = document.getElementById(sectionId);
+		if (targetElement) {
+			targetElement.scrollIntoView({ behavior: 'smooth' });
+		}
+
+		if (window.location.pathname !== '/') {
+			history.push(`/?section=${sectionId}`);
+		}
+	}
 
 	return (
 		<div className='nav-container'>
@@ -19,9 +32,11 @@ function Navigation({ isLoaded }) {
 					<div className='menu-links'>
 						<NavLink to="/trainers">Coaches</NavLink>
 						<NavLink to="/classes">Classes</NavLink>
-						<NavLink to="/routines" className="topright-nav-create-text">Exercises</NavLink>
-						<NavLink to="/" className="topright-nav-create-text">Apparel</NavLink>
-						<NavLink to="/" className="topright-nav-create-text">Contact</NavLink>
+						<NavLink to="/routines" >Exercises</NavLink>
+						<a href="/" onClick={(e) => { e.preventDefault(); alert("Feature Coming Soon"); }}>Apparel</a>
+						<a href="/" onClick={(event) => scrollToSection(event, 'hours-operation')}>
+							Contact
+						</a>
 						{isLoaded && (
 							<div className='topright-nav'>
 								<ProfileButton user={sessionUser} />
@@ -30,7 +45,7 @@ function Navigation({ isLoaded }) {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div >
 
 	);
 }

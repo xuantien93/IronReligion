@@ -1,22 +1,57 @@
 .classes-page-container {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
     flex-wrap: wrap;
-    position: relative;
+    flex-direction: column;
+}
+
+.classes-page-container>h1 {
+    text-align: center;
+    margin-top: 2%;
 }
 
 .single-class {
-    border: 1px solid blue;
+    border: 1px solid #9E896E;
+    border-radius: 7px;
     display: flex;
     flex-direction: column;
     width: 50%;
     position: absolute;
     right: 25%;
-    top: 30px;
+    top: 25%;
 }
 
 .single-class-block {
-    border: 1px solid pink;
+    /* border: 1px solid pink; */
     display: flex;
     flex-direction: column;
+    border-bottom: 1px solid #9E896E;
+    margin: 3% 3%;
+}
+
+.single-class-block:last-child {
+    border-bottom: none;
+}
+
+.already-passed {
+    color: white !important;
+    background-color: #9E896E !important;
+}
+
+#reserve-btn {
+    background-color: #9E896E;
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 5px 10px;
+    border-style: none;
+    cursor: pointer;
+    font-size: 15px;
+    margin: 2% 0;
+}
+
+#reserve-btn:hover {
+    background-color: black;
+    color: #9E896E;
+    transition: all 0.3s ease;
 }
