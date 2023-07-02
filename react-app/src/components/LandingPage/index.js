@@ -83,6 +83,19 @@ const LandingPage = () => {
         faqContent.classList.toggle("bounce-animation");
     };
 
+    // const blurDivs = document.querySelectorAll(".blur-load")
+    // blurDivs.forEach(div => {
+    //     const img = div.querySelector("img")
+    //     function loaded() {
+    //         div.classList.add("loaded")
+    //     }
+    //     if (img.complete) {
+    //         loaded()
+    //     } else {
+    //         img.addEventListener("load", loaded)
+    //     }
+    // })
+
 
     return (
         <div className='landing-page-container'>
@@ -110,45 +123,53 @@ const LandingPage = () => {
                 </div>
             </div>
             <div className='gallery-container'>
-                <div className='each-gallery'>
+                <div className='each-gallery' >
                     <div className='gallery-name'>Outdoor gym</div>
-                    <img src="https://i.imgur.com/rDwKpS5.jpg"></img>
+
+                    <img src="https://i.imgur.com/rDwKpS5.jpg" loading='lazy'></img>
                 </div>
                 <div className='each-gallery'>
                     <div className='gallery-name'>Equipments</div>
-                    <img src="https://i.imgur.com/7z6JV9s.jpg"></img>
+
+                    <img src="https://i.imgur.com/7z6JV9s.jpg" loading='lazy'></img>
                 </div>
-                <div className='each-gallery'>
+                <div className='each-gallery' >
                     <div className='gallery-name'>Indoor gym</div>
-                    <img src="https://i.imgur.com/st7LZ3X.jpg"></img>
+
+                    <img src="https://i.imgur.com/st7LZ3X.jpg" loading='lazy'></img>
                 </div>
-                <div className='each-gallery'>
+                <div className='each-gallery' >
                     <div className='gallery-name'>Indoor gym</div>
-                    <img src="https://i.imgur.com/C7J7zbq.jpg"></img>
+
+                    <img src="https://i.imgur.com/C7J7zbq.jpg" loading='lazy'></img>
                 </div>
-                <div className='each-gallery'>
+                <div className='each-gallery' >
                     <div className='gallery-name'>PowerLifting Equipments</div>
-                    <img src="https://i.imgur.com/9G04UdE.jpg"></img>
+
+                    <img src="https://i.imgur.com/9G04UdE.jpg" loading='lazy'></img>
                 </div>
-                <div className='each-gallery'>
+                <div className='each-gallery' >
                     <div className='gallery-name'>Private Studio</div>
-                    <img src="https://i.imgur.com/EeTcbRU.jpg"></img>
+
+                    <img src="https://i.imgur.com/EeTcbRU.jpg" loading='lazy'></img>
                 </div>
-                <div className='each-gallery'>
+                <div className='each-gallery' >
                     <div className='gallery-name'>Boxing Room</div>
-                    <img src="https://i.imgur.com/N9uaI7T.jpg"></img>
+
+                    <img src="https://i.imgur.com/N9uaI7T.jpg" loading='lazy'></img>
                 </div>
-                <div className='each-gallery'>
+                <div className='each-gallery' >
                     <div className='gallery-name'>Patio</div>
-                    <img src="https://i.imgur.com/U97x53B.jpg"></img>
+
+                    <img src="https://i.imgur.com/U97x53B.jpg" loading='lazy'></img>
                 </div>
-                <div className='each-gallery'>
+                <div className='each-gallery' >
                     <div className='gallery-name'>Locker-room</div>
-                    <img src="https://i.imgur.com/Vn2Fp2I.jpg"></img>
+                    <img src="https://i.imgur.com/Vn2Fp2I.jpg" loading='lazy'></img>
                 </div>
-                <div className='each-gallery'>
-                    <div className='gallery-name'>Tower Service</div>
-                    <img src="https://i.imgur.com/OuMwefr.jpg"></img>
+                <div className='each-gallery' >
+                    <div className='gallery-name'>Towel Service</div>
+                    <img src="https://i.imgur.com/OuMwefr.jpg" loading='lazy'></img>
                 </div>
             </div>
             <div className='pay-package-container'>
