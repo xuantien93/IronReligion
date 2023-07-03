@@ -13,7 +13,7 @@ Live Site: [IronReligion](https://ironreligion.onrender.com/)
 
 [MVP list](https://github.com/xuantien93/IronReligion/wiki/MVP-list)
 
-[API Routes/User Stories]((https://github.com/xuantien93/IronReligion/wiki/User-Stories)
+[API Routes/User Stories](https://github.com/xuantien93/IronReligion/wiki/User-Stories)
 
 ## Features
 - User registration and authentication: Users can create accounts and log in securely.
