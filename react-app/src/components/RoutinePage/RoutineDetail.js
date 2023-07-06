@@ -20,7 +20,7 @@ const RoutineDetail = ({ routine }) => {
     }
 
     // if (!user) history.push("/")
-    // console.log("this is routine on routine detail", routine)
+    console.log("this is routine on routine detail", Object.values(routine.comments))
 
 
 
@@ -38,6 +38,12 @@ const RoutineDetail = ({ routine }) => {
                     )}
                     {routine.user_id === user?.id && <button id="update-routine-btn" onClick={() => history.push(`/routines/${routine.id}/update`)}>Update Routine</button>}
                 </div>
+                {Object.values(routine.comments).map(comment => {
+                    { console.log(comment.user) }
+                    return (
+                        <div>{comment.user.first_name} {comment.user.last_name}: {comment.content}</div>
+                    )
+                })}
                 {routine.workouts?.map(workout => {
                     if (!workout) return null
                     const deleteWorkoutBtn = async (e) => {
@@ -74,7 +80,7 @@ const RoutineDetail = ({ routine }) => {
                     />
                 </div>}
             </div>
-        </div>
+        </div >
     )
 
 
