@@ -15,6 +15,7 @@ import Mybooking from "./components/MyBookings";
 import MyRoutine from "./components/RoutinePage/MyRoutine";
 import TrainerPage from "./components/TrainerPage";
 import { RingLoader } from "react-spinners"
+import LoadingSpinner from "./components/LoadingLogo";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,8 +37,9 @@ function App() {
     <>
       {isLoading ? (
         <div className="loading-screen">
-          <RingLoader color="#d636c4" size={100} />
-          <p className="loading-message">IronReligion by Muytien</p>
+          {/* <RingLoader color="#d636c4" size={100} />
+          <p className="loading-message">IronReligion by Muytien</p> */}
+          <LoadingSpinner />
         </div >
       ) : (
         <>

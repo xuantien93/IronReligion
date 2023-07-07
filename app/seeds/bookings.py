@@ -10,38 +10,38 @@ def seed_bookings():
     booking1 = Booking(
         class_id=1,
         user_id=3,
-        time_start=datetime(2023,6,25, hour = 9,minute = 30),
-        time_end= datetime(2023,6,25, hour = 10, minute = 30),
+        time_start=datetime(2023,7,6, hour = 9,minute = 30),
+        time_end= datetime(2023,7,6, hour = 10, minute = 30),
     )
     booking2 = Booking(
         class_id=2,
         user_id=1,
-        time_start=datetime(2023,6,25,hour = 10,minute = 30),
-        time_end= datetime(2023,6,25, hour = 11, minute = 30),
+        time_start=datetime(2023,7,6,hour = 10,minute = 30),
+        time_end= datetime(2023,7,6, hour = 11, minute = 30),
     )
     booking3 = Booking(
         class_id=3,
         user_id=2,
-        time_start=datetime(2023,6,26,hour = 9,minute = 30),
-        time_end= datetime(2023,6,26, hour = 10, minute = 30),
+        time_start=datetime(2023,7,7,hour = 9,minute = 30),
+        time_end= datetime(2023,7,7, hour = 10, minute = 30),
     )
     booking4 = Booking(
         class_id=4,
         user_id=3,
-        time_start=datetime(2023,6,27,hour = 8,minute = 30),
-        time_end= datetime(2023,6,27, hour = 9, minute = 30),
+        time_start=datetime(2023,7,7,hour = 8,minute = 30),
+        time_end= datetime(2023,7,7, hour = 9, minute = 30),
     )
     booking5 = Booking(
         class_id=5,
         user_id=1,
-        time_start=datetime(2023,6,27,hour = 12 ,minute = 30),
-        time_end= datetime(2023,6,27, hour = 13, minute = 30),
+        time_start=datetime(2023,7,8,hour = 12 ,minute = 30),
+        time_end= datetime(2023,7,8, hour = 13, minute = 30),
     )
     booking6 = Booking(
         class_id=6,
         user_id=2,
-        time_start=datetime(2023,6,27,hour = 15,minute = 30),
-        time_end= datetime(2023,6,27, hour = 16, minute = 30),
+        time_start=datetime(2023,7,8,hour = 15,minute = 30),
+        time_end= datetime(2023,7,8, hour = 16, minute = 30),
     )
 
     bookings = [booking1,booking2,booking3,booking4,booking5,booking6]
