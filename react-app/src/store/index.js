@@ -5,13 +5,15 @@ import routinesReducer from './routine';
 import classReducer from './class';
 import bookingReducer from './booking';
 import trainerReducer from './trainer';
+import commentReducer from './comments';
 
 const rootReducer = combineReducers({
   session,
   routines: routinesReducer,
   classes: classReducer,
   bookings: bookingReducer,
-  trainers: trainerReducer
+  trainers: trainerReducer,
+  comments: commentReducer
 });
 
 

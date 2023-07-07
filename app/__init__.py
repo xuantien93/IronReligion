@@ -12,6 +12,7 @@ from .api.routes.workout_routes import workouts
 from .api.routes.booking_routes import bookings
 from .api.routes.class_routes import classes
 from .api.routes.trainer_routes import trainers
+from .api.routes.comment_routes import comments
 from .seeds import seed_commands
 from .config import Config
 
@@ -41,6 +42,7 @@ app.register_blueprint(workouts, url_prefix='/api/workouts')
 app.register_blueprint(bookings, url_prefix='/api/bookings')
 app.register_blueprint(classes, url_prefix='/api/classes')
 app.register_blueprint(trainers,url_prefix='/api/trainers')
+app.register_blueprint(comments,url_prefix='/api/comments')
 
 db.init_app(app)
 Migrate(app, db)

@@ -15,6 +15,7 @@ import Mybooking from "./components/MyBookings";
 import MyRoutine from "./components/RoutinePage/MyRoutine";
 import TrainerPage from "./components/TrainerPage";
 import { RingLoader } from "react-spinners"
+import LoadingSpinner from "./components/LoadingLogo";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,68 +25,69 @@ function App() {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 2000);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
 
-  //   return () => clearTimeout(timer);
-  // }, []);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    // <>
-    //   {isLoading ? (
-    //     <div className="loading-screen">
-    //       <RingLoader color="#d636c4" size={100} />
-    //       <p className="loading-message">IronReligion by Muytien</p>
-    //     </div >
-    //   ) : (
     <>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route exact path="/">
-            <LandingPage />
-          </Route>
-          <Route path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-          <Route path="/trainers">
-            <TrainerPage />
-          </Route>
-          <Route path="/routines/create">
-            <CreateRoutine />
-          </Route>
-          <Route path="/routines/me">
-            <MyRoutine />
-          </Route>
-          <Route path="/routines/:id/update">
-            <EditRoutine />
-          </Route>
-          <Route path="/routines/:id">
-            <SingleRoutinePage />
-          </Route>
-          <Route path="/routines">
-            <RoutinePage />
-          </Route>
-          <Route path="/classes">
-            <ClassPage />
-          </Route>
-          <Route path="/bookings">
-            <Mybooking />
-          </Route>
-          <Route>
-            <h1>Page not found</h1>
-          </Route>
-        </Switch>
-      )}
+      {isLoading ? (
+        <div className="loading-screen">
+          {/* <RingLoader color="#d636c4" size={100} />
+          <p className="loading-message">IronReligion by Muytien</p> */}
+          <LoadingSpinner />
+        </div >
+      ) : (
+        <>
+          <Navigation isLoaded={isLoaded} />
+          {isLoaded && (
+            <Switch>
+              <Route exact path="/">
+                <LandingPage />
+              </Route>
+              <Route path="/login">
+                <LoginFormPage />
+              </Route>
+              <Route path="/signup">
+                <SignupFormPage />
+              </Route>
+              <Route path="/trainers">
+                <TrainerPage />
+              </Route>
+              <Route path="/routines/create">
+                <CreateRoutine />
+              </Route>
+              <Route path="/routines/me">
+                <MyRoutine />
+              </Route>
+              <Route path="/routines/:id/update">
+                <EditRoutine />
+              </Route>
+              <Route path="/routines/:id">
+                <SingleRoutinePage />
+              </Route>
+              <Route path="/routines">
+                <RoutinePage />
+              </Route>
+              <Route path="/classes">
+                <ClassPage />
+              </Route>
+              <Route path="/bookings">
+                <Mybooking />
+              </Route>
+              <Route>
+                <h1>Page not found</h1>
+              </Route>
+            </Switch>
+          )}
+        </>
+      )
+      }
     </>
-    //   )
-    //   }
-    // </>
   );
 
 }

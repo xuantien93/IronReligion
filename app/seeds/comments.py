@@ -9,13 +9,13 @@ fake = Faker()
 
 def seed_comments():
     comment1 = Comment(
-        content="Great work out, Love it", user_id = 3, routine_id = 1, created_at=fake.date_between(start_date='-5y', end_date='today')
+        content="Great work out", user_id = 3, routine_id = 1, created_at=fake.date_between(start_date='-5y', end_date='today')
     )
     comment2 = Comment(
         content="Awesome work out, Love it", user_id = 2, routine_id = 1, created_at=fake.date_between(start_date='-5y', end_date='today')
     )
     comment3 = Comment(
-        content="Amazing work out, Love it", user_id = 3, routine_id = 1, created_at=fake.date_between(start_date='-5y', end_date='today')
+        content="Tried it again a week after, amazing workout", user_id = 3, routine_id = 1, created_at=fake.date_between(start_date='-5y', end_date='today')
     )
     comment4 = Comment(
         content="Love it", user_id = 1, routine_id = 2, created_at=fake.date_between(start_date='-5y', end_date='today')
@@ -27,10 +27,10 @@ def seed_comments():
         content="Let's go", user_id = 1, routine_id = 2, created_at=fake.date_between(start_date='-5y', end_date='today')
     )
     comment7 = Comment(
-        content="My body is working hard with this", user_id = 2, routine_id = 3, created_at=fake.date_between(start_date='-5y', end_date='today')
+        content="My legs were so sore the next day", user_id = 2, routine_id = 3, created_at=fake.date_between(start_date='-5y', end_date='today')
     )
     comment8 = Comment(
-        content="Legs were so sore the next day", user_id = 3, routine_id = 3, created_at=fake.date_between(start_date='-5y', end_date='today')
+        content="Awesome legs workout", user_id = 3, routine_id = 3, created_at=fake.date_between(start_date='-5y', end_date='today')
     )
 
     comments = [comment1,comment2,comment3,comment4,comment5,comment6,comment7,comment8]

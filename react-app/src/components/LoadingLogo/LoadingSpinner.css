@@ -1,0 +1,48 @@
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    /* Set the width to 100% */
+    height: 20vh;
+    /* Adjust the height as needed */
+    opacity: 0;
+    /* Start with the spinner hidden */
+    animation: fade-in 1s forwards, glow 2s linear infinite;
+    background-color: #000;
+    /* Adjust the background color as needed */
+}
+
+.spinner>img {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    animation: glow 2s linear infinite;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px #fff, 0 0 5px #fff;
+        /* Initial glow effect */
+    }
+
+    50% {
+        box-shadow: -10px 0 20px #fff, 10px 0 20px #fff;
+        /* Increased glow effect */
+    }
+
+    100% {
+        box-shadow: 0 0 5px #fff, 0 0 5px #fff;
+        /* Return to the initial glow effect */
+    }
+}

@@ -4,7 +4,7 @@ from datetime import date
 from ...models.db import db
 from ...models.user import User
 from ...models.models import Routine,Workout,Comment
-from ...forms.routine_form import RoutineForm,WorkoutForm
+from ...forms.routine_form import RoutineForm,WorkoutForm, CommentForm
 
 
 
@@ -177,3 +177,41 @@ def delete_routine(id):
     db.session.delete(routine)
     db.session.commit()
     return {"res":"Successfully deleted"}
+
+
+@routines.route("/<int:id>/comments", methods=['POST'])
+@login_required
+def create_comment(id):
+    form = CommentForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        result = Comment(
+            content = form.data['content'],
+            created_at = date.today(),
+            user_id = current_user.id,
+            routine_id = id
+        )
+        db.session.add(result)
+        db.session.commit()
+        return {"resComment":result.to_dict()}
+    if form.errors:
+         return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@routines.route("/<int:id>/comments",methods=["PUT"])
+@login_required
+def update_comment(id):
+    form = CommentForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+
+    if form.validate_on_submit():
+        comment = Comment.query.get(id)
+        comment.content = form.data["content"]
+        comment.created_at = date.today()
+        comment.user_id = current_user.id
+        comment.routine_id = id
+
+        db.session.commit()
+
+        return {"resComment":comment.to_dict()}
+    if form.errors:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
