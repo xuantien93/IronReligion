@@ -19,7 +19,7 @@ function LoginFormPage() {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
-      setErrors(data);
+      setErrors(data[0].split(":")[1]);
     }
   };
 
@@ -33,9 +33,9 @@ function LoginFormPage() {
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <span id="login-error">
-          {errors.map((error, idx) => (
-            <p style={{ color: "red" }} key={idx}>{error}</p>
-          ))}
+
+          <p style={{ color: "red" }}>{errors}</p>
+
         </span>
         <div className="txt_field">
           <label>

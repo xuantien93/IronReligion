@@ -37,10 +37,11 @@ function SignupFormPage() {
     if (!lastName || lastName.trim().length > 50 || lastName.trim().length < 2)
       errors.lastName = "Last name must be between 2 characters and 50 characters";
     if (!password || password.length < 6)
-      errors.password = "Password must be 6 characters";
+      errors.password = "Password must be at least 6 characters";
     if (password !== confirmPassword) errors.confirmPassword = "Password must match"
     if (!phone || phone.replace(/-/g, '').length !== 10) errors.phone = "Must be a valid US Number"
     if (!username) errors.username = "Username is required"
+    if (username.trim().length < 6) errors.username = "Username must at least 6 characters"
     const today = new Date();
     const selectedDate = new Date(birthday);
 
@@ -64,12 +65,24 @@ function SignupFormPage() {
     e.preventDefault();
 
     setSubmitted(true);
-
+    let errors = {}
     if (!Object.values(errors).length) {
       if (password === confirmPassword) {
-        await dispatch(signUp(firstName, lastName, email, password, username, gender, phone, birthday));
-        closeModal()
-        return history.push("/");
+        const data = await dispatch(signUp(firstName, lastName, email, password, username, gender, phone, birthday));
+        if (data) {
+          data.forEach(error => {
+            if (error.startsWith("email")) {
+              errors.email = error.split(":")[1]
+            }
+            if (error.startsWith("username")) {
+              errors.username = error.split(":")[1]
+            }
+          })
+          // console.log(errors)
+          setErrors(errors)
+        } else {
+          return history.push("/");
+        }
       }
     }
   };
