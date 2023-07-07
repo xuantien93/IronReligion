@@ -407,7 +407,7 @@ const LandingPage = () => {
                             </div>
                         </div>
                         <div className='faq-images'>
-                            {/* <img src="https://i.imgur.com/es3Yui4.jpg"></img> */}
+                            <img src="https://i.imgur.com/es3Yui4.jpg"></img>
                             <img src="https://i.imgur.com/SPvnPZA.jpg"></img>
                         </div>
                     </div>
