@@ -441,7 +441,7 @@ const LandingPage = () => {
 
 
                     <a href="https://www.instagram.com/muytien/">
-                        <img src="https://i.imgur.com/nD6MYTx.jpg" alt="iglink" onclick="window.location.href = 'https://example.com';" />
+                        <img src="https://i.imgur.com/nD6MYTx.jpg" alt="iglink" />
                     </a>
 
 

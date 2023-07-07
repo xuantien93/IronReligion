@@ -7,7 +7,7 @@ fake = Faker()
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io',first_name='Demo',last_name='Lition',gender='M',phone='469-999-8888',birthday="1993-02-14",status='Active', enrolled_with_coach=True, password='password',created_at=fake.date_between(start_date='-5y', end_date='today'),trainer_id = 2 )
+        username='Demo123', email='demo@aa.io',first_name='Demo',last_name='Lition',gender='M',phone='469-999-8888',birthday="1993-02-14",status='Active', enrolled_with_coach=True, password='password',created_at=fake.date_between(start_date='-5y', end_date='today'),trainer_id = 2 )
     marnie = User(
         username='Marnie', email='marnie@aa.io',first_name='Marnie',last_name='Doe',gender='F',phone='469-999-8888',birthday="1993-02-14",status='Active', enrolled_with_coach=True, password='password',created_at=fake.date_between(start_date='-5y', end_date='today'),trainer_id = 3)
     bobbie = User(
