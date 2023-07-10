@@ -5,6 +5,7 @@ from ...models.db import db
 from ...models.user import User
 from ...models.models import Routine,Workout,Comment
 from ...forms.routine_form import RoutineForm,WorkoutForm, CommentForm
+from app.api.routes.aws import get_unique_filename,upload_file_to_s3,remove_file_from_s3
 
 
 
@@ -68,9 +69,13 @@ def create_routines():
 
 
     if form.validate_on_submit():
+        image = form.data['image']
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        aws_image = upload['url']
         new_routine = Routine(
             description = form.data['description'],
-            image = form.data['image'],
+            image = aws_image,
             created_at = date.today(),
             user_id = current_user.id,
         )
