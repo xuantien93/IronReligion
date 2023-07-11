@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from "react-router-dom";
 import { createRoutine } from '../../store/routine';
+import { BeatLoader } from 'react-spinners';
 import './RoutinePage.css'
 
 
@@ -10,8 +11,9 @@ const CreateRoutine = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
+    const [imageLoading, setImageLoading] = useState(false)
+    const [image, setImage] = useState(null)
     const [description, setDescription] = useState("")
-    const [image, setImage] = useState("")
     const [exercise, setExercise] = useState("")
     const [sets, setSets] = useState("")
     const [reps, setReps] = useState("")
@@ -25,7 +27,7 @@ const CreateRoutine = () => {
 
     useEffect(() => {
         const error = {};
-        const imageExtensions = ['.png', '.jpg', 'jpeg'];
+        // const imageExtensions = ['.png', '.jpg', 'jpeg'];
         const integerRegex = /^\d+$/;
 
         if (!description) error.description = 'Description is required';
@@ -34,10 +36,10 @@ const CreateRoutine = () => {
         if (description.trim().length > 5000)
             error.description = 'Maximum of 5000 characters only';
         if (!image) error.image = 'Image is required';
-        if (image && !imageExtensions.includes(image.slice(-4))) {
-            error.image =
-                'Please make sure your images end with either .png, .jpg, or .jpeg';
-        }
+        // if (image && !imageExtensions.includes(image.slice(-4))) {
+        //     error.image =
+        //         'Please make sure your images end with either .png, .jpg, or .jpeg';
+        // }
         if (!exercise) error.exercise = 'Exercise is required';
         if (exercise.trim().length < 2)
             error.exercise = 'Minimum of 2 characters is required';
@@ -69,6 +71,7 @@ const CreateRoutine = () => {
     const submitForm = async (e) => {
         e.preventDefault()
         setSubmitted(true)
+        setImageLoading(true)
 
         const routineData = new FormData()
         routineData.append("description", description)
@@ -87,11 +90,12 @@ const CreateRoutine = () => {
             history.push("/routines")
             setDescription("")
             setNotes("")
-            setImage("")
+            setImage(null)
             setExercise("")
             setSets("")
             setReps("")
             setWeights("")
+            setImageLoading(false)
         }
     }
     return (
@@ -117,10 +121,11 @@ const CreateRoutine = () => {
                             <div>Image <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
                             {errors.image && submitted && < p style={{ color: "red" }}>{errors.image}</p>}
                             <input
-                                placeholder="Image..."
-                                type="text"
-                                value={image}
-                                onChange={(e) => setImage(e.target.value)}
+                                placeholder="Insert image here..."
+                                type="file"
+                                accept="image/*"
+                                filename={image && image.name}
+                                onChange={(e) => setImage(e.target.files[0])}
                             ></input>
                         </label>
                     </div>
@@ -194,6 +199,8 @@ const CreateRoutine = () => {
                     </div>
                     <div className='routine-submit-btn'>
                         <button type="submit" >Submit</button>
+                        {/* {imageLoading &&
+                            <div className='loading-screen'><BeatLoader color="#d636c4" size={100} /></div>} */}
                     </div>
                 </form >
             </div>

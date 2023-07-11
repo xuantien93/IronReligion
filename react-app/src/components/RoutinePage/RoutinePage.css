@@ -240,6 +240,10 @@
     padding-right: 10px;
 }
 
+#routine-edit-image {
+    width: 50%;
+}
+
 .routine-submit-btn {
     display: flex;
     flex-direction: column;
@@ -360,4 +364,3 @@
         /* Final position next to the loading spinner */
     }
 }
-

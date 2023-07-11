@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField,TextAreaField, IntegerField,DateField
 from wtforms.validators import DataRequired, Length, URL, Email, ValidationError
 from flask_wtf.file import FileAllowed,FileField,FileRequired
-from app.api.routes.aws import ALLOWED_IMAGES
+from app.api.routes.aws import ALLOWED_EXTENSIONS
 
 def text_length(form, field):
     # Checking if post length is correct
@@ -13,7 +13,7 @@ def text_length(form, field):
 
 class RoutineForm(FlaskForm):
     description = TextAreaField("Description",validators=[text_length])
-    image = FileField("Image",validators=[FileRequired(),FileAllowed(list(ALLOWED_IMAGES))])
+    image = FileField("Image",validators=[FileRequired(),FileAllowed(list(ALLOWED_EXTENSIONS))])
     exercise = StringField('Exercise',validators=[DataRequired()])
     sets = IntegerField('Sets')
     reps = IntegerField('Reps')
