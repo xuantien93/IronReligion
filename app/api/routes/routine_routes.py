@@ -5,6 +5,7 @@ from ...models.db import db
 from ...models.user import User
 from ...models.models import Routine,Workout,Comment
 from ...forms.routine_form import RoutineForm,WorkoutForm, CommentForm
+from app.api.routes.aws import get_unique_filename,upload_file_to_s3,remove_file_from_s3
 
 
 
@@ -68,9 +69,16 @@ def create_routines():
 
 
     if form.validate_on_submit():
+        image = form.data['image']
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        if 'url' not in upload:
+            print('upload here =============',upload)
+            return upload["errors"]
+
         new_routine = Routine(
             description = form.data['description'],
-            image = form.data['image'],
+            image = upload['url'],
             created_at = date.today(),
             user_id = current_user.id,
         )
@@ -127,9 +135,20 @@ def update_routine(id):
     routine_form["csrf_token"].data = request.cookies["csrf_token"]
 
     if routine_form.validate_on_submit():
+
+        image = routine_form.data['image']
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        if 'url' not in upload:
+            print("upload here =======",upload)
+            return upload["errors"]
+
         routine = Routine.query.get(id)
+        file_delete = remove_file_from_s3(routine.image)
+
+
         routine.description = routine_form.data['description']
-        routine.image = routine_form.data['image']
+        routine.image = upload['url']
         routine.created_at = date.today()
         routine.user_id = current_user.id
 
@@ -174,6 +193,8 @@ def update_routine(id):
 @login_required
 def delete_routine(id):
     routine = Routine.query.get(id)
+    file_delete = remove_file_from_s3(routine.image)
+
     db.session.delete(routine)
     db.session.commit()
     return {"res":"Successfully deleted"}
