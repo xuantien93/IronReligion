@@ -33,7 +33,7 @@ function Navigation({ isLoaded }) {
 						<NavLink to="/trainers">Coaches</NavLink>
 						<NavLink to="/classes">Classes</NavLink>
 						<NavLink to="/routines" >Exercises</NavLink>
-						<a href="/" onClick={(e) => { e.preventDefault(); alert("Feature Coming Soon"); }}>Apparel</a>
+						{/* <a href="/" onClick={(e) => { e.preventDefault(); alert("Feature Coming Soon"); }}>Apparel</a> */}
 						<a href="/" onClick={(event) => scrollToSection(event, 'hours-operation')}>
 							Contact
 						</a>
