@@ -12,6 +12,7 @@ const CreateRoutine = () => {
     const history = useHistory()
 
     const [imageLoading, setImageLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
     const [image, setImage] = useState(null)
     const [description, setDescription] = useState("")
     const [exercise, setExercise] = useState("")
@@ -72,6 +73,7 @@ const CreateRoutine = () => {
         e.preventDefault()
         setSubmitted(true)
         setImageLoading(true)
+        setIsLoading(true)
 
         const routineData = new FormData()
         routineData.append("description", description)
@@ -96,114 +98,121 @@ const CreateRoutine = () => {
             setReps("")
             setWeights("")
             setImageLoading(false)
+            setIsLoading(false)
         }
     }
     return (
         <div className='routine-form-container'>
             <h1>Create Routine</h1>
-            <div className='routine-form-subform'>
-                <form className="routine-form" onSubmit={submitForm}>
-                    <div className="txt_field">
-                        <label>
-                            <div>Description <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
-                            {errors.description && submitted && < p style={{ color: "red" }}>{errors.description}</p>}
-                            <input
-                                id="routine-description"
-                                placeholder="Description..."
-                                type="text"
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                            ></input>
-                        </label>
-                    </div>
-                    <div className='txt_field'>
-                        <label>
-                            <div>Image <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
-                            {errors.image && submitted && < p style={{ color: "red" }}>{errors.image}</p>}
-                            <input
-                                placeholder="Insert image here..."
-                                type="file"
-                                accept="image/*"
-                                filename={image && image.name}
-                                onChange={(e) => setImage(e.target.files[0])}
-                            ></input>
-                        </label>
-                    </div>
-                    <div className='txt_field'>
-                        <label>
-                            <div>Exercise <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
-                            {errors.exercise && submitted && < p style={{ color: "red" }}>{errors.exercise}</p>}
-                            <input
-                                id="workout-exercise"
-                                placeholder="Exercise..."
-                                type="text"
-                                value={exercise}
-                                onChange={(e) => setExercise(e.target.value)}
-                            ></input>
-                        </label>
-                    </div>
-                    <div className='txt_field'>
-                        <label>
-                            <div>Sets <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
-                            {errors.sets && submitted && < p style={{ color: "red" }}>{errors.sets}</p>}
-                            <input
-                                id="workout-sets"
-                                placeholder="Sets..."
-                                type="text"
-                                value={sets}
-                                onChange={(e) => setSets(e.target.value)}
-                            />
-                        </label>
-                    </div>
-                    <div className='txt_field'>
+            {isLoading ? (
+                <div className="loading-screen">
+                    <BeatLoader color="#d636c4" size={30} />
+                </div>
+            ) : (
+                <div className='routine-form-subform'>
+                    <form className="routine-form" onSubmit={submitForm}>
+                        <div className="txt_field">
+                            <label>
+                                <div>Description <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
+                                {errors.description && submitted && < p style={{ color: "red" }}>{errors.description}</p>}
+                                <input
+                                    id="routine-description"
+                                    placeholder="Description..."
+                                    type="text"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                ></input>
+                            </label>
+                        </div>
+                        <div className='txt_field'>
+                            <label>
+                                <div>Image <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
+                                {errors.image && submitted && < p style={{ color: "red" }}>{errors.image}</p>}
+                                <input
+                                    placeholder="Insert image here..."
+                                    type="file"
+                                    accept="image/*"
+                                    filename={image && image.name}
+                                    onChange={(e) => setImage(e.target.files[0])}
+                                ></input>
+                            </label>
+                        </div>
+                        <div className='txt_field'>
+                            <label>
+                                <div>Exercise <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
+                                {errors.exercise && submitted && < p style={{ color: "red" }}>{errors.exercise}</p>}
+                                <input
+                                    id="workout-exercise"
+                                    placeholder="Exercise..."
+                                    type="text"
+                                    value={exercise}
+                                    onChange={(e) => setExercise(e.target.value)}
+                                ></input>
+                            </label>
+                        </div>
+                        <div className='txt_field'>
+                            <label>
+                                <div>Sets <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
+                                {errors.sets && submitted && < p style={{ color: "red" }}>{errors.sets}</p>}
+                                <input
+                                    id="workout-sets"
+                                    placeholder="Sets..."
+                                    type="text"
+                                    value={sets}
+                                    onChange={(e) => setSets(e.target.value)}
+                                />
+                            </label>
+                        </div>
+                        <div className='txt_field'>
 
-                        <label>
-                            <div>Reps <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
-                            {errors.reps && submitted && < p style={{ color: "red" }}>{errors.reps}</p>}
-                            <input
-                                id="workout-reps"
-                                placeholder="Reps..."
-                                type="text"
-                                value={reps}
-                                onChange={(e) => setReps(e.target.value)}
-                            ></input>
-                        </label>
-                    </div>
-                    <div className='txt_field'>
+                            <label>
+                                <div>Reps <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
+                                {errors.reps && submitted && < p style={{ color: "red" }}>{errors.reps}</p>}
+                                <input
+                                    id="workout-reps"
+                                    placeholder="Reps..."
+                                    type="text"
+                                    value={reps}
+                                    onChange={(e) => setReps(e.target.value)}
+                                ></input>
+                            </label>
+                        </div>
+                        <div className='txt_field'>
 
-                        <label>
-                            <div>Weights <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
-                            {errors.weights && submitted && < p style={{ color: "red" }}>{errors.weights}</p>}
-                            <input
-                                id="workout-reps"
-                                placeholder="Weights..."
-                                type="text"
-                                value={weights}
-                                onChange={(e) => setWeights(e.target.value)}
-                            ></input>
-                        </label>
-                    </div>
-                    <div className='txt_field'>
+                            <label>
+                                <div>Weights <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
+                                {errors.weights && submitted && < p style={{ color: "red" }}>{errors.weights}</p>}
+                                <input
+                                    id="workout-reps"
+                                    placeholder="Weights..."
+                                    type="text"
+                                    value={weights}
+                                    onChange={(e) => setWeights(e.target.value)}
+                                ></input>
+                            </label>
+                        </div>
+                        <div className='txt_field'>
 
-                        <label>
-                            <div>Notes</div>
-                            {errors.notes && submitted && < p style={{ color: "red", fontSize: "0.7rem" }}>{errors.notes}</p>}
-                            <input
-                                id="workout-notes"
-                                placeholder="Notes...(optional)"
-                                type="text"
-                                value={notes}
-                                onChange={(e) => setNotes(e.target.value)}
-                            ></input>
-                        </label>
-                    </div>
-                    <div className='routine-submit-btn'>
-                        <button type="submit" >Submit</button>
-                        {/* {imageLoading &&
+                            <label>
+                                <div>Notes</div>
+                                {errors.notes && submitted && < p style={{ color: "red", fontSize: "0.7rem" }}>{errors.notes}</p>}
+                                <input
+                                    id="workout-notes"
+                                    placeholder="Notes...(optional)"
+                                    type="text"
+                                    value={notes}
+                                    onChange={(e) => setNotes(e.target.value)}
+                                ></input>
+                            </label>
+                        </div>
+                        <div className='routine-submit-btn'>
+                            <button type="submit" >Submit</button>
+                            {/* {imageLoading &&
                             <div className='loading-screen'><BeatLoader color="#d636c4" size={100} /></div>} */}
-                    </div>
-                </form >
-            </div>
+                        </div>
+                    </form >
+                </div>
+            )}
         </div >
 
     )
