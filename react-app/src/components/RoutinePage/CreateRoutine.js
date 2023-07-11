@@ -11,7 +11,6 @@ const CreateRoutine = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const [imageLoading, setImageLoading] = useState(false)
     const [isLoading, setIsLoading] = useState(false);
     const [image, setImage] = useState(null)
     const [description, setDescription] = useState("")
@@ -72,7 +71,6 @@ const CreateRoutine = () => {
     const submitForm = async (e) => {
         e.preventDefault()
         setSubmitted(true)
-        setImageLoading(true)
         setIsLoading(true)
 
         const routineData = new FormData()
@@ -90,6 +88,7 @@ const CreateRoutine = () => {
         if (!Object.values(errors).length) {
             const data = await dispatch(createRoutine(routineData))
             history.push("/routines")
+            setIsLoading(false)
             setDescription("")
             setNotes("")
             setImage(null)
@@ -97,8 +96,6 @@ const CreateRoutine = () => {
             setSets("")
             setReps("")
             setWeights("")
-            setImageLoading(false)
-            setIsLoading(false)
         }
     }
     return (
