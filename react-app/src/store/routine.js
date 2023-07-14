@@ -135,6 +135,7 @@ export const editRoutineThunk = (routineId, info) => async (dispatch) => {
         return resRoutine
     } else {
         const data = await res.json()
+        console.log("this is data", data)
         if (data.errors) {
             return data
         }

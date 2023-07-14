@@ -11,7 +11,7 @@ const CreateRoutine = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
     const [image, setImage] = useState(null)
     const [description, setDescription] = useState("")
     const [exercise, setExercise] = useState("")
@@ -21,6 +21,7 @@ const CreateRoutine = () => {
     const [notes, setNotes] = useState("")
     const [errors, setErrors] = useState({})
     const [submitted, setSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const user = useSelector(state => state.session.user)
 
@@ -71,7 +72,7 @@ const CreateRoutine = () => {
     const submitForm = async (e) => {
         e.preventDefault()
         setSubmitted(true)
-        setIsLoading(true)
+
 
         const routineData = new FormData()
         routineData.append("description", description)
@@ -86,9 +87,9 @@ const CreateRoutine = () => {
 
 
         if (!Object.values(errors).length) {
+            setIsSubmitting(true)
             const data = await dispatch(createRoutine(routineData))
             history.push("/routines")
-            setIsLoading(false)
             setDescription("")
             setNotes("")
             setImage(null)
@@ -101,7 +102,7 @@ const CreateRoutine = () => {
     return (
         <div className='routine-form-container'>
             <h1>Create Routine</h1>
-            {isLoading ? (
+            {isSubmitting ? (
                 <div className="loading-screen">
                     <BeatLoader color="#d636c4" size={30} />
                 </div>

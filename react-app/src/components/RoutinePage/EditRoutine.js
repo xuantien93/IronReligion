@@ -39,7 +39,7 @@ const EditRoutine = () => {
         if (!description) error.description = "Description is required";
         if (description.toString().trim().length < 5) error.description = "Minimum of 5 characters is required";
         if (description.toString().trim().length > 5000) error.description = "Maximum of 5000 characters only";
-        if (!image) error.image = "Image is required";
+        // if (!image) error.image = "Image is required";
         // if (image && !imageExtensions.includes(image.slice(-4))) {
         //     error.image = "Please make sure your images end with either .png, .jpg, or .jpeg";
         // }
@@ -58,7 +58,7 @@ const EditRoutine = () => {
         if (notes?.toString().trim().length > 1000) error.notes = "Maximum of 1000 characters only";
 
         setErrors(error);
-    }, [description, image, exercise, sets, reps, weights]);
+    }, [description, exercise, sets, reps, weights]);
 
     useEffect(() => {
         dispatch(getAllRoutines())
@@ -73,8 +73,7 @@ const EditRoutine = () => {
                 setNotes(routine[id].workouts[0]?.notes)
                 // console.log("===================", routine[id])
             })
-    }, [dispatch])
-
+    }, [dispatch, id])
     if (!routine) return null
     if (!user) {
         return <Redirect to="/" />
@@ -84,7 +83,6 @@ const EditRoutine = () => {
     const submitForm = async (e) => {
         e.preventDefault()
         setSubmitted(true)
-        setIsLoading(true);
 
         const routineData = new FormData()
         routineData.append("description", description)
@@ -99,6 +97,7 @@ const EditRoutine = () => {
 
 
         if (!Object.values(errors).length) {
+            setIsLoading(true);
             const data = await dispatch(editRoutineThunk(routine.id, routineData))
             history.push("/routines")
             setDescription("")
@@ -108,7 +107,6 @@ const EditRoutine = () => {
             setReps("")
             setWeights("")
             setImage(null)
-            setIsLoading(false);
         }
 
 
@@ -142,10 +140,11 @@ const EditRoutine = () => {
                         <div className="txt_field">
                             <label>
                                 <div>Image <span className="required-field" style={{ color: "red", fontSize: "0.7rem" }}>*</span></div>
-                                {console.log("this is iamge", image)}
+
                                 {typeof image === 'object' ? null : <img id="routine-edit-image" src={image} alt="Preview" />}
                                 {errors.image && submitted && < p style={{ color: "red" }}>{errors.image}</p>}
                                 <input
+                                    required
                                     placeholder="Insert Image here..."
                                     type="file"
                                     accept="image/*"
@@ -224,8 +223,7 @@ const EditRoutine = () => {
                         </div>
                     </form >
                 </div >
-            )
-            }
+            )}
         </div >
 
     )
