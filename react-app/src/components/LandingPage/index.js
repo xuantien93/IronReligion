@@ -6,28 +6,30 @@ import { useHistory } from 'react-router-dom';
 
 const LandingPage = () => {
     const history = useHistory()
+    const user = useSelector(state => state.session.user)
 
     useEffect(() => {
         const fadingTextElement = document.querySelector('.fading-text');
         const words = ['culture', 'movement', 'gym'];
         let currentIndex = 0;
+        if (!user) {
+            const interval = setInterval(() => {
+                fadingTextElement.classList.remove('show-gym', 'show-movement');
+                fadingTextElement.classList.add('fade-to-movement');
+                setTimeout(() => showNextWord(fadingTextElement), 500);
+            }, 3000);
 
-        const interval = setInterval(() => {
-            fadingTextElement.classList.remove('show-gym', 'show-movement');
-            fadingTextElement.classList.add('fade-to-movement');
-            setTimeout(() => showNextWord(fadingTextElement), 500);
-        }, 3000);
+            const showNextWord = (element) => {
+                const nextWord = words[currentIndex];
+                element.textContent = nextWord;
+                element.classList.remove('fade-to-movement');
+                element.classList.add(`show-${nextWord}`);
+                currentIndex = (currentIndex + 1) % words.length;
+            };
 
-        const showNextWord = (element) => {
-            const nextWord = words[currentIndex];
-            element.textContent = nextWord;
-            element.classList.remove('fade-to-movement');
-            element.classList.add(`show-${nextWord}`);
-            currentIndex = (currentIndex + 1) % words.length;
-        };
-
-        return () => clearInterval(interval);
-    }, []);
+            return () => clearInterval(interval);
+        }
+    }, [user]);
 
     useEffect(() => {
         const ambitionSection = document.querySelector('.ambition-section');
@@ -103,7 +105,7 @@ const LandingPage = () => {
                 <div className='landing-page-intro'>
                     <h1>Join The Iron Elite</h1>
                     <h3>Unleash your potential, redefine your limits, and forge a formidable physique. With an unwavering dedication to excellence, we empower individuals to rise above and beyond, transforming both mind and body.</h3>
-                    <button id="try-us-btn" onClick={(e) => history.push("/signup")}>Join the <span className="fading-text">culture</span></button>
+                    {user ? <button id="try-us-btn2">Welcome {user.username}</button> : <button id="try-us-btn" onClick={(e) => history.push("/signup")}>Join the <span className="fading-text">culture</span></button>}
                 </div>
             </div>
             <div className='ambition-section-cover'>

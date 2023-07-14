@@ -20,7 +20,7 @@ const RoutineDetail = ({ routine }) => {
     }
 
     // if (!user) history.push("/")
-    console.log("this is routine on routine detail", routine)
+    // console.log("this is routine on routine detail", routine)
 
 
 
