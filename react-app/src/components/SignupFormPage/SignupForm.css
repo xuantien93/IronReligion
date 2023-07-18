@@ -69,3 +69,9 @@ form .txt_field {
 .txt_field label {
     color: #9E896E
 }
+
+.txt_field input:hover,
+.txt_field select:hover {
+    background-color: rgba(72, 64, 53, 0.5);
+    border-radius: 2px;
+}
