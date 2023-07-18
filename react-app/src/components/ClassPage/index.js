@@ -19,7 +19,7 @@ const ClassPage = () => {
     const bookings = Object.values(useSelector(state => state.bookings))
     const [reservedClasses, setReservedClasses] = useState([]);
     const [errors, setErrors] = useState('');
-    const [isReserved, setIsReserved] = useState(false);
+
 
 
 
@@ -65,13 +65,6 @@ const ClassPage = () => {
                             setReservedClasses([...reservedClasses, classItem.id])
                         }
                     }
-                    const handleBookingDeleted = (bookingId) => {
-                        // Check if the deleted booking ID matches the class item ID
-                        // If yes, update the isReserved state to false for the corresponding class
-                        setReservedClasses((prevReservedClasses) =>
-                            prevReservedClasses.filter((id) => id !== bookingId)
-                        );
-                    };
 
                     const isReserved = reservedClasses.includes(classItem.id)
                     const isAlreadyPassed = getCurrentDateTime() > timeStart.getTime();
