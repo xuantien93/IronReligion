@@ -5,6 +5,9 @@ import { Redirect, NavLink } from "react-router-dom";
 import { getAllClasses } from '../../store/class';
 import './ClassPage.css'
 import { createBooking, deleteBookingThunk, getAllBooking } from '../../store/booking';
+import OpenModalButton from '../OpenModalButton';
+import DeleteBookingModal from '../MyBookings/DeleteBookingModal';
+import Mybooking from '../MyBookings';
 
 
 const ClassPage = () => {
@@ -44,6 +47,7 @@ const ClassPage = () => {
 
     const myBooking = bookings.filter(booking => booking.user_id === user?.id)
 
+    console.log("this is mybooking", myBooking)
     return (
         <div className='classes-page-container'>
             <h1>Classes</h1>
@@ -68,6 +72,8 @@ const ClassPage = () => {
                     const isReserved = reservedClasses.includes(classItem.id)
                     const isAlreadyPassed = getCurrentDateTime() > timeStart.getTime();
                     const isAlreadyBooked = myBooking.some(booking => booking.class_id === classItem.id);
+                    const myNewBooking = myBooking.find(booking => booking.class_id === classItem.id);
+
                     return (
                         < div className='single-class-block' key={classItem.id} >
                             <span>{classItem.class_name}</span>
@@ -82,6 +88,15 @@ const ClassPage = () => {
                                     onClick={handleReserve}
                                     className={isAlreadyPassed || isAlreadyBooked ? "already-passed" : ""}
                                 >{isReserved ? "Reserved" : (isAlreadyPassed ? 'Already Passed' : (isAlreadyBooked ? 'Already Booked' : 'Reserve'))}</button>
+                                {isAlreadyBooked && (
+                                    < div id="reserve-btn2">
+                                        <OpenModalButton
+                                            buttonText="Delete"
+                                            modalComponent={<DeleteBookingModal bookingId={myNewBooking?.id} bookingPage={true}
+                                            />}
+                                        />
+                                    </div>
+                                )}
                             </div>
                         </div>
                     )

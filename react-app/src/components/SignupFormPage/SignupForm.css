@@ -12,7 +12,7 @@
     flex-direction: column;
     border: 1px solid #9E896E;
     position: absolute;
-    top: 80%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
@@ -68,4 +68,10 @@ form .txt_field {
 
 .txt_field label {
     color: #9E896E
+}
+
+.txt_field input:hover,
+.txt_field select:hover {
+    background-color: rgba(72, 64, 53, 0.5);
+    border-radius: 2px;
 }
