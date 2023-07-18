@@ -22,7 +22,6 @@ const ClassPage = () => {
 
 
 
-
     useEffect(() => {
         dispatch(getAllClasses())
         dispatch(getAllBooking())
@@ -40,6 +39,12 @@ const ClassPage = () => {
         return now.getTime();
     };
 
+
+    // if (!user) {
+    //     return <Redirect to="/" />
+    // }
+    // console.log("this is now", new Date())
+    // console.log("this is getcurrentdatetime", getCurrentDateTime())
 
 
     const myBooking = bookings.filter(booking => booking.user_id === user?.id)
@@ -65,6 +70,7 @@ const ClassPage = () => {
                             setReservedClasses([...reservedClasses, classItem.id])
                         }
                     }
+
 
                     const isReserved = reservedClasses.includes(classItem.id)
                     const isAlreadyPassed = getCurrentDateTime() > timeStart.getTime();

@@ -18,6 +18,7 @@ function DeleteBookingModal({ bookingId, bookingPage }) {
         if (bookingPage) {
             await dispatch(deleteBookingThunk(bookingId));
             history.push("/bookings")
+
             closeModal();
         } else {
             await dispatch(deleteBookingThunk(bookingId));
