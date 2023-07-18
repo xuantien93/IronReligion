@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./MyBookings.css"
-import { deleteBookingThunk } from "../../store/booking";
+import { deleteBookingThunk, getAllBooking } from "../../store/booking";
 import { useHistory } from "react-router-dom";
 
 
@@ -17,7 +17,7 @@ function DeleteBookingModal({ bookingId, bookingPage }) {
 
         if (bookingPage) {
             await dispatch(deleteBookingThunk(bookingId));
-            history.push("/classes")
+            history.push("/bookings")
             closeModal();
         } else {
             await dispatch(deleteBookingThunk(bookingId));

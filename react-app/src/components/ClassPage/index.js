@@ -17,9 +17,11 @@ const ClassPage = () => {
     const classes = Object.values(useSelector(state => state.classes))
     const user = useSelector(state => state.session.user)
     const bookings = Object.values(useSelector(state => state.bookings))
-
     const [reservedClasses, setReservedClasses] = useState([]);
     const [errors, setErrors] = useState('');
+    const [isReserved, setIsReserved] = useState(false);
+
+
 
     useEffect(() => {
         dispatch(getAllClasses())
@@ -32,22 +34,17 @@ const ClassPage = () => {
         }
     }, [user])
 
+
     const getCurrentDateTime = () => {
         const now = new Date();
         return now.getTime();
     };
 
 
-    // if (!user) {
-    //     return <Redirect to="/" />
-    // }
-    // console.log("this is now", new Date())
-    // console.log("this is getcurrentdatetime", getCurrentDateTime())
-
 
     const myBooking = bookings.filter(booking => booking.user_id === user?.id)
 
-    console.log("this is mybooking", myBooking)
+    // console.log("this is mybooking", myBooking)
     return (
         <div className='classes-page-container'>
             <h1>Classes</h1>
@@ -68,6 +65,13 @@ const ClassPage = () => {
                             setReservedClasses([...reservedClasses, classItem.id])
                         }
                     }
+                    const handleBookingDeleted = (bookingId) => {
+                        // Check if the deleted booking ID matches the class item ID
+                        // If yes, update the isReserved state to false for the corresponding class
+                        setReservedClasses((prevReservedClasses) =>
+                            prevReservedClasses.filter((id) => id !== bookingId)
+                        );
+                    };
 
                     const isReserved = reservedClasses.includes(classItem.id)
                     const isAlreadyPassed = getCurrentDateTime() > timeStart.getTime();
@@ -84,7 +88,7 @@ const ClassPage = () => {
                             {errors && <p style={{ color: "red" }}>{errors}</p>}
                             <div className='reserve-block'>
                                 <button id="reserve-btn"
-                                    disabled={isReserved || isAlreadyBooked || isAlreadyPassed}
+                                    disabled={isAlreadyBooked || isReserved || isAlreadyPassed}
                                     onClick={handleReserve}
                                     className={isAlreadyPassed || isAlreadyBooked ? "already-passed" : ""}
                                 >{isReserved ? "Reserved" : (isAlreadyPassed ? 'Already Passed' : (isAlreadyBooked ? 'Already Booked' : 'Reserve'))}</button>
