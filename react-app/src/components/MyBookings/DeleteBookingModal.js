@@ -6,7 +6,7 @@ import { deleteBookingThunk } from "../../store/booking";
 import { useHistory } from "react-router-dom";
 
 
-function DeleteBookingModal({ bookingId }) {
+function DeleteBookingModal({ bookingId, bookingPage }) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
     const history = useHistory()
@@ -15,10 +15,15 @@ function DeleteBookingModal({ bookingId }) {
     const deleteButton = async (e) => {
         e.preventDefault();
 
-
-        await dispatch(deleteBookingThunk(bookingId));
-        history.push("/bookings")
-        closeModal();
+        if (bookingPage) {
+            await dispatch(deleteBookingThunk(bookingId));
+            history.push("/classes")
+            closeModal();
+        } else {
+            await dispatch(deleteBookingThunk(bookingId));
+            history.push("/bookings")
+            closeModal();
+        }
     }
 
 

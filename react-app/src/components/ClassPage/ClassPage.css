@@ -61,3 +61,21 @@
     color: #9E896E;
     transition: all 0.3s ease;
 }
+
+#reserve-btn2>button {
+    background-color: #9E896E;
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 5px 22px;
+    border-style: none;
+    cursor: pointer;
+    font-size: 15px;
+    margin: 2% 0;
+}
+
+#reserve-btn2>button:hover {
+    background-color: black;
+    color: #9E896E;
+    transition: all 0.3s ease;
+}

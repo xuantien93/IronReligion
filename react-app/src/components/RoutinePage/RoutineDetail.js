@@ -38,13 +38,13 @@ const RoutineDetail = ({ routine }) => {
                     )}
                     {routine.user_id === user?.id && <button id="update-routine-btn" onClick={() => history.push(`/routines/${routine.id}/update`)}>Update Routine</button>}
                 </div>
-                <div>Comments</div>
+                {/* <div>Comments</div>
                 {Object.values(routine.comments).map(comment => {
                     { console.log(comment.user) }
                     return (
                         <div className='routine-comment'>{comment.user.first_name} {comment.user.last_name}: {comment.content}</div>
                     )
-                })}
+                })} */}
                 {routine.workouts?.map(workout => {
                     if (!workout) return null
                     const deleteWorkoutBtn = async (e) => {

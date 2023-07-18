@@ -65,25 +65,41 @@ function SignupFormPage() {
     e.preventDefault();
 
     setSubmitted(true);
-    let errors = {}
-    if (!Object.values(errors).length) {
-      if (password === confirmPassword) {
-        const data = await dispatch(signUp(firstName, lastName, email, password, username, gender, phone, birthday));
-        if (data) {
-          data.forEach(error => {
-            if (error.startsWith("email")) {
-              errors.email = error.split(":")[1]
-            }
-            if (error.startsWith("username")) {
-              errors.username = error.split(":")[1]
-            }
-          })
-          // console.log(errors)
-          setErrors(errors)
-        } else {
-          return history.push("/");
+
+    let formErrors = {};
+    if (!emailValidation(email)) formErrors.email = "Not a valid email address";
+    if (!firstName || firstName.trim().length > 50 || firstName.trim().length < 2)
+      formErrors.firstName = "First name must be between 2 characters and 50 characters";
+    if (!lastName || lastName.trim().length > 50 || lastName.trim().length < 2)
+      formErrors.lastName = "Last name must be between 2 characters and 50 characters";
+    if (!password || password.length < 6)
+      formErrors.password = "Password must be at least 6 characters";
+    if (password !== confirmPassword) formErrors.confirmPassword = "Password must match";
+    if (!phone || phone.replace(/-/g, '').length !== 10) formErrors.phone = "Must be a valid US Number";
+    if (!username) formErrors.username = "Username is required";
+    if (username.trim().length < 6) formErrors.username = "Username must be at least 6 characters";
+
+    // If there are any errors in the form fields, do not proceed with form submission
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return;
+    }
+
+    // If there are no errors in the form fields, proceed with the form submission
+    const data = await dispatch(signUp(firstName, lastName, email, password, username, gender, phone, birthday));
+    if (data) {
+      const serverErrors = {};
+      data.forEach(error => {
+        if (error.startsWith("email")) {
+          serverErrors.email = error.split(":")[1];
         }
-      }
+        if (error.startsWith("username")) {
+          serverErrors.username = error.split(":  ")[1];
+        }
+      });
+      setErrors(serverErrors);
+    } else {
+      return history.push("/");
     }
   };
 
@@ -95,7 +111,7 @@ function SignupFormPage() {
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         {errors.firstName && submitted && (
-          <p className="sign-in-errors">{errors.firstName}</p>
+          <p className="sign-in-errors" style={{ marginTop: "10px" }}>{errors.firstName}</p>
         )}
         <div className="txt_field">
           <label>
