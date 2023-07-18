@@ -62,7 +62,7 @@
     font-size: 30px;
     color: white;
     margin-top: 10%;
-    cursor: pointer;
+    /* cursor: pointer; */
     border: 2px solid white;
     background-color: transparent;
     width: 330px;
