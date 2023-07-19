@@ -10,8 +10,8 @@ const Mybooking = () => {
     const history = useHistory()
     const bookings = Object.values(useSelector(state => state.bookings))
 
-    // console.log("this is bookings", bookings)
     const user = useSelector(state => state.session.user)
+    // console.log("this is user", user)
 
     useEffect(() => {
         dispatch(getAllBooking())
@@ -25,6 +25,7 @@ const Mybooking = () => {
     if (!user) {
         return <Redirect to="/" />
     }
+    const userBooking = bookings.some(booking => booking.user_id === user?.id)
 
     return (
         <div className='mybooking-container'>
@@ -32,37 +33,39 @@ const Mybooking = () => {
                 <h1>My Classes</h1>
             </div>
             <div className='mybooking-content'>
-                {bookings.toReversed().map(booking => {
-                    const timeStart = new Date(booking.time_start);
-                    const timeEnd = new Date(booking.time_end);
+                {!userBooking ? (
+                    <h2>Sign up for a <NavLink id="nav-class" to="classes">class</NavLink> now!</h2>
+                ) : (
+                    bookings.toReversed().map(booking => {
+                        const timeStart = new Date(booking.time_start);
+                        const timeEnd = new Date(booking.time_end);
 
-                    const durationInMilliseconds = timeEnd.getTime() - timeStart.getTime();
-                    const durationInMinutes = Math.floor(durationInMilliseconds / (1000 * 60));
-                    const isAlreadyPassed = getCurrentDateTime() > timeStart.getTime();
-                    return (
-                        booking.user_id === user?.id && <div key={booking.id}>
-                            <div className='mybooking-detail'>
-                                <h3>{booking.class.class_name}</h3>
-                                <p>Start: {booking.class.time_start}</p>
-                                <p>End: {booking.class.time_end}</p>
-                                <p>Duration: {durationInMinutes}</p>
+                        const durationInMilliseconds = timeEnd.getTime() - timeStart.getTime();
+                        const durationInMinutes = Math.floor(durationInMilliseconds / (1000 * 60));
+                        const isAlreadyPassed = getCurrentDateTime() > timeStart.getTime();
+                        return (
+                            booking.user_id === user?.id && <div key={booking.id}>
+                                <div className='mybooking-detail'>
+                                    <h3>{booking.class.class_name}</h3>
+                                    <p>Start: {booking.class.time_start}</p>
+                                    <p>End: {booking.class.time_end}</p>
+                                    <p>Duration: {durationInMinutes}</p>
+                                </div>
+                                <div className='mybooking-bottom-btn'>
+                                    {isAlreadyPassed ? (<button disabled={true}>Completed</button>) :
+                                        < div className='mybooking-delete-modal'>
+                                            <OpenModalButton
+                                                buttonText="Delete"
+                                                modalComponent={<DeleteBookingModal bookingId={booking.id} />}
+                                            />
+                                        </div>}
+                                </div>
                             </div>
-                            <div className='mybooking-bottom-btn'>
-                                {isAlreadyPassed ? (<button disabled={true}>Completed</button>) :
-                                    < div className='mybooking-delete-modal'>
-                                        <OpenModalButton
-                                            buttonText="Delete"
-                                            modalComponent={<DeleteBookingModal bookingId={booking.id} />}
-                                        />
-                                    </div>}
-                            </div>
-                        </div>
-
-                    )
-                })}
+                        )
+                    })
+                )}
             </div>
         </div >
-
     )
 }
 
