@@ -442,7 +442,7 @@ const LandingPage = () => {
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" alt="redux" />
 
 
-                    <a href="https://www.instagram.com/muytien/">
+                    <a href="https://www.instagram.com/muytien/" target="_blank">
                         <img src="https://i.imgur.com/nD6MYTx.jpg" alt="iglink" />
                     </a>
 

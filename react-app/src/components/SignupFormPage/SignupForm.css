@@ -1,5 +1,6 @@
 .sign-in-errors {
-    color: red
+    color: red;
+    font-size: 14px;
 }
 
 
@@ -12,7 +13,7 @@
     flex-direction: column;
     border: 1px solid #9E896E;
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
@@ -25,8 +26,8 @@
     text-align: center;
     border-bottom: 1px solid #9E896E;
     margin: 0 5%;
-    padding-bottom: 20px;
-    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 .login-container-2 form {
