@@ -48,3 +48,14 @@
     color: black;
     transition: all 0.3s ease;
 }
+
+#nav-class {
+    text-decoration: none;
+    color: #9E896E;
+}
+
+#nav-class:hover {
+    transform: scale(1.02);
+    filter: brightness(1.2);
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
