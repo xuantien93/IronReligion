@@ -61,7 +61,7 @@ export const getAllRoutines = () => async (dispatch) => {
 }
 
 export const createRoutine = (data) => async (dispatch) => {
-    console.log('data in create routine thunk ', data)
+    // console.log('data in create routine thunk ', data)
     const res = await fetch("/api/routines", {
         method: 'POST',
         body: data
@@ -135,7 +135,7 @@ export const editRoutineThunk = (routineId, info) => async (dispatch) => {
         return resRoutine
     } else {
         const data = await res.json()
-        console.log("this is data", data)
+        // console.log("this is data", data)
         if (data.errors) {
             return data
         }

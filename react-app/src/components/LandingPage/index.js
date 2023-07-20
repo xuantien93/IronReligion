@@ -460,7 +460,7 @@ const LandingPage = () => {
 
                 </div>
                 <div className='footer-about'>
-                    <span id="linkedin"><a href="https://github.com/xuantien93" target="_blank"><i className="fa-brands fa-github"></i></a>
+                    <span id="linkedin"><a href="https://github.com/xuantien93/IronReligion" target="_blank"><i className="fa-brands fa-github"></i></a>
                         <a href="https://www.linkedin.com/in/tien-hoang-6205b5281" target="_blank"><i class="fa-brands fa-linkedin"></i></a></span>
                     <span style={{ fontSize: "15px" }}>© 2023 | Muytien LLC | All Rights Reserved</span>
                     <br />
